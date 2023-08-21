@@ -1,0 +1,13 @@
+.main {
+    flex-direction: column;
+    justify-content: center;
+}
+
+.main-header { max-height: 40vh; width: 100%; }
+
+.main-header > img {
+    max-height: 35vh;
+    width: 100%;
+}
+
+.search-button { margin-top: 3vh; }
