@@ -16,7 +16,7 @@ const Main = () => {
 
     const [flights, setFlights] = useState([]);
 
-    const baseURL = window.location.href.includes('localhost:3000') ? 'http://localhost:3001/' : window.location.href;
+    const baseURL = window.location.href.includes('localhost:3000') ? 'http://localhost:3001' : '';
 
     const url = "https://images.pexels.com/photos/358319/pexels-photo-358319.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1";
     
@@ -50,7 +50,7 @@ const Main = () => {
         
         if (!originInp || !destInp || !departInp || !returnInp) { return; }
         
-        await axios.post(baseURL + 'flight/search-flight/', {
+        await axios.post(baseURL + '/flight/search-flight/', {
             origin: originInp.split(',')[0],
             destination: destInp.split(',')[0],
             departDate: departInp,
