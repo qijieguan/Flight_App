@@ -1,12 +1,13 @@
 .main {
+    padding-bottom: 20vh;
     flex-direction: column;
     justify-content: center;
 }
 
-.main-header { max-height: 40vh; width: 100%; }
+.main-header { height: min(40vh, 15rem); width: 100%; }
 
 .main-header > img {
-    max-height: 35vh;
+    height: 100%;
     width: 100%;
 }
 

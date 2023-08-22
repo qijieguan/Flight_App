@@ -14,7 +14,7 @@ const Main = () => {
     const [departInp, setDepartInp] = useState(null);
     const [returnInp, setReturnInp] = useState(null);
 
-    const [flights, setFlights] = useState(null);
+    const [flights, setFlights] = useState([]);
 
     const baseURL = window.location.href.includes('localhost:3000') ? 'http://localhost:3001' : '';
 
@@ -30,9 +30,13 @@ const Main = () => {
     }
 
     const setDateInput = (input) => {
-        let date = new Date(input.date);
-        date = date.getFullYear() + '-' +  ("0" + (date.getMonth() + 1)).slice(-2) + '-' + ('0' + date.getDate()).slice(-2);
-        
+        let date = null;
+
+        if (input.date !== null) {
+            date = new Date(input.date);
+            date = date.getFullYear() + '-' +  ("0" + (date.getMonth() + 1)).slice(-2) + '-' + ('0' + date.getDate()).slice(-2);
+        }
+
         if (input.type === 'depart') {
             setDepartInp(date);
         }
@@ -46,15 +50,13 @@ const Main = () => {
         
         if (!originInp || !destInp || !departInp || !returnInp) { return; }
         
-        
         await axios.post(baseURL + '/flight/search-flight/', {
             origin: originInp.split(',')[0],
             destination: destInp.split(',')[0],
             departDate: departInp,
             returnDate: returnInp,
         })
-        .then((response) => { setFlights(response.data.data.flights)} );
-        
+        .then((response) => { setFlights(response.data.data.flights)} ); 
     }
 
     return (
@@ -63,7 +65,7 @@ const Main = () => {
                 <img src={url} alt=""/>
             </div>
             <form className='autocomplete-form grid'>
-                <h1>Pick Two Airport Points</h1>
+                <h1 className='flex'>Pick Two Airport Points <span>ROUND_TRIP</span></h1>
                 <PlacesAutocomplete param={'origin'} setAirportInput={setAirportInput}/>
                 <PlacesAutocomplete param={'destination'} setAirportInput={setAirportInput}/>
                 
@@ -71,7 +73,7 @@ const Main = () => {
                 <button className='search-button' onClick={searchFlight}>Search Flight</button>
             </form>
 
-            <SearchResults/>
+            <SearchResults flights={flights}/>
         </div>
     )
 }

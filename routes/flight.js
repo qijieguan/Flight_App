@@ -52,13 +52,12 @@ router.route('/search-flight').post(async (req, res) => {
       destinationAirportCode: destination_iata,
       date: departDate,
       itineraryType: 'ROUND_TRIP',
-      sortOrder: 'PRICE',
+      sortOrder: 'ML_BEST_VALUE',
       numAdults: '1',
       numSeniors: '0',
       classOfService: 'ECONOMY',
       returnDate: returnDate,
       pageNumber: '1',
-      nonstop: 'yes',
       currencyCode: 'USD'
     }
   
