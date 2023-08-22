@@ -66,8 +66,8 @@ router.route('/search-flight').post(async (req, res) => {
       'X-RapidAPI-Host': process.env.TRIP_API_HOST,
     }
 
-    const response = await axios.request(options(method, url, params, headers));
-    res.json(response.data);
+    await axios.request(options(method, url, params, headers))
+    .then((response) => {res.json(response.data);})
   }
   catch (error) {
       console.error(error);
