@@ -70,12 +70,14 @@ const Main = () => {
                 <img src={url} alt=""/>
             </div>
             <form className='autocomplete-form grid'>
-                <h1 className='flex'>Pick Two Airport Points <span>ROUND_TRIP</span></h1>
+                <div className='autocomplete-form-label flex'><h1>Pick Two Airport Points</h1> <span>ROUND_TRIP</span></div>
                 <PlacesAutocomplete param={'origin'} setAirportInput={setAirportInput}/>
                 <PlacesAutocomplete param={'destination'} setAirportInput={setAirportInput}/>
                 
                 <DatePickers setDateInput={setDateInput}/>
-                <button className='search-button' onClick={searchFlight}>Search Flight</button>
+                <button className='search-button' onClick={searchFlight}>
+                    <span>Search Flight</span>
+                </button>
             </form>
 
             <SearchResults flights={flights}/>

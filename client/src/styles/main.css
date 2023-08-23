@@ -4,11 +4,14 @@
     justify-content: center;
 }
 
-.main-header { height: min(40vh, 15rem); width: 100%; }
+.main-header { height: 40vh; width: 100%; }
 
 .main-header > img {
     height: 100%;
     width: 100%;
 }
 
-.search-button { margin-top: 3vh; }
+
+@media (max-width: 25rem) {
+    .main-header { height: min(40vh, 7.5rem); }
+}
