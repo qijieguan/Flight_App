@@ -47,8 +47,9 @@ const Main = () => {
 
     const searchFlight = async (e) => {
         e.preventDefault();
-        
+
         if (!originInp || !destInp || !departInp || !returnInp) { return; }
+
         
         await axios.post(baseURL + '/flight/search-flight/', {
             origin: originInp.split(',')[0],
@@ -56,9 +57,10 @@ const Main = () => {
             departDate: departInp,
             returnDate: returnInp,
         })
-        .then((response) => { 
-            console.log(response.data)
-            //setFlights(response.data.data.flights)
+        .then((response) => {  
+            console.log(response.data);
+            let results = response.data.data ? response.data.data.flights : response.data.flights;
+            setFlights(results);
         } ); 
     }
 

@@ -94,8 +94,8 @@ const PlacesAutocomplete = ( {param, setAirportInput} ) => {
                     <ComboboxList className='combobox-list'>
                         {
                             data.filter(d => d.description.toLowerCase().includes('airport')).map(({ place_id, description }) => 
-                                <div className='combobox-option-wrapper flex'>
-                                    <div className='combobox-option flex' key={place_id} value={description}>
+                                <div className='combobox-option-wrapper flex' key={place_id}>
+                                    <div className='combobox-option flex' value={description}>
                                         <span className='combobox-option-description flex' onClick={() => {handleSelect(description)}}>
                                             <span>{description}</span>
                                             <span className='option-icon'>
