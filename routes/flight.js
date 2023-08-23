@@ -67,7 +67,7 @@ router.route('/search-flight').post(async (req, res) => {
     }
     
     await axios.request(options(method, url, params, headers))
-    .then((response) => { res.json(response.data); });
+    .then((response) => { res.send(response); });
   }
   catch (error) {
     console.error(error);
