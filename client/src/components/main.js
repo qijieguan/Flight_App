@@ -58,7 +58,9 @@ const Main = () => {
             returnDate: returnInp,
         })
         .then((response) => {  
-            setFlights(response.data.data.flights);
+            console.log(response.data);
+            let results = response.data.data ? response.data.data.flights : response.data.flights;
+            setFlights(results);
         } ); 
     }
 
