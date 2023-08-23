@@ -13,6 +13,8 @@ const PlacesAutocomplete = ( {param, setAirportInput} ) => {
 
     const baseURL = window.location.href.includes('localhost:3000') ? 'http://localhost:3001' : '';
 
+    console.log(window.location.href)
+
     const [searchResult, setSearchResult] = useState([]);
 
     const {
