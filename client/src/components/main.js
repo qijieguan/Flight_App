@@ -48,7 +48,7 @@ const Main = () => {
     const searchFlight = async (e) => {
         e.preventDefault();
         
-        //if (!originInp || !destInp || !departInp || !returnInp) { return; }
+        if (!originInp || !destInp || !departInp || !returnInp) { return; }
         
         await axios.post(baseURL + '/flight/search-flight/', {
             origin: originInp.split(',')[0],
