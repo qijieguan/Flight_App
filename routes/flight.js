@@ -65,12 +65,12 @@ router.route('/search-flight').post(async (req, res) => {
       'X-RapidAPI-Key': process.env.API_KEY,
       'X-RapidAPI-Host': process.env.TRIP_API_HOST,
     }
-
-    await axios.request(options(method, url, params, headers))
-    .then((response) => {res.send(response.data);})
+    res.json("test");
+    //await axios.request(options(method, url, params, headers))
+    //.then((response) => {res.send(response.data);})
   }
   catch (error) {
-      console.error(error);
+    console.error(error);
   }
 });
 
