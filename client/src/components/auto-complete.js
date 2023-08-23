@@ -6,14 +6,11 @@ import { Combobox, ComboboxInput, ComboboxPopover, ComboboxList, ComboboxOption 
 import "@reach/combobox/styles.css";
 
 import { useState, useEffect } from 'react';
-import uuid from 'react-uuid';
 import axios from 'axios';
 
 const PlacesAutocomplete = ( {param, setAirportInput} ) => {
 
     const baseURL = window.location.href.includes('localhost:3000') ? 'http://localhost:3001' : '';
-
-    console.log(window.location.href)
 
     const [searchResult, setSearchResult] = useState([]);
 
@@ -97,7 +94,7 @@ const PlacesAutocomplete = ( {param, setAirportInput} ) => {
                     <ComboboxList className='combobox-list'>
                         {
                             data.filter(d => d.description.toLowerCase().includes('airport')).map(({ place_id, description }) => 
-                                <div className='combobox-option-wrapper flex' key={uuid()}>
+                                <div className='combobox-option-wrapper flex'>
                                     <div className='combobox-option flex' key={place_id} value={description}>
                                         <span className='combobox-option-description flex' onClick={() => {handleSelect(description)}}>
                                             <span>{description}</span>
