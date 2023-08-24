@@ -8,6 +8,7 @@
 }
 
 .important-message {
+    margin: 2vh 0;
     grid-column: 1 / 4;
     color: grey;
     font-style: oblique;
@@ -70,7 +71,7 @@
 
 
 @media (max-width: 50rem) {
-    .search-results { grid-template-columns: 47.5% 47.5%; transform: translateY(-10%); width: 97.5%; }
+    .search-results { grid-template-columns: 47.5% 47.5%; transform: translateY(-8%); width: 97.5%; }
     .important-message { grid-column: 1 / 3; }
 }
 

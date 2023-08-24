@@ -27,7 +27,7 @@
 
 .date-picker { width: 100%; }
 
-.date-picker * { border: 0 !important; box-shadow: none !important; outline: 0 !important; }
+.date-picker * { font-weight: 700 !important; border: 0 !important; box-shadow: none !important; outline: 0 !important; }
 
 @media (max-width: 25rem) {
     .date-pickers { grid-column: 1 / 2; grid-template-columns: 100%; row-gap: 1vh; }

@@ -5,7 +5,7 @@
     column-gap: 2vw;
     justify-content: space-between;
     width: 95%;
-    background: gold;
+    background: white;
     box-shadow: 0 3px 10px gray;
     transform: translateY(-20%);
 }
@@ -21,17 +21,16 @@
 }
 
 .autocomplete-form-label > h1 {
-    font-size: clamp(1.25rem, 1.75vw, 1.75rem);
+    font-size: clamp(1.125rem, 1.75vw, 1.75rem);
 }
 
 .autocomplete-form-label > span {
-    padding: 0.5vh max(1vw, 0.5rem);
-    font-size: clamp(0.75rem, 1vw, 1rem);
+    padding: 0.75vh max(1vw, 0.5rem) 0.5vh max(1vw, 0.5rem);
+    font-size: clamp(0.625rem, 1vw, 1rem);
     font-weight: bold;
-    color: black;
-    background: orange;
-    border-radius: 4rem;
-    box-shadow: 0 0 1px tomato;
+    color: white;
+    background: rgb(75, 75, 75);
+    border-radius: 0.25rem;
 }
 
 .combobox-input-wrapper {
@@ -149,6 +148,7 @@
 
 @media (max-width: 25rem) {
     .autocomplete-form { grid-template-columns: 100%; width: 100%; row-gap: 1vh; transform: translateY(0); }
-    .autocomplete-form-label { grid-column: 1 / 2; align-items: center; }
+    .autocomplete-form-label { grid-column: 1 / 2; align-items: center; } 
+    .autocomplete-form-label > span { color: gray; background: rgb(228, 228, 228); box-shadow: 0 0 1px; }
     .search-button { margin-top: 3vh; grid-column: 1 / 2; }
 }

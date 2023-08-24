@@ -18,7 +18,7 @@ const Main = () => {
 
     const baseURL = window.location.href.includes('localhost:3000') ? 'http://localhost:3001' : "";
 
-    const url = "https://images.pexels.com/photos/358319/pexels-photo-358319.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1";
+    const url = "https://images.pexels.com/photos/1831271/pexels-photo-1831271.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1";
     
     const setAirportInput = (input) => {
         if (input.type === 'origin') {
@@ -70,7 +70,7 @@ const Main = () => {
                 <img src={url} alt=""/>
             </div>
             <form className='autocomplete-form grid'>
-                <div className='autocomplete-form-label flex'><h1>Pick Two Airport Points</h1> <span>ROUND_TRIP</span></div>
+                <div className='autocomplete-form-label flex'><h1>Pick Two Airport Points</h1> <span>ROUND TRIP</span></div>
                 <PlacesAutocomplete param={'origin'} setAirportInput={setAirportInput}/>
                 <PlacesAutocomplete param={'destination'} setAirportInput={setAirportInput}/>
                 

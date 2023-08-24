@@ -4,14 +4,14 @@
     justify-content: center;
 }
 
-.main-header { height: 40vh; width: 100%; }
+.main-header { position: relative;  height: 30vh; width: 100%; }
 
 .main-header > img {
+    object-position: bottom;
     height: 100%;
     width: 100%;
 }
 
-
 @media (max-width: 25rem) {
-    .main-header { height: min(40vh, 7.5rem); }
+    .main-header { height: min(40vh, 5rem); }
 }
