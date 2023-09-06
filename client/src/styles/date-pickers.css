@@ -11,6 +11,7 @@
     padding: 1vh 0 0 0;
     align-items: flex-start;
     flex-direction: column;
+    height: fit-content;
     width: 100%;
     background: white;
     border: 1px solid rgb(226, 226, 226);
@@ -21,13 +22,23 @@
     margin-left: 2%;
     text-transform: uppercase;
     font-weight: bold;
-    font-size: clamp(0.75rem, 0.875vw, 0.875rem);
-    color: rgb(180, 180, 180);
+    font-size: clamp(0.75rem, 1.25vw, 1.25rem);
+    color: gray;
 }
 
 .date-picker { width: 100%; }
 
-.date-picker * { font-weight: 700 !important; border: 0 !important; box-shadow: none !important; outline: 0 !important; }
+.date-picker * { 
+    font-weight: 700 !important; 
+    font-size: clamp(0.875rem, 1.5vw, 1.5rem) !important; 
+    border: 0 !important; 
+    box-shadow: none !important; 
+    outline: 0 !important; 
+}
+
+.MuiSvgIcon-root { 
+    font-size: clamp(1.5rem, 2vw, 2rem) !important; 
+}
 
 @media (max-width: 25rem) {
     .date-pickers { grid-column: 1 / 2; grid-template-columns: 100%; row-gap: 1vh; }

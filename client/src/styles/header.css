@@ -1,7 +1,17 @@
 .header {
+    padding: 1vh;
     position: absolute;
     inset: 0 auto auto 0;
     min-height: 7.5vh;
     width: 100%;
     z-index: 3;
+}
+
+.header button { 
+    text-transform: uppercase;
+    font-size: clamp(0.875rem, 1vw, 1rem);
+    font-weight: bold;
+    color: white;
+    background: transparent; 
+    border: 0; 
 }

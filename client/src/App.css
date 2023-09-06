@@ -23,7 +23,6 @@
 .App {
   position: relative;
   text-align: center;
-  min-height: 150vh;
 }
 
 h1 { margin: 0; }

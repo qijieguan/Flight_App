@@ -31,12 +31,6 @@ const SearchResults = ({ flights }) => {
 
     return (
         <div className="search-results grid">
-            
-            <div className='important-message'>
-                This is an early build of the app using a free version of a flight API service. 
-                Please click search button again if no results are shown (avg. wait time 5 - 30 seconds). 
-                Thank you for your patience.
-            </div>
 
             {flights && flights.length > 0 &&
                 flights.map(flight => 

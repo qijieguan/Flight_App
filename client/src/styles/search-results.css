@@ -1,19 +1,14 @@
 .search-results {
+    padding: 2vh 0;
+    position: relative;
     grid-template-columns: 30% 30% 30%;
     row-gap: 4vh;
     justify-content: space-evenly;
     min-height: 10vh;
-    width: 95%;
-    transform: translateY(-5%);
-}
-
-.important-message {
-    margin: 2vh 0;
-    grid-column: 1 / 4;
-    color: grey;
-    font-style: oblique;
-    font-size: clamp(0.875rem, 1.25vw, 1.25rem);
     width: 100%;
+    background: white;
+    transform: translateY(-5%);
+    z-index: 3;
 }
 
 .flight {
@@ -72,10 +67,8 @@
 
 @media (max-width: 50rem) {
     .search-results { grid-template-columns: 47.5% 47.5%; transform: translateY(-8%); width: 97.5%; }
-    .important-message { grid-column: 1 / 3; }
 }
 
 @media (max-width: 25rem) {
     .search-results { transform: translateY(1%); grid-template-columns: 100%; row-gap: 2vh; }
-    .important-message { grid-column: 1 / 2; }
 }
