@@ -1,8 +1,11 @@
 import './App.css';
 import axios from 'axios';
 import { useEffect, useState } from 'react';
-import Main from './components/main.js';
 import Header from './components/header';
+import Main from './components/main.js';
+import TourPlaces from './components/tour-places.js';
+
+import {BrowserRouter as Router, Routes, Route} from "react-router-dom";
 
 import { LocalizationProvider } from '@mui/x-date-pickers';
 import { AdapterDayjs } from '@mui/x-date-pickers/AdapterDayjs';
@@ -34,10 +37,20 @@ function App() {
   return (
     <div className="App">
       <LocalizationProvider dateAdapter={AdapterDayjs}>
-        <Header/>
-        {isLoaded &&
-          <Main/>
-        }
+        <Router>
+            <Header/>
+            <Routes>
+              {isLoaded &&
+                <Route path="/" element={<Main/>} exact/>
+              }
+              {isLoaded &&
+                <Route path="/quick-start" element={<Main/>} exact/>
+              }
+              {isLoaded &&
+                <Route path="/tour-places" element={<Main/>} exact/>
+              }
+          </Routes>
+        </Router>
       </LocalizationProvider>
     </div>
   );

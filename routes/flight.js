@@ -92,5 +92,57 @@ router.route('/search-airports').post(async (req, res) => {
     }
 });
 
+router.route('/locations-search').post(async (req, res) => {
+  const method = "GET";
+  const url = 'https://travel-advisor.p.rapidapi.com/locations/search';
+  const params = {
+    query: req.body.query,
+    limit: '30',
+    offset: '0',
+    units: 'km',
+    location_id: '1',
+    currency: 'USD',
+    sort: 'relevance',
+    lang: 'en_US'
+  };
+  const headers =  {
+    'X-RapidAPI-Key': process.env.API_KEY,
+    'X-RapidAPI-Host': process.env.TRAVEL_API_HOST,
+  }
+ 
+  try {       
+    const response = await axios.request(options(method, url, params, headers));
+    let result = response.data.data.filter(data => data.result_type === 'geos');
+    res.json(result);
+  }
+  catch (error) {
+      console.error(error);
+  }
+});
+
+router.route('/attractions-list').post(async (req, res) => {
+  const method = "GET";
+  const url = 'https://travel-advisor.p.rapidapi.com/attractions/list';
+  const params = {
+    location_id: req.body.location_id,
+    currency: 'USD',
+    lang: 'en_US',
+    lunit: 'km',
+    sort: 'recommended'
+  };
+  const headers =  {
+    'X-RapidAPI-Key': process.env.API_KEY,
+    'X-RapidAPI-Host': process.env.TRAVEL_API_HOST,
+  }
+ 
+  try {       
+    const response = await axios.request(options(method, url, params, headers));
+    res.json(response.data);
+  }
+  catch (error) {
+      console.error(error);
+  }
+});
+
 
 module.exports = router;

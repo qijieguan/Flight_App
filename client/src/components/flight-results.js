@@ -1,10 +1,10 @@
-import '../styles/search-results.css';
+import '../styles/flight-results.css';
 import { IoMdAirplane } from 'react-icons/io';
 
 import { useEffect } from 'react';
 import uuid from 'react-uuid';
 
-const SearchResults = ({ flights }) => {
+const FlightResults = ({ flights }) => {
 
     useEffect(() => {
         //console.log(flights);
@@ -30,7 +30,7 @@ const SearchResults = ({ flights }) => {
     }
 
     return (
-        <div className="search-results grid">
+        <div className="flight-results grid">
 
             {flights && flights.length > 0 &&
                 flights.map(flight => 
@@ -70,4 +70,4 @@ const SearchResults = ({ flights }) => {
     )
 }
 
-export default SearchResults
+export default FlightResults

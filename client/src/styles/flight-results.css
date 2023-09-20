@@ -1,4 +1,4 @@
-.search-results {
+.flight-results {
     padding: 2vh 0;
     position: relative;
     grid-template-columns: 30% 30% 30%;
@@ -66,9 +66,9 @@
 
 
 @media (max-width: 50rem) {
-    .search-results { grid-template-columns: 47.5% 47.5%; transform: translateY(-8%); width: 97.5%; }
+    .flight-results { grid-template-columns: 47.5% 47.5%; transform: translateY(-8%); width: 97.5%; }
 }
 
 @media (max-width: 25rem) {
-    .search-results { transform: translateY(1%); grid-template-columns: 100%; row-gap: 2vh; }
+    .flight-results { transform: translateY(1%); grid-template-columns: 100%; row-gap: 2vh; }
 }
