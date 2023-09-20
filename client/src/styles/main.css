@@ -191,14 +191,16 @@
     right: 0;
 }
 
-.important-message {
-    margin: 3vh 0;
+.important-notice {
+    margin: 10vh auto 3vh auto;
     grid-column: 1 / 4;
     color: grey;
     font-style: oblique;
     font-size: clamp(0.875rem, 1.25vw, 1.25rem);
-    width: 100%;
+    width: 80%;
 }
+
+.important-notice > span { font-weight: bold; color: rgb(44, 44, 44); }
 
 @media (max-width: 50rem) {
     .main-header-overlay-wrapper > img { height: 75%; }
@@ -216,4 +218,5 @@
     .autocomplete-form-label { margin: 1vh 0 5vh 0; grid-column: 1 / 2; align-items: center; } 
     .autocomplete-form-label > span { box-shadow: 0 0 1px; }
     .search-button { margin-top: 3vh; grid-column: 1 / 2; }
+    .important-notice { margin: 3vh auto;; width: 97.5%; }
 }

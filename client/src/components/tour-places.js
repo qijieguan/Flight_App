@@ -10,6 +10,7 @@ const TourPlaces = () => {
     const [tourList, setTourList] = useState([]);
     const [tourInput, setInput] = useState('');
     const [searchTerm, setTerm] = useState('');
+    const [message, setMessage] = useState('Fetching data... Please wait a second!');
 
     const baseURL = window.location.href.includes('localhost:3000') ? 'http://localhost:3001' : "";
 
@@ -27,7 +28,12 @@ const TourPlaces = () => {
                 location_id: response.data[0].result_object.location_id
             })
             .then((response) => {
-                setTourList(response.data.data.filter(place => place.hasOwnProperty('photo') && place.hasOwnProperty('name')));
+                if (response.data.data) {
+                    setTourList(response.data.data.filter(place => place.hasOwnProperty('photo') && place.hasOwnProperty('name')));
+                }
+                else {
+                    setMessage('No results for this query. Please try another key search.');
+                }
                 setTerm(tourInput);
                 setInput('');
             }); 
@@ -84,7 +90,7 @@ const TourPlaces = () => {
                 }
             </div>
             {tourList.length === 0 &&
-                <h1 className='tour-list-empty'>Fetching data... Please wait a second!</h1>
+                <h1 className='tour-list-empty'>{message}</h1>
             }
         </div>
     )

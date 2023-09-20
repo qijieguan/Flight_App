@@ -148,8 +148,8 @@ const Main = () => {
                         </button>
                     </form>
                 
-                    <div className='important-message'>
-                        ****Server is currently down. Please try again later**** This is an early build based on a free version of a flight API service. 
+                    <div className='important-notice'>
+                        <span>*****Server is currently down. Please try again later***** </span>This is an early build based on a free version of a flight API service. 
                         Please click search button again if no results are shown (avg. wait time 5 - 30 seconds). 
                         Thank you for your patience.
                     </div>
