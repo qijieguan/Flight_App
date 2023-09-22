@@ -200,7 +200,7 @@
     width: 80%;
 }
 
-.important-notice > span { font-weight: bold; color: rgb(44, 44, 44); }
+.important-notice > span { display: none; font-weight: bold; color: rgb(44, 44, 44); }
 
 @media (max-width: 50rem) {
     .main-header-overlay-wrapper > img { height: 75%; }
