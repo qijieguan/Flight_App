@@ -94,7 +94,6 @@ const Main = () => {
     const handleNav = () => {
         let main_banner = document.querySelector('.main-header-banner');
         let height = main_banner.clientHeight;
-
         let factor = 0.6;
         
         if (main_banner.clientWidth <= 800) { factor = 0.75; }
