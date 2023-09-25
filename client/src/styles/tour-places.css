@@ -61,7 +61,7 @@
 .tour-place > img {
     height: 66%;
     width: 100%;
-    border-radius: 0.125rem;
+    border-radius: 0.5rem;
 }
 
 .tour-list-empty {
@@ -86,5 +86,5 @@
     .tour-search { margin: 5vh 0; width: 97.5%; }
     .tour-results-label { margin-bottom: 5vh; }
     .tour-list { grid-template-columns: 100%; }
-    .tour-place > img { height: 75%; }
+    .tour-place > img { height: 75%;  border-radius: 0; }
 }

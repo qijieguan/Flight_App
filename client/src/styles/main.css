@@ -102,7 +102,7 @@
 
 .autocomplete-form {
     position: relative;
-    padding: min(20vh, 3rem) 2vw 0 2vw;
+    padding: min(20vh, 3rem) 2vw;
     grid-template-columns: 47.5% 47.5%;
     justify-content: space-between;
     row-gap: 7.5vh;
@@ -127,7 +127,7 @@
 
 .autocomplete-form-label {
     margin: 5vh 0 2.5vh 0;
-    flex-direction: column;
+    flex-wrap: wrap;
     justify-content: center;
     row-gap: 1vh;
     text-transform: uppercase;
@@ -136,7 +136,7 @@
 }
 
 .autocomplete-form-label > h1 {
-    font-size: clamp(1.5rem, 3vw, 3rem);
+    font-size: clamp(1.5rem, 3vw, 2.5rem);
     font-weight: bolder;
 }
 
@@ -192,7 +192,7 @@
 }
 
 .important-notice {
-    margin: 10vh auto 3vh auto;
+    margin: 10vh auto 15vh auto;
     grid-column: 1 / 4;
     color: grey;
     font-style: oblique;

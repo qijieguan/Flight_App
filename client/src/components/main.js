@@ -32,7 +32,7 @@ const Main = () => {
     useEffect(() => {
         scrollHeaderAnimation();
         setParamURL(location.pathname);
-    }, [location]);
+    }, [location, flights]);
 
     const scrollHeaderAnimation = () => {
         let main_banner = document.querySelector('.main-header-banner');

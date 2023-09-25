@@ -1,13 +1,50 @@
 import '../styles/flight-results.css';
 import { IoMdAirplane } from 'react-icons/io';
+import { MdOutlineArrowDropDownCircle,  MdFlightTakeoff, MdFlightLand } from 'react-icons/md';
 
 import { useEffect } from 'react';
 import uuid from 'react-uuid';
 
+import FlightSegment from './flight-segment.js';
+
 const FlightResults = ({ flights }) => {
+
+    const testObj = [
+        {segments: [
+            {legs: [
+                {
+                    arrivalDateTime: "2023-09-29T17:35:00+09:00",
+                    departureDateTime: "2023-09-28T12:10:00-07:00",
+                    marketingCarrier: {
+                        displayName: 'Example',
+                        logoUrl: "https://static.tacdn.com/img2/flights/airlines/logos/100x100/Emirates2.png"
+                    },
+                    originStationCode: 'LAX',
+                    destinationStationCode: 'TPE'
+                }
+            ]}, 
+            {legs: [
+                {
+                    arrivalDateTime: "2023-09-30T05:35:00+09:00",
+                    departureDateTime: "2023-09-29T17:35:00+09:00",
+                    marketingCarrier: {
+                        displayName: 'Example',
+                        logoUrl: "https://static.tacdn.com/img2/flights/airlines/logos/100x100/Emirates2.png"
+                    },
+                    originStationCode: 'TPE',
+                    destinationStationCode: 'LAX'
+                }
+            ]}
+        ],
+        purchaseLinks: [{
+            totalPrice: 5000,
+        }],
+        },
+    ]
 
     useEffect(() => {
         //console.log(flights);
+        //console.log(tempFlightObj)
     }, [flights]);
 
     const calcDuration = (depart_date, arrival_date) => {
@@ -26,12 +63,30 @@ const FlightResults = ({ flights }) => {
     }
 
     const getTime = (date) => {
-        return new Date(date).toUTCString().split(' ')[4].slice(0, 5);
+        //console.log(new Date(date).toUTCString());
+        let meridiem = 'am';
+        let time = new Date(date).toUTCString().split(' ')[4].slice(0, 5);
+        if (Number(time.split(':')[0]) % 12 >= 0) { 
+            time = Number(time.split(':')[0]) % 12 + ":" + time.split(':')[1];
+            meridiem = 'pm';
+        }
+        return time + meridiem;
     }
+
+    const toggleFlightDetail = (e) => { 
+        let flight_detail = e.currentTarget.parentElement?.querySelector('.flight-detail');
+        setTimeout(() => {
+            if (!flight_detail?.classList.contains('show')) {
+                document.querySelector('.flight-detail.show')?.classList.remove('show');   
+            }
+            flight_detail?.classList.toggle('show');
+        });
+    }
+
+    //flights && flights.length > 0 &&
 
     return (
         <div className="flight-results grid">
-
             {flights && flights.length > 0 &&
                 flights.map(flight => 
                     <div className="flight flex" key={uuid()}>
@@ -63,6 +118,31 @@ const FlightResults = ({ flights }) => {
                             <span className='flight-name'>{flight.segments[0].legs[0].marketingCarrier.displayName}</span>
                             <span className='flight-price'>${flight.purchaseLinks[0].totalPrice}</span>
                         </div>
+                        <div className='show-detail flex' onClick={toggleFlightDetail}>
+                            <span>Show details</span>
+                            <MdOutlineArrowDropDownCircle className='icon'/>
+                        </div>
+                        {
+                            <div className='flight-detail flex'>
+                                <div className='flight-detail-segment flex'>
+                                    <label className='depart-label'>Depart Trip</label>
+                                    <div className='depart-detail flex'>
+                                        {flight.segments[0].legs.map(leg => 
+                                            <FlightSegment param={"depart"} leg={leg} key={uuid()}/>
+                                        )}  
+                                    </div>
+                                </div>
+
+                                <div className='flight-detail-segment flex'>
+                                    <label className='return-label'>Return Trip</label>
+                                    <div className='return-detail flex'>
+                                    {flight.segments[1].legs.map(leg => 
+                                        <FlightSegment param={"return"} leg={leg} key={uuid()}/>
+                                    )} 
+                                    </div>
+                                </div>
+                            </div>
+                        }
                     </div>
                 )
             }
