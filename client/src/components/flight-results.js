@@ -56,9 +56,9 @@ const FlightResults = ({ flights }) => {
     useEffect(() => {
         //console.log(flights);
         //console.log(tempFlightObj)
-        //if (flights && flights.length > 0) { 
+        if (flights && flights.length > 0) { 
             scrollToFlightSection()
-        //}
+        }
     }, [flights]);
 
     const calcDuration = (depart_date, arrival_date) => {
