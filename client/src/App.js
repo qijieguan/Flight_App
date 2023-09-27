@@ -1,9 +1,7 @@
 import './App.css';
 import axios from 'axios';
 import { useEffect, useState } from 'react';
-import Header from './components/header';
 import Main from './components/main.js';
-import TourPlaces from './components/tour-places.js';
 
 import {BrowserRouter as Router, Routes, Route} from "react-router-dom";
 
@@ -38,17 +36,16 @@ function App() {
     <div className="App">
       <LocalizationProvider dateAdapter={AdapterDayjs}>
         <Router>
-            <Header/>
-            <Routes>
-              {isLoaded &&
-                <Route path="/" element={<Main/>} exact/>
-              }
-              {isLoaded &&
-                <Route path="/quick-start" element={<Main/>} exact/>
-              }
-              {isLoaded &&
-                <Route path="/tour-places" element={<Main/>} exact/>
-              }
+          <Routes>
+            {isLoaded &&
+              <Route path="/" element={<Main/>} exact/>
+            }
+            {isLoaded &&
+              <Route path="/quick-start" element={<Main/>} exact/>
+            }
+            {isLoaded &&
+              <Route path="/tour-places" element={<Main/>} exact/>
+            }
           </Routes>
         </Router>
       </LocalizationProvider>

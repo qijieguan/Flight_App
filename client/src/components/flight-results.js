@@ -50,12 +50,15 @@ const FlightResults = ({ flights }) => {
             originalCurrency: 'sek',
             totalPrice: 27000,
         }],
-        },
+        }
     ]
 
     useEffect(() => {
         //console.log(flights);
         //console.log(tempFlightObj)
+        //if (flights && flights.length > 0) { 
+            scrollToFlightSection()
+        //}
     }, [flights]);
 
     const calcDuration = (depart_date, arrival_date) => {
@@ -97,8 +100,19 @@ const FlightResults = ({ flights }) => {
     const closeFlightDetail = () => {
         document.querySelector('.flight-detail.show')?.classList.remove('show');  
     }
-    //flights && flights.length > 0 &&
 
+    const scrollToFlightSection = () => {
+        setTimeout(() => {
+            let flight = document.getElementsByClassName('flight')[0];
+            let autocomplete = document.querySelector('.autocomplete-form');
+
+            let scrollY = autocomplete?.getBoundingClientRect().height + flight?.getBoundingClientRect().height;
+            window?.scrollTo({top: scrollY, behavior: 'smooth'});
+        }, 500)
+    }
+
+    //flights && flights.length > 0 &&
+   
     return (
         <div className="flight-results grid">
             {flights && flights.length > 0 &&

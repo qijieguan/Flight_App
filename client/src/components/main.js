@@ -1,11 +1,10 @@
 import '../styles/main.css'
-import { MdOutlineCellTower } from 'react-icons/md';
-import { PiMountainsFill } from 'react-icons/pi';
 
 import { useState, useEffect } from 'react'
 import axios from 'axios';
-import { Link, useLocation } from 'react-router-dom';
+import { useLocation } from 'react-router-dom';
 
+import Header from './header.js';
 import PlacesAutocomplete from './auto-complete.js';
 import DatePickers from './date-pickers.js';
 import FlightResults from './flight-results.js';
@@ -17,15 +16,11 @@ const Main = () => {
     const [destInp, setDestInp] = useState(null);
     const [departInp, setDepartInp] = useState(null);
     const [returnInp, setReturnInp] = useState(null);
-
     const [paramURL, setParamURL] = useState('');
 
     const [flights, setFlights] = useState([]);
 
     const baseURL = window.location.href.includes('localhost:3000') ? 'http://localhost:3001' : "";
-
-    const banner_url = "https://images.pexels.com/photos/358220/pexels-photo-358220.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1";
-    const profile_url = "https://images.pexels.com/photos/321159/pexels-photo-321159.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1";
 
     const location = useLocation();
 
@@ -47,8 +42,9 @@ const Main = () => {
                 let factor = 0.6;
                 lastKnownScrollPosition = window.scrollY;
 
-                if (main_banner.clientWidth <= 800) { factor = 0.75; }
-                if (main_banner.clientWidth <= 400) { factor = 0.33; }
+                if (main_banner.clientWidth <= 800) { factor = 0.8; }
+                if (main_banner.clientWidth <= 400) { factor = 0.6; }
+                if (main_banner.clientWidth <= 200) { factor = 0.4; }
 
                 if (lastKnownScrollPosition <= height * factor) {
                     main_banner.style.transform = 'translateY(-' + lastKnownScrollPosition + "px)";
@@ -92,47 +88,9 @@ const Main = () => {
         } ); 
     }
 
-    const handleNav = () => {
-        let main_banner = document.querySelector('.main-header-banner');
-        let height = main_banner.clientHeight;
-        let factor = 0.6;
-        
-        if (main_banner.clientWidth <= 800) { factor = 0.75; }
-        if (main_banner.clientWidth <= 400) { factor = 0.33; }
-
-        window.scrollTo({top: height * factor, behavior: 'smooth'})
-    }
-
     return (
         <div className="main flex">
-            <div className='main-header-banner'>
-                <img src={banner_url} alt=""/>
-                <div className='main-header-overlay flex'>
-                    <div className='main-header-overlay-wrapper flex'>
-                        <h1>
-                            <span>Hello! </span>
-                            <span>Plan your trip today!</span>
-                        </h1>
-                        <img src={profile_url} alt=""/>
-                        <div className='main-header-banner-links flex'>
-                            <Link to='/'>
-                                <div className='main-header-banner-link flex' onClick={() => {handleNav(); }}>
-                                    <span>Realtime Flights</span>
-                                    <MdOutlineCellTower className='icon'/>
-                                </div>
-                            </Link>
-
-                            <Link to='/tour-places'>
-                                <div className='main-header-banner-link flex'>
-                                    <span>Tour Locations</span>
-                                    <PiMountainsFill className='icon' style={{transform: 'translateY(-7.5%)'}}/>
-                                </div>
-                            </Link>
-                        </div>
-                    </div>
-                </div>   
-            </div>
-            
+            <Header/>            
             {!paramURL.includes('tour-places') &&
                 <div>
                     <form className='autocomplete-form grid'>
