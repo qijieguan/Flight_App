@@ -32,7 +32,8 @@ const Main = () => {
     useEffect(() => {
         scrollHeaderAnimation();
         setParamURL(location.pathname);
-    }, [location, flights]);
+        setFlights([]);
+    }, [location]);
 
     const scrollHeaderAnimation = () => {
         let main_banner = document.querySelector('.main-header-banner');
@@ -129,15 +130,14 @@ const Main = () => {
                             </Link>
                         </div>
                     </div>
-                </div>
-                
+                </div>   
             </div>
             
             {!paramURL.includes('tour-places') &&
                 <div>
                     <form className='autocomplete-form grid'>
                         <div className="bubble"/>
-                        <div className='autocomplete-form-label flex'><h1>Choose Your Flight</h1> <span>ROUND TRIP</span></div>
+                        <div className='autocomplete-form-label flex'><h1>Pick Your Flight</h1> <span>ROUND TRIP</span></div>
                         <PlacesAutocomplete param={'origin'} setAirportInput={setAirportInput}/>
                         <PlacesAutocomplete param={'destination'} setAirportInput={setAirportInput}/>
                         

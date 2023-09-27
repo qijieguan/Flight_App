@@ -1,10 +1,12 @@
 import '../styles/flight-results.css';
 import { IoMdAirplane } from 'react-icons/io';
-import { MdOutlineArrowDropDownCircle,  MdFlightTakeoff, MdFlightLand } from 'react-icons/md';
+import { MdOutlineArrowDropDownCircle } from 'react-icons/md';
+import { AiOutlineArrowRight } from 'react-icons/ai';
 
 import { useEffect } from 'react';
 import uuid from 'react-uuid';
 
+import FlightPrice from './flightPrice.js';
 import FlightSegment from './flight-segment.js';
 
 const FlightResults = ({ flights }) => {
@@ -19,6 +21,10 @@ const FlightResults = ({ flights }) => {
                         displayName: 'Example',
                         logoUrl: "https://static.tacdn.com/img2/flights/airlines/logos/100x100/Emirates2.png"
                     },
+                    operatingCarrier: {
+                        displayName: 'Example',
+                        code: 'Ex'
+                    },
                     originStationCode: 'LAX',
                     destinationStationCode: 'TPE'
                 }
@@ -31,13 +37,18 @@ const FlightResults = ({ flights }) => {
                         displayName: 'Example',
                         logoUrl: "https://static.tacdn.com/img2/flights/airlines/logos/100x100/Emirates2.png"
                     },
+                    operatingCarrier: {
+                        displayName: 'Example',
+                        code: 'Ex'
+                    },
                     originStationCode: 'TPE',
                     destinationStationCode: 'LAX'
                 }
             ]}
         ],
         purchaseLinks: [{
-            totalPrice: 5000,
+            originalCurrency: 'sek',
+            totalPrice: 27000,
         }],
         },
     ]
@@ -83,6 +94,9 @@ const FlightResults = ({ flights }) => {
         });
     }
 
+    const closeFlightDetail = () => {
+        document.querySelector('.flight-detail.show')?.classList.remove('show');  
+    }
     //flights && flights.length > 0 &&
 
     return (
@@ -116,14 +130,20 @@ const FlightResults = ({ flights }) => {
                         <div className='flight-airline flex'>
                             <img src={flight.segments[0].legs[0].marketingCarrier.logoUrl} alt=""/>
                             <span className='flight-name'>{flight.segments[0].legs[0].marketingCarrier.displayName}</span>
-                            <span className='flight-price'>${flight.purchaseLinks[0].totalPrice}</span>
+                            <span className='flight-price'>
+                                <FlightPrice 
+                                    currency={flight.purchaseLinks[0].originalCurrency}
+                                    price={flight.purchaseLinks[0].totalPrice}
+                                />
+                            </span>
                         </div>
                         <div className='show-detail flex' onClick={toggleFlightDetail}>
                             <span>Show details</span>
                             <MdOutlineArrowDropDownCircle className='icon'/>
                         </div>
                         {
-                            <div className='flight-detail flex'>
+                            <div className='flight-detail'>
+                                <h1>Flight Overview</h1>
                                 <div className='flight-detail-segment flex'>
                                     <label className='depart-label'>Depart Trip</label>
                                     <div className='depart-detail flex'>
@@ -141,6 +161,11 @@ const FlightResults = ({ flights }) => {
                                     )} 
                                     </div>
                                 </div>
+
+                                <button className='close-btn flex' onClick={closeFlightDetail}>
+                                    <span>Go Back</span>
+                                    <AiOutlineArrowRight className='icon'/>
+                                </button>
                             </div>
                         }
                     </div>

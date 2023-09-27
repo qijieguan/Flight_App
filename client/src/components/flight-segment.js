@@ -30,12 +30,12 @@ const FlightSegment = ({param, leg}) => {
     }
 
     return (
-        <div className='flight-segment flex'>
+        <div className='flight-segment'>
             <div className={param + '-start flex'}>
                 <MdFlightTakeoff className='icon'/>
-                <span>{ getTime(leg.departureDateTime) }</span> 
+                <span>{ getTime(leg.departureDateTime) } </span> 
                 <span> - </span>
-                <span>{ leg.originStationCode } </span>
+                <span>{ leg.originStationCode } <span>({leg.operatingCarrier.displayName} - {leg.operatingCarrier.code})</span></span>
             </div>
             <div className={param + '-duration'}>
                 {calcDuration(
@@ -45,9 +45,9 @@ const FlightSegment = ({param, leg}) => {
             </div>
             <div className={param + '-end flex'}>
                 <MdFlightLand className='icon'/>
-                { getTime(leg.arrivalDateTime) } 
-                - 
-                { leg.destinationStationCode } 
+                <span>{ getTime(leg.arrivalDateTime) } </span>
+                <span> - </span> 
+                <span>{ leg.destinationStationCode } </span>
             </div>
         </div>
     )
