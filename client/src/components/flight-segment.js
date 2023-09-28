@@ -34,9 +34,8 @@ const FlightSegment = ({param, leg}) => {
                 <MdFlightTakeoff className='icon'/>
                 <span>{ getTime(leg.departureDateTime) } </span> 
                 <span> - </span>
-                <span>{ leg.originStationCode } 
-                    <span className='carrier-name'> ({leg.operatingCarrier.displayName} - {leg.operatingCarrier.code})</span>
-                </span>
+                <span>{ leg.originStationCode }</span>
+                <span className='carrier-name'> ({leg.operatingCarrier.displayName} - {leg.operatingCarrier.code})</span>
             </div>
             <div className={param + '-duration'}>
                 {calcDuration(

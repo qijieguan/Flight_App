@@ -1,9 +1,8 @@
 .flight-segment { text-align: center; font-style: oblique; color: grey; width: 100%; }
 .flight-segment > div { column-gap: 0.25vw; }
-.flight-segment > div > span { font-weight: bold; }
-.carrier-name { font-weight: 500; }
-
+.flight-segment > div > span:not(.carrier-name) { font-weight: bold; }
 .flight-segment * { font-size: clamp(0.875rem, 1vw, 1rem); }
+.carrier-name { font-weight: 500; font-size: clamp(0.75rem, 1vw, 1rem); }
 .flight-segment .icon { 
     margin-right: 0.25vw;
     font-size: clamp(1.25rem, 1.5vw, 1.5rem); 

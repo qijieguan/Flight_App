@@ -1,6 +1,6 @@
 import '../styles/flight-results.css';
 import { IoMdAirplane } from 'react-icons/io';
-import { MdOutlineArrowDropDownCircle } from 'react-icons/md';
+import { MdOutlineArrowDropDownCircle, MdOutlineClose } from 'react-icons/md';
 import { AiOutlineArrowRight } from 'react-icons/ai';
 
 import { useEffect } from 'react';
@@ -158,8 +158,8 @@ const FlightResults = ({ flights }) => {
                         </div>
                         
                         { <div className='flight-detail'>
+                            <MdOutlineClose className='icon' onClick={closeFlightDetail}/>
                             <h1>Flight Overview</h1>
-
                             <div className='flight-detail-segment flex'>
                                 <label className='depart-label'>Depart Trip</label>
                                 <div className='depart-detail flex'>
