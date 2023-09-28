@@ -11,7 +11,7 @@
     row-gap: 7.5vh;
     min-height: 75vh;
     width: 100%;
-    background: white;
+    background: rgb(245, 245, 245);
     box-shadow: 0 -3px 10px gray;
     z-index: 1;
     overflow: hidden;
@@ -20,12 +20,13 @@
 .bubble {
     position: absolute;
     inset: 0 auto auto 0;
-    height: 100%;
-    width: 50%;
+    height: 50%;
+    width: 100%;
     background: gold;
-    transform: translate3d(-15%, -30%, 0);
+    transform: translate3d(0, -30%, 0);
     z-index: -1;
     border-radius: 0 5rem 50rem 0;
+    box-shadow: 0 0 3px gray;
 }
 
 .autocomplete-form-label {
@@ -39,7 +40,7 @@
 }
 
 .autocomplete-form-label > h1 {
-    font-size: clamp(1.5rem, 3vw, 2.5rem);
+    font-size: clamp(1.75rem, 3vw, 2.5rem);
     font-weight: bolder;
 }
 
@@ -59,7 +60,7 @@
     padding: 4vh 1vw;
     text-transform: uppercase;
     font-weight: bolder;
-    color: white;
+    color: gold;
     background: rgb(24, 24, 24);
     box-shadow: 0 3px 3px rgb(61, 61, 61);
     border-radius: 0.25rem;
@@ -102,6 +103,7 @@
 
 @media (max-width: 50rem) {
     .important-notice { margin: 3vh auto 2vh auto; }
+    .bubble { height: 75%; }
 }
 
 @media (max-width: 25rem) {
@@ -110,4 +112,5 @@
     .autocomplete-form-label > span { box-shadow: 0 0 1px; }
     .search-button { margin-top: 3vh; grid-column: 1 / 2; }
     .important-notice { margin: 2vh auto; width: 97.5%; }
+    .bubble { height: 100%; }
 }

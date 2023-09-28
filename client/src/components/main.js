@@ -4,7 +4,7 @@ import { useState, useEffect } from 'react'
 import axios from 'axios';
 import { useLocation } from 'react-router-dom';
 
-import Header from './header.js';
+import MainBanner from './main-banner.js';
 import PlacesAutocomplete from './auto-complete.js';
 import DatePickers from './date-pickers.js';
 import FlightResults from './flight-results.js';
@@ -25,33 +25,9 @@ const Main = () => {
     const location = useLocation();
 
     useEffect(() => {
-        scrollHeaderAnimation();
         setParamURL(location.pathname);
         setFlights([]);
     }, [location]);
-
-    const scrollHeaderAnimation = () => {
-        let main_banner = document.querySelector('.main-header-banner');
-        let lastKnownScrollPosition = 0;
-    
-        setTimeout(() => {
-            window.addEventListener('scroll', (e) => {
-                e.preventDefault();
-    
-                let height = main_banner.clientHeight;
-                let factor = 0.6;
-                lastKnownScrollPosition = window.scrollY;
-
-                if (main_banner.clientWidth <= 800) { factor = 0.8; }
-                if (main_banner.clientWidth <= 400) { factor = 0.6; }
-                if (main_banner.clientWidth <= 200) { factor = 0.4; }
-
-                if (lastKnownScrollPosition <= height * factor) {
-                    main_banner.style.transform = 'translateY(-' + lastKnownScrollPosition + "px)";
-                }
-            });
-        }, 500);
-    }
 
     const setAirportInput = (input) => {
         if (input.type === 'origin') { setOriginInp(input.address.split(',')[0]); }
@@ -90,7 +66,7 @@ const Main = () => {
 
     return (
         <div className="main flex">
-            <Header/>            
+            <MainBanner/>            
             {!paramURL.includes('tour-places') &&
                 <div>
                     <form className='autocomplete-form grid'>

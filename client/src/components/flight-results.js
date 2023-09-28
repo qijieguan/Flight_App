@@ -155,33 +155,32 @@ const FlightResults = ({ flights }) => {
                             <span>Show details</span>
                             <MdOutlineArrowDropDownCircle className='icon'/>
                         </div>
-                        {
-                            <div className='flight-detail'>
-                                <h1>Flight Overview</h1>
-                                <div className='flight-detail-segment flex'>
-                                    <label className='depart-label'>Depart Trip</label>
-                                    <div className='depart-detail flex'>
-                                        {flight.segments[0].legs.map(leg => 
-                                            <FlightSegment param={"depart"} leg={leg} key={uuid()}/>
-                                        )}  
-                                    </div>
+                        
+                        { <div className='flight-detail'>
+                            <h1>Flight Overview</h1>
+                            <div className='flight-detail-segment flex'>
+                                <label className='depart-label'>Depart Trip</label>
+                                <div className='depart-detail flex'>
+                                    {flight.segments[0].legs.map(leg => 
+                                        <FlightSegment param={"depart"} leg={leg} key={uuid()}/>
+                                    )}  
                                 </div>
-
-                                <div className='flight-detail-segment flex'>
-                                    <label className='return-label'>Return Trip</label>
-                                    <div className='return-detail flex'>
-                                    {flight.segments[1].legs.map(leg => 
-                                        <FlightSegment param={"return"} leg={leg} key={uuid()}/>
-                                    )} 
-                                    </div>
-                                </div>
-
-                                <button className='close-btn flex' onClick={closeFlightDetail}>
-                                    <span>Go Back</span>
-                                    <AiOutlineArrowRight className='icon'/>
-                                </button>
                             </div>
-                        }
+
+                            <div className='flight-detail-segment flex'>
+                                <label className='return-label'>Return Trip</label>
+                                <div className='return-detail flex'>
+                                {flight.segments[1].legs.map(leg => 
+                                    <FlightSegment param={"return"} leg={leg} key={uuid()}/>
+                                )} 
+                                </div>
+                            </div>
+
+                            <button className='close-btn flex' onClick={closeFlightDetail}>
+                                <span>Go Back</span>
+                                <AiOutlineArrowRight className='icon'/>
+                            </button>
+                        </div> }
                     </div>
                 )
             }

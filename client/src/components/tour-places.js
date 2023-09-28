@@ -17,6 +17,18 @@ const TourPlaces = () => {
     useEffect(() => {
         if (tourList.length === 0) {
             apiRequest("Rome, Italy");
+            setTimeout(() => {
+                let main_banner = document.querySelector('.main-banner');
+                let tour_header = document.querySelector('.tour-header');
+                let tour_results = document.querySelector('.tour-results-label');
+
+                let scrollY = 
+                    main_banner?.getBoundingClientRect().height + 
+                    tour_header?.getBoundingClientRect().height + 
+                    tour_results?.getBoundingClientRect().height;
+                    
+                window?.scrollTo({top: scrollY, behavior: 'smooth'});
+            }, 500);
         }
     }, []);
 

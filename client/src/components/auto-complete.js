@@ -92,25 +92,23 @@ const PlacesAutocomplete = ( {param, setAirportInput} ) => {
            
                 <ComboboxPopover className='combobox-popover'>
                     <ComboboxList className='combobox-list'>
-                        {
-                            data.filter(d => d.description.toLowerCase().includes('airport')).map(({ place_id, description }) => 
-                                <div className='combobox-option-wrapper flex' key={place_id}>
-                                    <div className='combobox-option flex' value={description}>
-                                        <span className='combobox-option-description flex' onClick={() => {handleSelect(description)}}>
-                                            <span>{description}</span>
-                                            <span className='option-icon'>
-                                                {param === 'origin' ?
-                                                    <MdFlightTakeoff/>
-                                                    :
-                                                    <MdFlightLand/>  
-                                                }
-                                            </span>
+                        { data.filter(d => d.description.toLowerCase().includes('airport')).map(({ place_id, description }) => 
+                            <div className='combobox-option-wrapper flex' key={place_id}>
+                                <div className='combobox-option flex' value={description}>
+                                    <span className='combobox-option-description flex' onClick={() => {handleSelect(description)}}>
+                                        <span>{description}</span>
+                                        <span className='option-icon'>
+                                            {param === 'origin' ?
+                                                <MdFlightTakeoff/>
+                                                :
+                                                <MdFlightLand/>  
+                                            }
                                         </span>
-                                        
-                                    </div>
+                                    </span>
+                                    
                                 </div>
-                            )
-                        }
+                            </div>
+                        ) }
                     </ComboboxList>
                 </ComboboxPopover>
                 
