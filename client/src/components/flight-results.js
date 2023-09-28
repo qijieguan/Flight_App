@@ -41,14 +41,15 @@ const FlightResults = ({ flights }) => {
                         displayName: 'Example',
                         code: 'Ex'
                     },
-                    originStationCode: 'TPE',
+                    originStationCode: 'JFK',
                     destinationStationCode: 'LAX'
                 }
             ]}
         ],
         purchaseLinks: [{
-            originalCurrency: 'sek',
-            totalPrice: 27000,
+            originalCurrency: 'USD',
+            totalPrice: 0,
+            url: "https://images.pexels.com/photos/5344850/pexels-photo-5344850.jpeg?auto=compress&cs=tinysrgb&w=600"
         }],
         }
     ]
@@ -158,6 +159,7 @@ const FlightResults = ({ flights }) => {
                         
                         { <div className='flight-detail'>
                             <h1>Flight Overview</h1>
+
                             <div className='flight-detail-segment flex'>
                                 <label className='depart-label'>Depart Trip</label>
                                 <div className='depart-detail flex'>
@@ -174,6 +176,13 @@ const FlightResults = ({ flights }) => {
                                     <FlightSegment param={"return"} leg={leg} key={uuid()}/>
                                 )} 
                                 </div>
+                            </div>
+
+                            <div className='flight-detail-segment purchase-link'>
+                                <label className='purchase-label'>Purchase Link</label>
+                                <span onClick={() => {window.open(flight.purchaseLinks[0].url, '_blank')}}>
+                                    {flight.purchaseLinks[0].url}
+                                </span>
                             </div>
 
                             <button className='close-btn flex' onClick={closeFlightDetail}>

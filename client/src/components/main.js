@@ -51,6 +51,8 @@ const Main = () => {
 
         if (!originInp || !destInp || !departInp || !returnInp) { return; }
 
+        console.log('submited!');
+
         await axios.post(baseURL + '/flight/search-flight/', {
             origin: originInp.split(',')[0],
             destination: destInp.split(',')[0],
@@ -60,7 +62,7 @@ const Main = () => {
         .then((response) => {  
             console.log(response.data);
             let results = response.data.data ? response.data.data.flights : response.data.flights;
-            setFlights(results);
+            setFlights([...results]);
         } ); 
     }
 

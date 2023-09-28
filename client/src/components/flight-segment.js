@@ -2,7 +2,6 @@ import '../styles/flight-segment.css';
 import { MdFlightTakeoff, MdFlightLand } from 'react-icons/md';
 
 const FlightSegment = ({param, leg}) => {
-    
     const calcDuration = (depart_date, arrival_date) => {
         let seconds = (new Date(arrival_date) - new Date(depart_date))/ 1000;
 
@@ -35,7 +34,9 @@ const FlightSegment = ({param, leg}) => {
                 <MdFlightTakeoff className='icon'/>
                 <span>{ getTime(leg.departureDateTime) } </span> 
                 <span> - </span>
-                <span>{ leg.originStationCode } <span>({leg.operatingCarrier.displayName} - {leg.operatingCarrier.code})</span></span>
+                <span>{ leg.originStationCode } 
+                    <span className='carrier-name'> ({leg.operatingCarrier.displayName} - {leg.operatingCarrier.code})</span>
+                </span>
             </div>
             <div className={param + '-duration'}>
                 {calcDuration(
