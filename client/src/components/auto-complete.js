@@ -77,7 +77,7 @@ const PlacesAutocomplete = ( {param, setAirportInput} ) => {
                             className='combobox-input'
                             value={value.split(',')[0]} 
                             onChange={(e) => { setValue(e.target.value)}} 
-                            placeholder={"Enter an " + param}
+                            placeholder="Enter valid airport"
                             disabled={!ready}
                         />
                         <div className='input-icon'>

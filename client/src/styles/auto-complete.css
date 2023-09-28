@@ -4,7 +4,7 @@
     flex-direction: column;
     background: white;
     box-shadow: 0 0 3px rgb(180, 180, 180);
-    border-radius: 0.125rem;
+    border-radius: 0.25rem;
     overflow-x: hidden;
 }
 
@@ -17,31 +17,20 @@
 
 .combobox-input {
     text-align: left;
-    font-size: clamp(1rem, 1.75vw, 1.75rem);
+    font-size: clamp(1rem, 1.5vw, 1.5rem);
     color: rgb(53, 53, 53);
     border: 0;
     width: 100%;
 }
 
-.combobox-input:focus {
-    font-size: clamp(1.5rem, 2vw, 2rem);
-    box-shadow: none;
-}
+.combobox-input:focus { font-size: clamp(1.25rem, 2vw, 2rem); box-shadow: none; }
 
-.input-wrapper {
-    justify-content: space-between;
-    width: 100%;
-}
+.input-wrapper { justify-content: space-between; width: 100%; }
 
 .input-icon { margin-right: 3%; }
-
-.input-icon * {
-    font-size: clamp(1.5rem, 2vw, 2rem);
-    color: gray;
-}
+.input-icon * { font-size: clamp(1.5rem, 2vw, 2rem); color: grey; }
 
 .combobox-list { position: relative; background: white; box-shadow: 0 3px 3px; z-index: 2; }
-
 .combobox-option { color: rgb(180, 180, 180); width: 100%; }
 
 .combobox-option-description {
@@ -52,14 +41,12 @@
     color: grey;
     border-bottom: 1px solid rgb(228, 228, 228);
 }
-
 .combobox-option-description:hover { font-weight: bold; background: gold; color: black; }
-
 .combobox-option-description > span:first-child { margin-right: 0.5vw; }
 
 .option-icon { margin-left: auto; }
+.option-icon * { transform: translateY(7.5%); font-size: clamp(1rem, 1.5vw, 1.5rem); }
 
-.option-icon * {
-    transform: translateY(7.5%);
-    font-size: clamp(1rem, 1.5vw, 1.5rem);
+@media (max-width: 25rem) {
+    .combobox-input-wrapper { padding: 1vh 0; border-radius: 0; }
 }

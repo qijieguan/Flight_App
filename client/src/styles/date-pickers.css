@@ -15,14 +15,14 @@
     width: 100%;
     background: white;
     box-shadow: 0 0 3px rgb(180, 180, 180);
-    border-radius: 0.125rem;
+    border-radius: 0.25rem;
 }
 
 .date-picker-wrapper > span {
     margin-left: 2%;
     text-transform: uppercase;
     font-weight: bold;
-    font-size: clamp(0.75rem, 1.25vw, 1.25rem);
+    font-size: clamp(0.75rem, 1.125vw, 1.125rem);
     color: gray;
 }
 
@@ -38,8 +38,11 @@
 
 .MuiSvgIcon-root { 
     font-size: clamp(1.5rem, 2vw, 2rem) !important; 
+    color: grey;
 }
 
 @media (max-width: 25rem) {
     .date-pickers { grid-column: 1 / 2; grid-template-columns: 100%; row-gap: 1vh; }
+    .date-picker-wrapper { border-radius: 0; }
+    .MuiPickersPopper-root { width: 100%; }
 }

@@ -73,7 +73,7 @@ const Main = () => {
                 <div>
                     <form className='autocomplete-form grid'>
                         <div className="bubble"/>
-                        <div className='autocomplete-form-label flex'><h1>Pick Your Flight</h1> <span>ROUND TRIP</span></div>
+                        <div className='autocomplete-form-label flex'><h1>Find Live Flights</h1> <span>ROUND TRIP</span></div>
                         <PlacesAutocomplete param={'origin'} setAirportInput={setAirportInput}/>
                         <PlacesAutocomplete param={'destination'} setAirportInput={setAirportInput}/>
                         
