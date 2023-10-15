@@ -18,14 +18,18 @@ const FlightSegment = ({param, leg}) => {
     }
 
     const getTime = (date) => {
-        //console.log(new Date(date).toUTCString());
-        let meridiem = 'am';
-        let time = new Date(date).toUTCString().split(' ')[4].slice(0, 5);
-        if (Number(time.split(':')[0]) % 12 >= 0) { 
-            time = Number(time.split(':')[0]) % 12 + ":" + time.split(':')[1];
-            meridiem = 'pm';
-        }
-        return time + meridiem;
+        //let meridiem = 'am';
+        //let time = new Date(date).toUTCString().split(' ')[4].slice(0, 5);
+    
+        //if (Number(time.split(':')[0]) / 12 >= 1) {
+        //    time = Number(time.split(':')[0]) % 12 + ":" + time.split(':')[1];
+        //    meridiem = 'pm';
+        //}
+
+        var options = { hour: 'numeric', minute: '2-digit' };
+        let time = new Date(date).toLocaleTimeString(navigator.language, options);
+
+        return time;
     }
 
     return (

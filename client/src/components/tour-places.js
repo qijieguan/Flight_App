@@ -13,6 +13,7 @@ const TourPlaces = () => {
     const [message, setMessage] = useState('Fetching data... Please wait a second!');
 
     const baseURL = window.location.href.includes('localhost:3000') ? 'http://localhost:3001' : "";
+    const banner_url = "https://images.pexels.com/photos/2359/sand-desert-statue-pyramid.jpg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1";
 
     useEffect(() => {
         if (tourList.length === 0) {
@@ -71,21 +72,23 @@ const TourPlaces = () => {
 
     return (
         <div className="tour-container flex">
-            <div className="tour-header flex">
-                <h1>Browse Tour Attractions</h1>
-                <span>
-                    Enter a city, state, country, or etc. We will compile a list of popular attractions 
-                    based around the query. Make new experiences and memories on your tour adventures.
-                </span>
-            </div>
-
-            <div className="tour-search grid">
-                <input 
-                    placeholder="Enter a city, state, or country"
-                    value={tourInput}
-                    onChange={handleChange}
-                />
-                <button onClick={handleSubmit}>Search</button>
+            <div className='tour-banner'>
+                <img className="tour-banner-image" src={banner_url} alt=""/>
+                <div className='tour-banner-overlay'/>
+                <form onSubmit={handleSubmit} className="tour-search flex">
+                    <input 
+                        placeholder="Enter a city, state, or country"
+                        value={tourInput}
+                        onChange={handleChange}
+                    />
+                    <div className="tour-header flex">
+                        <h1>Browse Tour Attractions</h1>
+                        <span>
+                            Enter a city, state, country, or etc. We will compile a list of popular attractions 
+                            based around the query. Make new experiences and memories on your tour adventures.
+                        </span>
+                    </div>
+                </form>
             </div>
 
             <label className='tour-results-label'>
@@ -95,6 +98,10 @@ const TourPlaces = () => {
                     <span>Search Results - {searchTerm}</span>
                 }
             </label>
+
+            {tourList.length === 0 &&
+                <h1 className='tour-list-empty'>{message}</h1>
+            }
 
             <div className="tour-list grid">
                 {tourList.length > 0 &&
@@ -106,9 +113,6 @@ const TourPlaces = () => {
                     )
                 }
             </div>
-            {tourList.length === 0 &&
-                <h1 className='tour-list-empty'>{message}</h1>
-            }
         </div>
     )
 }

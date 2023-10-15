@@ -1,90 +1,80 @@
 .tour-container {
     justify-content: flex-start;
     flex-direction: column;
-    padding: 10vh 2vw;
     min-height: 75vh;
     width: 100%;
 }
 
-.tour-header {
-    flex-direction: column;
-    row-gap: 2vh;
-    width: 60%;
+.tour-banner { position: relative; padding: 10vh 2vw; width: 100%; }
+.tour-banner-image {
+    position: absolute;
+    inset: 0 auto auto 0;
+    height: 100%;
+    width: 100%;
+    object-position: center;
 }
-
-.tour-header > h1 {
-    font-size: clamp(1.75rem, 2.5vw, 2.5rem);
-    font-weight: bolder;
-}
-
-.tour-header > span {
-    font-weight: 500;
+.tour-banner-overlay {
+    position: absolute;
+    inset: 0 auto auto 0;
+    height: 100%;
+    width: 100%;
+    background: gray;
+    opacity: 0.5;
+    z-index: 1;
 }
 
 .tour-search {
-    margin: 10vh 0;
-    grid-template-columns: 70% 25%;
-    height: 7.5vh;
-    width: 75%;
+    position: relative;
+    row-gap: 1vh;
+    flex-direction: column;
+    justify-content: center;
+    z-index: 1;
 }
 
 .tour-search > input {
-    height: 100%;
-    border-radius: 0;
-}
-
-.tour-search > button {
+    margin-bottom: 2vh;
+    width: 75%;
+    background: transparent;
     color: white;
-    background: royalblue;
-    border: 0;
-    box-shadow: 1px 1px 1px gray;
+    border: 2px solid white;
+    border-radius: 3rem;
 }
+.tour-search > input::placeholder { font-weight: 700; color: white; }
 
-.tour-results-label {
-    grid-column: 1 / 5;
-    margin-bottom: 7.5vh;
-    font-weight: bolder;
-}
+.tour-header { flex-direction: column; row-gap: 2vh; width: 75%; color: white; }
+.tour-header > h1 { font-size: clamp(1.5rem, 2.5vw, 2.5rem); font-weight: bolder; }
+.tour-header > span { font-weight: 500; }
 
+.tour-results-label { margin-top: 10vh; margin-bottom: 7.5vh; font-weight: bolder; }
 .tour-results-label > span {  font-size: clamp(1.375rem, 2vw, 2rem); }
 
 .tour-list {
     grid-template-columns: 22% 22% 22% 22%;
     justify-content: space-around;
+    min-height: 30vh;
 }
 
-.tour-place {
-    height: 33vh;
-    width: 100%;
-}
+.tour-place { height: 33vh; width: 100%; }
+.tour-place > img { height: 66%; width: 100%; border-radius: 0.5rem; transition: all 0.3s; }
+.tour-place > img:hover { transform: scale(1.5); }
 
-.tour-place > img {
-    height: 66%;
-    width: 100%;
-    border-radius: 0.5rem;
-}
-
-.tour-list-empty {
-    font-weight: 500;
-}
+.tour-list-empty { font-weight: 500; }
 
 @media (max-width: 50rem) {
-    .tour-header { width: 80%; }
-    .tour-search { width: 80%; }
     .tour-list { grid-template-columns: 30% 30% 30%; }
 }
 
 @media (max-width: 35rem) {
-    .tour-header { width: 80%; }
-    .tour-search { width: 80%; }
     .tour-list { grid-template-columns: 45% 45%; }
+    .tour-place > img:hover { transform: scale(1.25); }
 }
 
 @media (max-width: 25rem) {
-    .tour-container { padding: 5vh 1vw; }
+    .tour-container { padding: 0; }
+    .tour-banner { position: relative; padding: 5vh 1vw; } 
+    .tour-search > input { width:97.5%; } 
     .tour-header { width: 97.5%; }
-    .tour-search { margin: 5vh 0; width: 97.5%; }
-    .tour-results-label { margin-bottom: 5vh; }
+    .tour-results-label { margin-top: 5vh; margin-bottom: 5vh; }
     .tour-list { grid-template-columns: 100%; }
     .tour-place > img { height: 75%;  border-radius: 0; }
 }

@@ -62,6 +62,22 @@ const FlightResults = ({ flights }) => {
         }
     }, [flights]);
 
+    const oneWayDuration = (segment) => {
+        let totalDuration = {hours: 0, minutes: 0};
+
+        for (let i = 0; i < segment.legs.length; ++i) {
+            let result = calcDuration(segment.legs[i].departureDateTime, segment.legs[i].arrivalDateTime);
+            totalDuration.hours += result.hours;
+            totalDuration.minutes += result.minutes;
+        }        
+
+        let format_hours = totalDuration.hours + Math.floor(totalDuration.minutes / 60);
+        let format_minutes = totalDuration.minutes % 60;
+
+        let time_duration = ('0' + format_hours.toString()).slice(-2) + "h " + ('0' + format_minutes.toString()).slice(-2) + 'm';
+        return time_duration;
+    }
+
     const calcDuration = (depart_date, arrival_date) => {
         let seconds = (new Date(arrival_date) - new Date(depart_date))/ 1000;
 
@@ -71,21 +87,15 @@ const FlightResults = ({ flights }) => {
         hours = Math.ceil(hours * 100) / 100;
         minutes = Math.round((hours - Math.floor(hours)).toFixed(2) * 60);
         hours = Math.floor(hours);
-
-        let time_duration = ('0' + hours.toString()).slice(-2) + "h " + ('0' + minutes.toString()).slice(-2) + 'm';
-
-        return time_duration;
+        
+        return {hours, minutes};
     }
 
     const getTime = (date) => {
-        //console.log(new Date(date).toUTCString());
-        let meridiem = 'am';
-        let time = new Date(date).toUTCString().split(' ')[4].slice(0, 5);
-        if (Number(time.split(':')[0]) % 12 >= 0) { 
-            time = Number(time.split(':')[0]) % 12 + ":" + time.split(':')[1];
-            meridiem = 'pm';
-        }
-        return time + meridiem;
+        var options = { hour: 'numeric', minute: '2-digit' };
+        let time = new Date(date).toLocaleTimeString(navigator.language, options);
+
+        return time;
     }
 
     const toggleFlightDetail = (e) => { 
@@ -127,10 +137,7 @@ const FlightResults = ({ flights }) => {
                                 <span>&#9632;</span>
                                 <IoMdAirplane className='airplane-icon'/>
                                 <div className='flight-time-duration'>
-                                    {calcDuration(
-                                        flight.segments[0].legs[0].departureDateTime, 
-                                        flight.segments[0].legs[flight.segments[0].legs.length - 1].arrivalDateTime)
-                                    }
+                                    {oneWayDuration(flight.segments[0])}
                                 </div>
                             </span>
                             <span>{getTime(flight.segments[0].legs[flight.segments[0].legs.length - 1].arrivalDateTime)}</span>

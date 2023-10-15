@@ -7,7 +7,7 @@ import { useEffect } from 'react';
 
 const MainBanner = () => {
 
-    const banner_url = "https://images.pexels.com/photos/358220/pexels-photo-358220.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1";
+    const banner_url = "https://images.pexels.com/photos/3660892/pexels-photo-3660892.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1";
     const profile_url = "https://images.pexels.com/photos/321159/pexels-photo-321159.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1";
 
     const location = useLocation();
