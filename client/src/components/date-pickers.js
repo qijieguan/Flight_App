@@ -31,14 +31,14 @@ const DatePickers = ({ setDateInput }) => {
     return (
         <div className='date-pickers grid'>
             <div className='date-picker-wrapper flex'>
-                <span>Departure</span>
+                <span>Departure Date</span>
                 <DatePicker className='date-picker depart' value={depart_date} 
                     minDate={today}
                     onChange={(depart_date) => { handleSelect(depart_date, 'depart') }}
                 />
             </div>  
             <div className='date-picker-wrapper flex'>
-                <span>Return</span>
+                <span>Return Date</span>
                 <DatePicker className='date-picker return' value={return_date} 
                     minDate={depart_date !== null ? depart_date : today}
                     onChange={(return_date) => { handleSelect(return_date, 'return') }}

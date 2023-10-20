@@ -24,7 +24,7 @@ const FlightPrice = ({currency, price}) => {
             {totalPrice === 0 ?
                 <span>N/A</span>
                 :
-                <span>$ {totalPrice.toFixed(2)}</span>
+                <span>${totalPrice.toFixed(2)}</span>
             }
         </div>
     )

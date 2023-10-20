@@ -1,8 +1,8 @@
 .flight-results {
     padding: 2vh 0 10vh 0;
     position: relative;
-    grid-template-columns: 30% 30% 30%;
-    row-gap: 4vh;
+    flex-direction: column;
+    row-gap: 2vh;
     justify-content: space-evenly;
     min-height: 10vh;
     width: 100%;
@@ -11,80 +11,61 @@
 
 .flight {
     position: relative;
+    margin: 0 auto;
     padding: 2vh 2vw;
-    align-items: flex-start;
     row-gap: 2vh;
-    flex-direction: column;
-    min-height: 30vh;
-    height: fit-content;
+    min-height: 10vh;
+    width: 95%;
     background: white;
-    box-shadow: 0 0 3px rgb(180, 180, 180);
-    border-radius: 0.5rem;
+    border: 1px solid rgb(240, 240, 240);
+    border-radius: 2rem;
     overflow: hidden;
 }
 
-.flight-time { 
-    grid-template-columns: auto minmax(30%, 70%) auto; 
-    column-gap: 0.5vw; 
-    justify-content: center; 
-    width: 100%; 
-}
-.flight-time > span { margin: auto 0; font-size: clamp(1.125rem, 1.5vw, 1.5rem); font-weight: bold; color: gray; }
+.flight-header { justify-content: space-between; flex-wrap: wrap; row-gap: 2vh; }
 
-.flight-time-segment { position: relative; }
-.flight-time-segment > hr { width: 100%; }
-.flight-time-segment > span { font-size: clamp(1.25rem, 1.75vw, 1.75rem); transform: translateY(-7.5%); }
+.flight-airline { column-gap: 0.5vw; }
+.flight-airline > img { height: 7vh; width: 7vh; border-radius: 5rem; }
+.flight-airline > div { grid-template-columns: auto auto; text-align: left; column-gap: 0.5vw; }
 
-.airplane-icon {
-    position: absolute;
-    inset: auto auto auto 50%;
-    font-size: clamp(1.25rem, 1.75vw, 1.75rem);
+.flight-name { grid-column: 1 / 3; font-size: clamp(0.875rem, 1vw, 1rem); font-weight: 700; color: rgb(56, 56, 56); }
+.flight-code, .flight-time-duration { font-size: clamp(0.75rem, 1vw, 1rem); color: rgb(134, 134, 134); }
+.flight-code { padding-right: 0.5vw; border-right: 1px solid gainsboro; }
+
+.flight-depart-date {
+    padding: 1.5vh max(2vw, 1rem);
+    align-items: flex-start;
+    flex-direction: column;
     color: rgb(134, 134, 134);
-    transform: translateX(-50%) rotate(90Deg);
+    background: rgb(255, 204, 185);
+    border-radius: 2rem;
+}
+.flight-depart-date > span { font-size: clamp(0.75rem, 1vw, 1rem); color: orangered; }
+.flight-depart-date > span:first-child {
+    font-size: clamp(0.875rem, 1.125vw, 1.125rem);
+    font-weight: 500;
 }
 
-.flight-time-duration {
-    position: absolute;
-    inset: auto auto auto 50%;
-    font-size: clamp(0.75rem, 1vw, 1rem);
-    width: 100%;
-    color: rgb(134, 134, 134);
-    transform: translate3d(-50%, 100%, 0);
-}
+.flight-divider { margin: 2vh 0; width: 100%; border: 1px dashed rgb(226, 226, 226); }
 
-.flight-points { justify-content: space-between; width: 100%; }
-.flight-points > span {
-    padding: 0.25vh 1.5vw;
-    color: grey;
-    font-weight: 700;
-    font-size: clamp(0.875rem, 1vw, 1rem);
-    background: rgb(223, 223, 223);
-    border-radius: 1rem;
-}
+.flight-footer { justify-content: space-between; }
 
-.flight-divider { margin: 2vh 0; width: 100%; border: 1px dashed gray; }
-
-.flight-airline { column-gap: 0.5vw; width: 100%; }
-.flight-airline > img { height: 5vh; width: 5vh; border-radius: 5rem; }
-
-.flight-name { font-size: clamp(0.875rem, 1vw, 1rem); font-weight: 700; color: rgb(56, 56, 56); }
-.flight-price { margin-left: auto; font-weight: bold; color: cadetblue; }
-.flight-price > span { font-size: clamp(1rem, 1.375vw, 1.375rem); }
+.flight-price-wrapper { column-gap: 0.5vw; }
+.flight-price-wrapper > span { font-size: clamp(1rem, 1.5vw, 1.5rem); color: gray; }
+.flight-price > span { font-weight: 700; font-size: clamp(1.25rem, 1.75vw, 1.75rem); color: rgb(50, 50, 50); }
 
 .show-detail {
-    margin-left: auto; 
     justify-content: center; 
-    color: rgb(156, 156, 156); 
+    color: rgb(255, 98, 40); 
     border-bottom: 1px solid transparent; 
     transform: translateX(1vw);
 }
-.show-detail > span { margin: 0 0.25vw; font-size: clamp(0.875rem, 1vw, 1rem); font-weight: 500; }
+.show-detail > span { margin: 0 0.25vw; font-size: clamp(0.875rem, 1.125vw, 1.125rem); font-weight: 500; }
 .show-detail > .icon { 
-    font-size: clamp(1.25rem, 1.375vw, 1.375rem); 
-    color: rgb(182, 182, 182); 
+    font-size: clamp(1.375rem, 1.5vw, 1.5rem); 
     transform: translateY(-5%); 
 }
-.show-detail:hover { border-color: rgb(180, 180, 180); }
+.show-detail:hover { opacity: 0.4; }
 
 .flight-detail {
     position: fixed;
@@ -117,7 +98,7 @@
     padding: 0 1vw;
     font-size: clamp(1.25rem, 2.25vw, 2.25rem);
     text-transform: uppercase;
-    color: gray;
+    color: orangered;
 }
 
 .flight-detail-segment {
@@ -134,14 +115,14 @@
     position: absolute;
     inset: 0 auto auto 0;
     font-size: clamp(0.75rem, 1vw, 1rem);
-    font-weight: 700;
+    font-weight: 500;
     text-transform: uppercase;
     color: rgb(180, 180, 180);
     background: white;
     transform: translate3d(15%, -50%, 0);
 }
 
-.purchase-link > span { cursor: pointer; font-size: clamp(0.875rem, 1vw, 1.125rem); color: royalblue; }
+.purchase-link > span { cursor: pointer; font-size: clamp(0.875rem, 1vw, 1.125rem); color: orangered; }
 .purchase-link > span:hover { text-decoration: underline; }
 
 .close-btn {
@@ -163,17 +144,19 @@
 
 .depart-detail, .return-detail { margin: 0 auto; flex-direction: column; row-gap: 1vh; width: 50%; }
 
+@media (max-width: 75rem) {
+    .flight-detail { width: 60%; }
+}
+
 @media (max-width: 50rem) {
-    .flight-results { grid-template-columns: 47.5% 47.5%; width: 97.5%; }
-    .flight-top-border { grid-column: 1 / 3; }
     .flight-detail { width: 75%; }
     .depart-detail, .return-detail { width: 80%; }
 }
 
 @media (max-width: 25rem) {
-    .flight-results { grid-template-columns: 100%; width: 100%; row-gap: 2vh; }
-    .flight-top-border { grid-column: 1 / 2; }
-    .flight { padding: 1vh 1vw; border-radius: 0; }
+    .flight { padding: 1vh 2vw; border-radius: 0; }
+    .flight-header { justify-content: center; }
+    .flight-airline { margin-right: auto; column-gap: 3vw; }
     .flight-detail { padding-top: 1vh; width: 95%; border-top: 1px dashed rgb(226, 226, 226); }
     .flight-detail-segment > label { margin-bottom: 1vh; } 
     .purchase-link > span { margin-bottom: 3vh; }

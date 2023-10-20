@@ -1,7 +1,7 @@
 import '../styles/flight-results.css';
-import { IoMdAirplane } from 'react-icons/io';
 import { MdOutlineArrowDropDownCircle, MdOutlineClose } from 'react-icons/md';
 import { AiOutlineArrowRight } from 'react-icons/ai';
+import { BsChevronDown } from 'react-icons/bs';
 
 import { useEffect } from 'react';
 import uuid from 'react-uuid';
@@ -19,7 +19,8 @@ const FlightResults = ({ flights }) => {
                     departureDateTime: "2023-09-28T12:10:00-07:00",
                     marketingCarrier: {
                         displayName: 'Example',
-                        logoUrl: "https://static.tacdn.com/img2/flights/airlines/logos/100x100/Emirates2.png"
+                        logoUrl: "https://static.tacdn.com/img2/flights/airlines/logos/100x100/Emirates2.png",
+                        code: 'Ex'
                     },
                     operatingCarrier: {
                         displayName: 'Example',
@@ -35,7 +36,8 @@ const FlightResults = ({ flights }) => {
                     departureDateTime: "2023-09-29T17:35:00+09:00",
                     marketingCarrier: {
                         displayName: 'Example',
-                        logoUrl: "https://static.tacdn.com/img2/flights/airlines/logos/100x100/Emirates2.png"
+                        logoUrl: "https://static.tacdn.com/img2/flights/airlines/logos/100x100/Emirates2.png",
+                        code: 'Ex'
                     },
                     operatingCarrier: {
                         displayName: 'Example',
@@ -48,7 +50,7 @@ const FlightResults = ({ flights }) => {
         ],
         purchaseLinks: [{
             originalCurrency: 'USD',
-            totalPrice: 0,
+            totalPrice: 900,
             url: "https://images.pexels.com/photos/5344850/pexels-photo-5344850.jpeg?auto=compress&cs=tinysrgb&w=600"
         }],
         }
@@ -74,7 +76,7 @@ const FlightResults = ({ flights }) => {
         let format_hours = totalDuration.hours + Math.floor(totalDuration.minutes / 60);
         let format_minutes = totalDuration.minutes % 60;
 
-        let time_duration = ('0' + format_hours.toString()).slice(-2) + "h " + ('0' + format_minutes.toString()).slice(-2) + 'm';
+        let time_duration = ('0' + format_hours.toString()).slice(-2) + " h " + ('0' + format_minutes.toString()).slice(-2) + ' min';
         return time_duration;
     }
 
@@ -91,6 +93,12 @@ const FlightResults = ({ flights }) => {
         return {hours, minutes};
     }
 
+    const getDate = (date) => {
+        const options = { weekday: 'short', month: 'short', day: 'numeric' };
+        let parse_date = new Date(date).toLocaleDateString(navigator.language, options).split(',');
+        return parse_date[0] + parse_date[1] + ", " + getTime(date);
+    }
+
     const getTime = (date) => {
         var options = { hour: 'numeric', minute: '2-digit' };
         let time = new Date(date).toLocaleTimeString(navigator.language, options);
@@ -102,10 +110,20 @@ const FlightResults = ({ flights }) => {
         let flight_detail = e.currentTarget.parentElement?.querySelector('.flight-detail');
         setTimeout(() => {
             if (!flight_detail?.classList.contains('show')) {
-                document.querySelector('.flight-detail.show')?.classList.remove('show');   
+                closeFlightDetail();
             }
             flight_detail?.classList.toggle('show');
+
+            document.addEventListener('click', (e) => {
+                outsideClick(e, flight_detail);
+            });
         });
+    }
+    
+    const outsideClick = (e, flight_detail) => {
+        if (!flight_detail.contains(e.target)) {
+            closeFlightDetail();
+        }
     }
 
     const closeFlightDetail = () => {
@@ -125,78 +143,82 @@ const FlightResults = ({ flights }) => {
     //flights && flights.length > 0 &&
    
     return (
-        <div className="flight-results grid">
+        <div className="flight-results flex">
             {flights && flights.length > 0 &&
                 flights.map(flight => 
-                    <div className="flight flex" key={uuid()}>
-                        <div className="flight-time grid">
-                            <span>{getTime(flight.segments[0].legs[0].departureDateTime)}</span>
-                            <span className='flight-time-segment flex'>
-                                <span>&#9632;</span>
-                                <hr/>
-                                <span>&#9632;</span>
-                                <IoMdAirplane className='airplane-icon'/>
-                                <div className='flight-time-duration'>
-                                    {oneWayDuration(flight.segments[0])}
+                    <div className="flight" key={uuid()}>
+                        <div className='flight-header flex'>
+                            <div className='flight-airline flex'>
+                                <img src={flight.segments[0].legs[0].marketingCarrier.logoUrl} alt=""/>
+                                <div className='grid'>
+                                    <span className='flight-name'>{flight.segments[0].legs[0].marketingCarrier.displayName}</span>
+                                    <span className='flight-code'>
+                                        {flight.segments[0].legs[0].marketingCarrier.code}
+                                    </span>
+                                    <span className='flight-time-duration'>
+                                        {oneWayDuration(flight.segments[0])}
+                                    </span>
                                 </div>
-                            </span>
-                            <span>{getTime(flight.segments[0].legs[flight.segments[0].legs.length - 1].arrivalDateTime)}</span>
+                            </div>
+
+                            <div className='flight-depart-date flex'>
+                                <span>Depart Date</span>
+                                <span>
+                                {getDate(flight.segments[0].legs[0].departureDateTime)}
+                                </span>
+                            </div>
+
+                            <div className='show-detail flex' onClick={toggleFlightDetail}>
+                                <span>Show details</span>
+                                <MdOutlineArrowDropDownCircle className='icon'/>
+                            </div>
+
+                            { <div className='flight-detail'>
+                                <MdOutlineClose className='icon' onClick={closeFlightDetail}/>
+                                <h1>Flight Overview</h1>
+                                <div className='flight-detail-segment flex'>
+                                    <label className='depart-label'>Depart Trip</label>
+                                    <div className='depart-detail flex'>
+                                        {flight.segments[0].legs.map(leg => 
+                                            <FlightSegment param={"depart"} leg={leg} key={uuid()}/>
+                                        )}  
+                                    </div>
+                                </div>
+
+                                <div className='flight-detail-segment flex'>
+                                    <label className='return-label'>Return Trip</label>
+                                    <div className='return-detail flex'>
+                                    {flight.segments[1].legs.map(leg => 
+                                        <FlightSegment param={"return"} leg={leg} key={uuid()}/>
+                                    )} 
+                                    </div>
+                                </div>
+
+                                <div className='flight-detail-segment purchase-link'>
+                                    <label className='purchase-label'>Purchase Link</label>
+                                    <span onClick={() => {window.open(flight.purchaseLinks[0].url, '_blank')}}>
+                                        {flight.purchaseLinks[0].url}
+                                    </span>
+                                </div>
+
+                                <button className='close-btn flex' onClick={closeFlightDetail}>
+                                    <span>Go Back</span>
+                                    <AiOutlineArrowRight className='icon'/>
+                                </button>
+                            </div> }
                         </div>
-                        <div className='flight-points flex'>
-                            <span>{flight.segments[0].legs[0].originStationCode}</span>
-                            <span>{
-                                flight.segments[0].legs[flight.segments[0].legs.length - 1].destinationStationCode}
-                            </span>
-                        </div>
+                        
                         <div className='flight-divider'/>
-                        <div className='flight-airline flex'>
-                            <img src={flight.segments[0].legs[0].marketingCarrier.logoUrl} alt=""/>
-                            <span className='flight-name'>{flight.segments[0].legs[0].marketingCarrier.displayName}</span>
-                            <span className='flight-price'>
+
+                        <div className='flight-footer flex'>
+                            <span className='flight-price-wrapper flex'>
+                                <span>USD</span>
                                 <FlightPrice 
                                     currency={flight.purchaseLinks[0].originalCurrency}
                                     price={flight.purchaseLinks[0].totalPrice}
                                 />
                             </span>
                         </div>
-                        <div className='show-detail flex' onClick={toggleFlightDetail}>
-                            <span>Show details</span>
-                            <MdOutlineArrowDropDownCircle className='icon'/>
-                        </div>
-                        
-                        { <div className='flight-detail'>
-                            <MdOutlineClose className='icon' onClick={closeFlightDetail}/>
-                            <h1>Flight Overview</h1>
-                            <div className='flight-detail-segment flex'>
-                                <label className='depart-label'>Depart Trip</label>
-                                <div className='depart-detail flex'>
-                                    {flight.segments[0].legs.map(leg => 
-                                        <FlightSegment param={"depart"} leg={leg} key={uuid()}/>
-                                    )}  
-                                </div>
-                            </div>
-
-                            <div className='flight-detail-segment flex'>
-                                <label className='return-label'>Return Trip</label>
-                                <div className='return-detail flex'>
-                                {flight.segments[1].legs.map(leg => 
-                                    <FlightSegment param={"return"} leg={leg} key={uuid()}/>
-                                )} 
-                                </div>
-                            </div>
-
-                            <div className='flight-detail-segment purchase-link'>
-                                <label className='purchase-label'>Purchase Link</label>
-                                <span onClick={() => {window.open(flight.purchaseLinks[0].url, '_blank')}}>
-                                    {flight.purchaseLinks[0].url}
-                                </span>
-                            </div>
-
-                            <button className='close-btn flex' onClick={closeFlightDetail}>
-                                <span>Go Back</span>
-                                <AiOutlineArrowRight className='icon'/>
-                            </button>
-                        </div> }
                     </div>
                 )
             }

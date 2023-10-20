@@ -1,10 +1,10 @@
-import '../styles/main.css'
+import '../styles/main.css';
+import { AiOutlineSwap } from 'react-icons/ai';
 
 import { useState, useEffect } from 'react'
 import axios from 'axios';
 import { useLocation } from 'react-router-dom';
 
-import MainBanner from './main-banner.js';
 import PlacesAutocomplete from './auto-complete.js';
 import DatePickers from './date-pickers.js';
 import FlightResults from './flight-results.js';
@@ -67,15 +67,18 @@ const Main = () => {
     }
 
     return (
-        <div className="main flex">
-            <MainBanner/>            
+        <div className="main flex">         
             {!paramURL.includes('tour-places') &&
                 <div>
                     <form className='autocomplete-form grid'>
-                        <div className="bubble"/>
                         <div className='autocomplete-form-label flex'><h1>Find Live Flights</h1> <span>ROUND TRIP</span></div>
-                        <PlacesAutocomplete param={'origin'} setAirportInput={setAirportInput}/>
-                        <PlacesAutocomplete param={'destination'} setAirportInput={setAirportInput}/>
+                        <div className='place-autocomplete-inputs flex'>
+                            <PlacesAutocomplete param={'origin'} setAirportInput={setAirportInput}/>
+                            <div className='icon-wrapper flex'>
+                                <AiOutlineSwap className='icon'/>
+                            </div>
+                            <PlacesAutocomplete param={'destination'} setAirportInput={setAirportInput}/>
+                        </div>
                         
                         <DatePickers setDateInput={setDateInput}/>
                         <button className='search-button' onClick={searchFlight}>

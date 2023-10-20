@@ -16,9 +16,7 @@ const TourPlaces = () => {
     const banner_url = "https://images.pexels.com/photos/2359/sand-desert-statue-pyramid.jpg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1";
 
     useEffect(() => {
-        if (tourList.length === 0) {
-            apiRequest("Rome, Italy");
-        }
+        apiRequest("Rome, Italy")
     }, []);
 
     const scrollAnimation = () => {
@@ -36,15 +34,17 @@ const TourPlaces = () => {
         }, 500);
     }
 
-    const apiRequest = async(query) => {
+    const apiRequest = async (query) => {
         await axios.post(baseURL + '/flight/locations-search/', {query: query})
         .then(async (response) => { 
+            console.log('lol')
             await axios.post(baseURL + '/flight/attractions-list/', 
             {
                 location_id: response.data[0].result_object.location_id
             })
             .then((response) => {
                 if (response.data.data) {
+                    console.log('lol')
                     setTourList(response.data.data.filter(place => place.hasOwnProperty('photo') && place.hasOwnProperty('name')));
                 }
                 else {
@@ -54,7 +54,6 @@ const TourPlaces = () => {
                 setInput('');
             }); 
         });
-
         scrollAnimation();
     }
 
@@ -102,7 +101,7 @@ const TourPlaces = () => {
             {tourList.length === 0 &&
                 <h1 className='tour-list-empty'>{message}</h1>
             }
-
+        
             <div className="tour-list grid">
                 {tourList.length > 0 &&
                     tourList.map(place => 

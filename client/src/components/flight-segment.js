@@ -12,7 +12,7 @@ const FlightSegment = ({param, leg}) => {
         minutes = Math.round((hours - Math.floor(hours)).toFixed(2) * 60);
         hours = Math.floor(hours);
 
-        let time_duration = ('0' + hours.toString()).slice(-2) + "h " + ('0' + minutes.toString()).slice(-2) + 'm';
+        let time_duration = ('0' + hours.toString()).slice(-2) + " h " + ('0' + minutes.toString()).slice(-2) + ' min';
 
         return time_duration;
     }
