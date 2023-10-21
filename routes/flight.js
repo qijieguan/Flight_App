@@ -16,6 +16,8 @@ router.route('/search-flight').post(async (req, res) => {
   try {
     let origin = req.body.origin;
     let destination = req.body.destination;
+    let tripType = req.body.tripType;
+    let classType = req.body.classType;
     let departDate = req.body.departDate;
     let returnDate = req.body.returnDate;
 
@@ -51,11 +53,11 @@ router.route('/search-flight').post(async (req, res) => {
       sourceAirportCode: origin_iata,
       destinationAirportCode: destination_iata,
       date: departDate,
-      itineraryType: 'ROUND_TRIP',
+      itineraryType: tripType,
       sortOrder: 'ML_BEST_VALUE',
       numAdults: '1',
       numSeniors: '0',
-      classOfService: 'ECONOMY',
+      classOfService: classType,
       returnDate: returnDate,
       pageNumber: '1',
       currencyCode: 'USD'
@@ -65,7 +67,7 @@ router.route('/search-flight').post(async (req, res) => {
       'X-RapidAPI-Key': process.env.API_KEY,
       'X-RapidAPI-Host': process.env.TRIP_API_HOST,
     }
-    
+ 
     await axios.request(options(method, url, params, headers))
     .then((response) => { res.json(response.data); });
   }

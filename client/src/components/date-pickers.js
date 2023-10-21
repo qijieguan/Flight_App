@@ -2,7 +2,7 @@ import '../styles/date-pickers.css';
 
 import dayjs from 'dayjs';
 import { DatePicker } from '@mui/x-date-pickers';
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 
 const DatePickers = ({ setDateInput }) => {
 
@@ -10,6 +10,15 @@ const DatePickers = ({ setDateInput }) => {
 
     const [depart_date, setDepartDate] = useState(null);
     const [return_date, setReturnDate] = useState(null);
+
+    useEffect(() => { toggleReturnDate(); }, []);
+    
+    const toggleReturnDate = () => {
+        let return_date = document.getElementsByClassName('date-picker-wrapper')[1];
+        
+        if (sessionStorage.getItem('select_trip').includes('one')) { return_date?.classList.add('hide'); }
+        else { return_date?.classList.remove('hide'); }
+    }
 
     const handleSelect = (date, type) => {
         if (type === 'depart') {
@@ -37,6 +46,7 @@ const DatePickers = ({ setDateInput }) => {
                     onChange={(depart_date) => { handleSelect(depart_date, 'depart') }}
                 />
             </div>  
+
             <div className='date-picker-wrapper flex'>
                 <span>Return Date</span>
                 <DatePicker className='date-picker return' value={return_date} 

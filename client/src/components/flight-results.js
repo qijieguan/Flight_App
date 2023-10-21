@@ -1,7 +1,6 @@
 import '../styles/flight-results.css';
 import { MdOutlineArrowDropDownCircle, MdOutlineClose } from 'react-icons/md';
 import { AiOutlineArrowRight } from 'react-icons/ai';
-import { BsChevronDown } from 'react-icons/bs';
 
 import { useEffect } from 'react';
 import uuid from 'react-uuid';
@@ -27,7 +26,9 @@ const FlightResults = ({ flights }) => {
                         code: 'Ex'
                     },
                     originStationCode: 'LAX',
-                    destinationStationCode: 'TPE'
+                    destinationStationCode: 'TPE', 
+                    flightNumber: 69,
+                    classOfService: 'ECONOMY'
                 }
             ]}, 
             {legs: [
@@ -44,7 +45,9 @@ const FlightResults = ({ flights }) => {
                         code: 'Ex'
                     },
                     originStationCode: 'JFK',
-                    destinationStationCode: 'LAX'
+                    destinationStationCode: 'LAX',
+                    flightNumber: 69,
+                    classOfService: 'ECONOMY'
                 }
             ]}
         ],
@@ -153,19 +156,27 @@ const FlightResults = ({ flights }) => {
                                 <div className='grid'>
                                     <span className='flight-name'>{flight.segments[0].legs[0].marketingCarrier.displayName}</span>
                                     <span className='flight-code'>
-                                        {flight.segments[0].legs[0].marketingCarrier.code}
+                                        {flight.segments[0].legs[0].marketingCarrier.code + " " + flight.segments[0].legs[0].flightNumber}
                                     </span>
                                     <span className='flight-time-duration'>
                                         {oneWayDuration(flight.segments[0])}
                                     </span>
                                 </div>
                             </div>
-
+                           
                             <div className='flight-depart-date flex'>
                                 <span>Depart Date</span>
                                 <span>
-                                {getDate(flight.segments[0].legs[0].departureDateTime)}
+                                    {getDate(flight.segments[0].legs[0].departureDateTime)}
                                 </span>
+                            </div> 
+
+                            <div className='flight-class'>
+                                {flight.segments[0].legs[0].classOfService.toLowerCase().replace('_', " ")} Class
+                            </div>
+
+                            <div className='flight-trip'>
+                                {sessionStorage.getItem('select_trip')}
                             </div>
 
                             <div className='show-detail flex' onClick={toggleFlightDetail}>
@@ -173,7 +184,7 @@ const FlightResults = ({ flights }) => {
                                 <MdOutlineArrowDropDownCircle className='icon'/>
                             </div>
 
-                            { <div className='flight-detail'>
+                            <div className='flight-detail'>
                                 <MdOutlineClose className='icon' onClick={closeFlightDetail}/>
                                 <h1>Flight Overview</h1>
                                 <div className='flight-detail-segment flex'>
@@ -184,15 +195,16 @@ const FlightResults = ({ flights }) => {
                                         )}  
                                     </div>
                                 </div>
-
-                                <div className='flight-detail-segment flex'>
-                                    <label className='return-label'>Return Trip</label>
-                                    <div className='return-detail flex'>
-                                    {flight.segments[1].legs.map(leg => 
-                                        <FlightSegment param={"return"} leg={leg} key={uuid()}/>
-                                    )} 
+                                {flight.segments[1] &&
+                                    <div className='flight-detail-segment flex'>
+                                        <label className='return-label'>Return Trip</label>
+                                        <div className='return-detail flex'>
+                                        {flight.segments[1].legs.map(leg => 
+                                            <FlightSegment param={"return"} leg={leg} key={uuid()}/>
+                                        )} 
+                                        </div>
                                     </div>
-                                </div>
+                                }
 
                                 <div className='flight-detail-segment purchase-link'>
                                     <label className='purchase-label'>Purchase Link</label>
@@ -205,7 +217,7 @@ const FlightResults = ({ flights }) => {
                                     <span>Go Back</span>
                                     <AiOutlineArrowRight className='icon'/>
                                 </button>
-                            </div> }
+                            </div> 
                         </div>
                         
                         <div className='flight-divider'/>

@@ -22,7 +22,7 @@
     overflow: hidden;
 }
 
-.flight-header { justify-content: space-between; flex-wrap: wrap; row-gap: 2vh; }
+.flight-header { justify-content: space-between; flex-wrap: wrap; row-gap: 2vh; column-gap: 1vw; }
 
 .flight-airline { column-gap: 0.5vw; }
 .flight-airline > img { height: 7vh; width: 7vh; border-radius: 5rem; }
@@ -32,15 +32,16 @@
 .flight-code, .flight-time-duration { font-size: clamp(0.75rem, 1vw, 1rem); color: rgb(134, 134, 134); }
 .flight-code { padding-right: 0.5vw; border-right: 1px solid gainsboro; }
 
-.flight-depart-date {
+.flight-depart-date, .flight-class, .flight-trip {
     padding: 1.5vh max(2vw, 1rem);
     align-items: flex-start;
     flex-direction: column;
-    color: rgb(134, 134, 134);
+    color: orangered;
     background: rgb(255, 204, 185);
     border-radius: 2rem;
 }
-.flight-depart-date > span { font-size: clamp(0.75rem, 1vw, 1rem); color: orangered; }
+.flight-depart-date { margin: 0 auto; }
+.flight-depart-date > span, .flight-class, .flight-trip { text-transform: capitalize; font-size: clamp(0.75rem, 1vw, 1rem); }
 .flight-depart-date > span:first-child {
     font-size: clamp(0.875rem, 1.125vw, 1.125rem);
     font-weight: 500;

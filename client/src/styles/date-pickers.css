@@ -18,6 +18,11 @@
     border-radius: 1rem;
 }
 
+.date-picker-wrapper.hide {
+    opacity: 0.4;
+    pointer-events: none;
+}
+
 .date-picker-wrapper > span {
     margin-left: 2%;
     text-transform: uppercase;

@@ -39,7 +39,9 @@ const FlightSegment = ({param, leg}) => {
                 <span>{ getTime(leg.departureDateTime) } </span> 
                 <span> - </span>
                 <span>{ leg.originStationCode }</span>
-                <span className='carrier-name'> ({leg.operatingCarrier.displayName} - {leg.operatingCarrier.code})</span>
+                <span className='carrier-name'> 
+                    ({leg.operatingCarrier.displayName} - {leg.operatingCarrier.code + " " + leg.flightNumber})
+                </span>
             </div>
             <div className={param + '-duration'}>
                 {calcDuration(

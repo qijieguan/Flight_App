@@ -49,15 +49,25 @@ const Main = () => {
     const searchFlight = async (e) => {
         e.preventDefault();
 
-        if (!originInp || !destInp || !departInp || !returnInp) { return; }
+        if (!originInp || !destInp || !departInp) { return; }
 
         console.log('submited!');
+
+        let tripType = sessionStorage.getItem('select_trip').includes('one') ? 'ONE_WAY' : 'ROUND_TRIP';
+        //console.log(tripType);
+
+        let classType = 
+            sessionStorage.getItem('select_class').includes('prem') ? 'PREMIUM_ECONOMY' : 
+            sessionStorage.getItem('select_class').toUpperCase();
+        //console.log(classType)
 
         await axios.post(baseURL + '/flight/search-flight/', {
             origin: originInp.split(',')[0],
             destination: destInp.split(',')[0],
+            tripType: tripType,
+            classType: classType,
             departDate: departInp,
-            returnDate: returnInp,
+            returnDate: tripType === "ONE_WAY" ? null : returnInp,
         })
         .then((response) => {  
             console.log(response.data);
@@ -88,7 +98,7 @@ const Main = () => {
                 
                     <div className='important-notice'>
                         <span>*****Server is currently down. Please try again later***** </span>This is an early build based on a free version of a flight API service. 
-                        Please click search button again if no results are shown (avg. wait time 5 - 30 seconds). 
+                        Please refresh and try again if no results are shown (avg. wait time 5 - 30 seconds). 
                         Thank you for your patience.
                     </div>
 

@@ -13,7 +13,7 @@ const FlightPrice = ({currency, price}) => {
     }, []);
 
     const convertCurrency = async () => {
-        if (currency.toUpperCase === 'USD') { return };
+        if (currency.toUpperCase() === 'USD') { return };
 
         await axios.post(baseURL + '/util/convert-currency/', {query: currency})
         .then((response) => { setTotalPrice(response.data * price); })

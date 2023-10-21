@@ -25,7 +25,7 @@
 }
 
 .autocomplete-form-label > h1 {
-    font-size: clamp(1.5rem, 3vw, 2.5rem);
+    font-size: clamp(1.5rem, 4.5vw, 2.5rem);
     font-weight: 100;
 }
 
