@@ -1,11 +1,12 @@
 import '../styles/main.css';
 import { AiOutlineSwap } from 'react-icons/ai';
+import { FaCat } from 'react-icons/fa';
 
 import { useState, useEffect } from 'react'
 import axios from 'axios';
 import { useLocation } from 'react-router-dom';
 
-import PlacesAutocomplete from './auto-complete.js';
+import PlacesAutocomplete from './places-autocomplete.js';
 import DatePickers from './date-pickers.js';
 import FlightResults from './flight-results.js';
 import TourPlaces from './tour-places.js';
@@ -19,14 +20,15 @@ const Main = () => {
     const [paramURL, setParamURL] = useState('');
 
     const [flights, setFlights] = useState([]);
+    const [message, setMessage] = useState('')
 
     const baseURL = window.location.href.includes('localhost:3000') ? 'http://localhost:3001' : "";
-
     const location = useLocation();
 
     useEffect(() => {
         setParamURL(location.pathname);
         setFlights([]);
+        setMessage('');
     }, [location]);
 
     const setAirportInput = (input) => {
@@ -50,16 +52,19 @@ const Main = () => {
         e.preventDefault();
 
         if (!originInp || !destInp || !departInp) { return; }
-
+        if (sessionStorage.getItem('select_trip').includes('two') && returnInp === null) { return; }
         console.log('submited!');
 
-        let tripType = sessionStorage.getItem('select_trip').includes('one') ? 'ONE_WAY' : 'ROUND_TRIP';
-        //console.log(tripType);
+        setFlights([]);
+        setMessage("Fetching data... Please wait a second!");
 
+        let request_status = document.querySelector('.request-status');
+        setTimeout(() => { request_status?.scrollIntoView({block: 'start', behavior: 'smooth'}); }, 1000);
+
+        let tripType = sessionStorage.getItem('select_trip').includes('one') ? 'ONE_WAY' : 'ROUND_TRIP';
         let classType = 
             sessionStorage.getItem('select_class').includes('prem') ? 'PREMIUM_ECONOMY' : 
             sessionStorage.getItem('select_class').toUpperCase();
-        //console.log(classType)
 
         await axios.post(baseURL + '/flight/search-flight/', {
             origin: originInp.split(',')[0],
@@ -69,9 +74,15 @@ const Main = () => {
             departDate: departInp,
             returnDate: tripType === "ONE_WAY" ? null : returnInp,
         })
-        .then((response) => {  
-            console.log(response.data);
-            let results = response.data.data ? response.data.data.flights : response.data.flights;
+        .then((response) => {
+            //console.log(response.data);
+            let results = response.data.data ? response.data.data.flights : [];
+            if (results.length === 0) { 
+                console.log("Results are empty!");
+                setMessage("Request timeout. We are sorry for the inconvenience. Please refresh the page or click search again!")
+            }
+            else { setMessage(""); }
+            
             setFlights([...results]);
         } ); 
     }
@@ -96,19 +107,28 @@ const Main = () => {
                         </button>
                     </form>
                 
-                    <div className='important-notice'>
+                    <p className='important-notice'>
                         <span>*****Server is currently down. Please try again later***** </span>This is an early build based on a free version of a flight API service. 
                         Please refresh and try again if no results are shown (avg. wait time 5 - 30 seconds). 
                         Thank you for your patience.
-                    </div>
+                    </p>
 
                     <FlightResults flights={flights}/>
+                    { message.length > 0 && 
+                        <div className='request-status flex'>
+                            <FaCat className='icon'/>
+                            <FaCat className='icon'/>
+                            <FaCat className='icon'/>
+                            <span>{message}</span>
+                            <FaCat className='icon'/>
+                            <FaCat className='icon'/>
+                            <FaCat className='icon'/>
+                        </div> 
+                    }
                 </div>
             }   
 
-            {paramURL.includes('tour-places') &&
-                <TourPlaces/>
-            }
+            {paramURL.includes('tour-places') && <TourPlaces/> }
         </div>
     )
 }

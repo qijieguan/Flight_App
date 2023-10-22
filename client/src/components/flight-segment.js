@@ -1,10 +1,10 @@
 import '../styles/flight-segment.css';
 import { MdFlightTakeoff, MdFlightLand } from 'react-icons/md';
 
-const FlightSegment = ({param, leg}) => {
+const FlightSegment = ({leg}) => {
+
     const calcDuration = (depart_date, arrival_date) => {
         let seconds = (new Date(arrival_date) - new Date(depart_date))/ 1000;
-
         let minutes = seconds / 60;
         let hours = minutes / 60;
 
@@ -17,43 +17,43 @@ const FlightSegment = ({param, leg}) => {
         return time_duration;
     }
 
-    const getTime = (date) => {
-        //let meridiem = 'am';
-        //let time = new Date(date).toUTCString().split(' ')[4].slice(0, 5);
-    
-        //if (Number(time.split(':')[0]) / 12 >= 1) {
-        //    time = Number(time.split(':')[0]) % 12 + ":" + time.split(':')[1];
-        //    meridiem = 'pm';
-        //}
+    const getDate = (date) => {
+        const options = { weekday: 'short', month: 'short', day: 'numeric' };
+        let parse_date = new Date(date).toLocaleDateString(navigator.language, options).split(',');
+        return parse_date;
+    }
 
+    const getTime = (date) => {
         var options = { hour: 'numeric', minute: '2-digit' };
         let time = new Date(date).toLocaleTimeString(navigator.language, options);
-
         return time;
     }
 
     return (
         <div className='flight-segment'>
-            <div className={param + '-start flex'}>
+            <div className='flight-segment-start grid'>
                 <MdFlightTakeoff className='icon'/>
-                <span>{ getTime(leg.departureDateTime) } </span> 
-                <span> - </span>
-                <span>{ leg.originStationCode }</span>
+                <span className='flight-segment-date flex'>
+                    <span>{getTime(leg.departureDateTime)} </span>
+                    <span>{getDate(leg.departureDateTime)}</span>
+                </span> 
+                <span className='black-circle'>&#9679;</span>
+                <span className='carrier-code'>{ leg.originStationCode }</span>
                 <span className='carrier-name'> 
                     ({leg.operatingCarrier.displayName} - {leg.operatingCarrier.code + " " + leg.flightNumber})
                 </span>
             </div>
-            <div className={param + '-duration'}>
-                {calcDuration(
-                    leg.departureDateTime, 
-                    leg.arrivalDateTime
-                )}
+            <div className='flight-segment-duration'>
+                {calcDuration(leg.departureDateTime, leg.arrivalDateTime)}
             </div>
-            <div className={param + '-end flex'}>
+            <div className='flight-segment-end grid'>
                 <MdFlightLand className='icon'/>
-                <span>{ getTime(leg.arrivalDateTime) } </span>
-                <span> - </span> 
-                <span>{ leg.destinationStationCode } </span>
+                <span className='flight-segment-date flex'>
+                    <span>{getTime(leg.arrivalDateTime)} </span>
+                    <span>{getDate(leg.arrivalDateTime)}</span>
+                </span> 
+                <span className='black-circle'>&#9679;</span> 
+                <span className='carrier-code'>{ leg.destinationStationCode } </span>
             </div>
         </div>
     )

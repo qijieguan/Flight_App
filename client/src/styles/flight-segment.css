@@ -1,8 +1,21 @@
-.flight-segment { text-align: center; font-style: oblique; color: grey; width: 100%; }
-.flight-segment > div { column-gap: 0.25vw; }
-.flight-segment > div > span:not(.carrier-name) { font-weight: 500; }
-.flight-segment * { font-size: clamp(0.875rem, 1vw, 1rem); }
-.carrier-name { font-weight: 500; font-size: clamp(0.75rem, 1vw, 1rem); }
+.flight-segment {
+    color: grey; 
+    width: 100%; 
+}
+.flight-segment > div {
+    grid-template-columns: 10% 25% 2.5% auto auto;
+    justify-content: flex-start;
+    column-gap: 2vw;
+    font-size: clamp(0.75rem, 1vw, 0.875rem);
+}
+.flight-segment > div > span { font-size: clamp(0.75rem, 2vw, 1rem); }
+.flight-segment > div > .flex { align-items: flex-start; flex-direction: column; }
+.flight-segment > div > .flex > span { font-weight: 500; font-size: clamp(0.75rem, 2vw, 1rem); }
+.flight-segment > div > .flex > span:last-child { font-weight: 300; font-size: clamp(0.75rem, 1vw, 1rem); color: rgb(160, 160, 160); }
+
+.carrier-code, .carrier-name, .flight-segment-duration { color: rgb(160, 160, 160); }
+.carrier-name { font-size: clamp(0.75rem, 1vw, 1rem) !important; }
+.flight-segment-duration { margin: 2vh 0; }
 .flight-segment .icon { 
     margin-right: 0.25vw;
     font-size: clamp(1.25rem, 1.5vw, 1.5rem); 

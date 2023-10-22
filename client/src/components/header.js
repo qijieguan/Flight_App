@@ -1,7 +1,6 @@
 import '../styles/header.css';
 import { FiChevronDown } from 'react-icons/fi';
 import { LuEqual } from 'react-icons/lu';
-
 import flight_img from '../images/flight.webp';
 import rain_img from '../images/rain.webp';
 
@@ -16,11 +15,9 @@ const Header = () => {
     const [classType, setClass] = useState('Economy');
 
     useEffect(() => {
-        //console.log(location.pathname)
         if (!sessionStorage.getItem('select_trip')) {
             sessionStorage.setItem('select_trip', 'one-way');
         }
-
         if (!sessionStorage.getItem('select_class')) {
             sessionStorage.setItem('select_class', 'economy');
         }
@@ -64,13 +61,9 @@ const Header = () => {
             </div>
 
             <div className='header-trip-options flex'>
-                <div className='header-option-1 header-option active flex'
-                    onMouseEnter={handleMouseEnter}
-                >
+                <div className='header-option-1 header-option active flex' onMouseEnter={handleMouseEnter}>
                     <span>{tripType}</span>
-                    <div className='icon-wrapper flex'>
-                        <FiChevronDown className='icon'/>
-                    </div>
+                    <div className='icon-wrapper flex'><FiChevronDown className='icon'/></div>
                 </div>
 
                 <div className='flight-trip-options flight-options flex'>
@@ -78,13 +71,9 @@ const Header = () => {
                     <span onClick={selectTrip}>TWO WAY</span>
                 </div>
 
-                <div className='header-option-2 header-option flex'
-                    onMouseEnter={handleMouseEnter}
-                >
+                <div className='header-option-2 header-option flex' onMouseEnter={handleMouseEnter}>
                     <span>{classType}</span>
-                    <div className='icon-wrapper flex'>
-                        <FiChevronDown className='icon'/>
-                    </div>
+                    <div className='icon-wrapper flex'><FiChevronDown className='icon'/></div>
                 </div>
 
                 <div className='flight-class-options flight-options flex'>
@@ -98,20 +87,13 @@ const Header = () => {
 
             <div className='header-links'>
                 {!location.pathname.includes('/tour-places') ?
-                    <Link to='/tour-places'>
-                        <span>Travel Suggestions</span>
-                    </Link>
-                    :
-                    <Link to='/'>
-                        <span>Find Live Flights</span>
-                    </Link>
+                    <Link to='/tour-places'><span>Travel Suggestions</span></Link> :
+                    <Link to='/'><span>Find Live Flights</span></Link>
                 }
             </div>
 
             <div className='header-profile flex'>
-                <div className='icon-wrapper flex'>
-                    <LuEqual className='.icon'/>
-                </div>
+                <div className='icon-wrapper flex'><LuEqual className='.icon'/></div>
                 <img className='header-profile-avatar' src={rain_img} alt=""/>
             </div>
         </header>

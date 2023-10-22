@@ -1,4 +1,4 @@
-.main { flex-direction: column; justify-content: center; }
+.main { padding-bottom: 10vh; flex-direction: column; justify-content: center; }
 
 .autocomplete-form {
     position: relative;
@@ -111,8 +111,24 @@
 
 .important-notice > span { display: none; font-weight: bold; color: rgb(44, 44, 44); }
 
+.request-status {
+    flex-wrap: wrap;
+    justify-content: center;
+    row-gap: 1vh;
+    column-gap: 1vw;
+    margin: 25vh 0 50vh 0;
+    color: rgb(56, 56, 56);
+}
+.request-status > span { font-size: clamp(0.875rem, 2.5vw, 1.5rem); }
+.request-status > .icon {
+    margin-bottom: auto;
+    font-size: clamp(1.5rem, 2.5vw, 2.5rem);
+    color: rgb(65, 65, 65);
+}
+
 @media (max-width: 50rem) {
     .important-notice { margin: 3vh auto 2vh auto; }
+    .request-status { margin: 18vh 0 36vh 0; }
 }
 
 @media (max-width: 25rem) {
@@ -122,4 +138,5 @@
     .place-autocomplete-inputs { grid-column: 1 / 2; flex-direction: column; }  
     .search-button { grid-column: 1 / 2; }
     .important-notice { margin: 2vh auto; width: 97.5%; }
+    .request-status { margin: 12.5vh 0 25vh 0; }
 }

@@ -3,6 +3,7 @@ import axios from 'axios';
 import { useEffect, useState } from 'react';
 import Main from './components/main.js';
 import Header from './components/header.js';
+import Footer from './components/footer.js';
 
 import {BrowserRouter as Router, Routes, Route} from "react-router-dom";
 
@@ -46,6 +47,7 @@ function App() {
               <Route path="/tour-places" element={<Main/>} exact/>
             }
           </Routes>
+          <Footer/>
         </Router>
       </LocalizationProvider>
     </div>

@@ -1,4 +1,4 @@
-import '../styles/auto-complete.css';
+import '../styles/places-autocomplete.css';
 import { MdFlightTakeoff, MdFlightLand } from 'react-icons/md';
 
 import usePlacesAutocomplete, {getGeocode, getLatLng} from 'use-places-autocomplete';
@@ -68,9 +68,7 @@ const PlacesAutocomplete = ( {param, setAirportInput} ) => {
             <Combobox onSelect={handleSelect} style={{ width: '100%'}}>
                 <div className='combobox-input-wrapper flex'>
                     {param === 'origin'?
-                        <span>FROM</span>
-                        : 
-                        <span>TO</span>
+                        <span>FROM</span> : <span>TO</span>
                     }   
                     <div className='input-wrapper flex'>
                         <ComboboxInput 
@@ -79,12 +77,11 @@ const PlacesAutocomplete = ( {param, setAirportInput} ) => {
                             onChange={(e) => { setValue(e.target.value)}} 
                             placeholder="Enter valid airport"
                             disabled={!ready}
+                            required
                         />
                         <div className='input-icon'>
                             {param === 'origin' ?
-                                <MdFlightTakeoff/>
-                                :
-                                <MdFlightLand/>  
+                                <MdFlightTakeoff/> : <MdFlightLand/>  
                             }
                         </div>
                     </div>
@@ -105,7 +102,6 @@ const PlacesAutocomplete = ( {param, setAirportInput} ) => {
                                             }
                                         </span>
                                     </span>
-                                    
                                 </div>
                             </div>
                         ) }

@@ -1,0 +1,48 @@
+[
+    {"segments": [
+        {"legs": [
+            {
+                "arrivalDateTime": "2023-09-29T17:35:00+09:00",
+                "departureDateTime": "2023-09-28T12:10:00-07:00",
+                "marketingCarrier": {
+                    "displayName": "Example",
+                    "logoUrl": "https://static.tacdn.com/img2/flights/airlines/logos/100x100/Emirates2.png",
+                    "code": "Ex"
+                },
+                "operatingCarrier": {
+                    "displayName": "Example",
+                    "code": "Ex"
+                },
+                "originStationCode": "LAX",
+                "destinationStationCode": "TPE", 
+                "flightNumber": 69,
+                "classOfService": "ECONOMY"
+            }
+        ]}, 
+        {"legs": [
+            {
+                "arrivalDateTime": "2023-09-30T05:35:00+09:00",
+                "departureDateTime": "2023-09-29T17:35:00+09:00",
+                "marketingCarrier": {
+                    "displayName": "Example",
+                    "logoUrl": "https://static.tacdn.com/img2/flights/airlines/logos/100x100/Emirates2.png",
+                    "code": "Ex"
+                },
+                "operatingCarrier": {
+                    "displayName": "Example",
+                    "code": "Ex"
+                },
+                "originStationCode": "JFK",
+                "destinationStationCode": "LAX",
+                "flightNumber": 69,
+                "classOfService": "ECONOMY"
+            }
+        ]}
+        ],
+        "purchaseLinks": [{
+            "originalCurrency": "USD",
+            "totalPrice": 900,
+            "url": "https://images.pexels.com/photos/5344850/pexels-photo-5344850.jpeg?auto=compress&cs=tinysrgb&w=600"
+        }]
+    }
+]
