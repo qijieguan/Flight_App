@@ -37,21 +37,18 @@ const TourPlaces = () => {
     const apiRequest = async (query) => {
         await axios.post(baseURL + '/flight/locations-search/', {query: query})
         .then(async (response) => { 
-            console.log('lol')
             await axios.post(baseURL + '/flight/attractions-list/', 
             {
                 location_id: response.data[0].result_object.location_id
             })
             .then((response) => {
                 if (response.data.data) {
-                    console.log('lol')
                     setTourList(response.data.data.filter(place => place.hasOwnProperty('photo') && place.hasOwnProperty('name')));
                 }
                 else {
-                    setMessage('No results for this query. Please try another key search.');
+                    setMessage('No results for this query at this level. Please try another key search.');
                 }
                 setTerm(tourInput);
-                setInput('');
             }); 
         });
         scrollAnimation();
@@ -76,14 +73,14 @@ const TourPlaces = () => {
                 <div className='tour-banner-overlay'/>
                 <form onSubmit={handleSubmit} className="tour-search flex">
                     <input 
-                        placeholder="Enter a city, state, or country"
+                        placeholder="Enter a city, district, or place"
                         value={tourInput}
                         onChange={handleChange}
                     />
                     <div className="tour-header flex">
                         <h1>Browse Tour Attractions</h1>
                         <span>
-                            Enter a city, state, country, or etc. We will compile a list of popular attractions 
+                            Enter cities, districts, places, or more. We will compile a list of popular attractions 
                             based around the query. Make new experiences and memories on your tour adventures.
                         </span>
                     </div>

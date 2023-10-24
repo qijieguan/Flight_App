@@ -32,8 +32,8 @@ const Main = () => {
     }, [location]);
 
     const setAirportInput = (input) => {
-        if (input.type === 'origin') { setOriginInp(input.address.split(',')[0]); }
-        else { setDestInp(input.address.split(',')[0]); }
+        if (input.type === 'origin') { setOriginInp(input.address); }
+        else { setDestInp(input.address); }
     }
 
     const setDateInput = (input) => {

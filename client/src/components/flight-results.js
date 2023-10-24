@@ -88,57 +88,57 @@ const FlightResults = ({ flights }) => {
     return (
         <div className='flight-results-wrapper'>
             {flights && flights.length > 0 &&
-            <div className="flight-results flex">
-                {flights.map(flight => 
-                    <div className="flight" key={uuid()}>
-                        <div className='flight-header flex'>
-                            <div className='flight-airline flex'>
-                                <img src={flight.segments[0].legs[0].marketingCarrier.logoUrl} alt=""/>
-                                <div className='grid'>
-                                    <span className='flight-name'>{flight.segments[0].legs[0].marketingCarrier.displayName}</span>
-                                    <span className='flight-code'>
-                                        {flight.segments[0].legs[0].marketingCarrier.code + " " + flight.segments[0].legs[0].flightNumber}
-                                    </span>
-                                    <span className='flight-time-duration'> 
-                                        {oneWayDuration(flight.segments[0])}
-                                    </span>
+                <div className="flight-results flex">
+                    {flights.map(flight => 
+                        <div className="flight" key={uuid()}>
+                            <div className='flight-header flex'>
+                                <div className='flight-airline flex'>
+                                    <img src={flight.segments[0].legs[0].marketingCarrier.logoUrl} alt=""/>
+                                    <div className='grid'>
+                                        <span className='flight-name'>{flight.segments[0].legs[0].marketingCarrier.displayName}</span>
+                                        <span className='flight-code'>
+                                            {flight.segments[0].legs[0].marketingCarrier.code + " " + flight.segments[0].legs[0].flightNumber}
+                                        </span>
+                                        <span className='flight-time-duration'> 
+                                            {oneWayDuration(flight.segments[0])}
+                                        </span>
+                                    </div>
                                 </div>
+                            
+                                <div className='flight-depart-date flex'>
+                                    <span>Depart Date</span>
+                                    <span>{getDate(flight.segments[0].legs[0].departureDateTime)}</span>
+                                </div> 
+
+                                <div className='flight-class'>
+                                    {flight.segments[0].legs[0].classOfService.toLowerCase().replace('_', " ")} Class
+                                </div>
+
+                                <div className='flight-trip'>{sessionStorage.getItem('select_trip')}</div>
+
+                                <div className='show-detail flex' onClick={toggleFlightDetail}>
+                                    <span>Show details</span>
+                                    <MdOutlineArrowDropDownCircle className='icon'/>
+                                </div>
+
+                                <FlightDetail closeFlightDetail={closeFlightDetail} flight={flight}/>
                             </div>
-                        
-                            <div className='flight-depart-date flex'>
-                                <span>Depart Date</span>
-                                <span>{getDate(flight.segments[0].legs[0].departureDateTime)}</span>
-                            </div> 
+                            
+                            <div className='flight-divider'/>
 
-                            <div className='flight-class'>
-                                {flight.segments[0].legs[0].classOfService.toLowerCase().replace('_', " ")} Class
+                            <div className='flight-footer flex'>
+                                <span className='flight-price-wrapper flex'>
+                                    <span>USD</span>
+                                    <FlightPrice 
+                                        currency={flight.purchaseLinks[0].originalCurrency}
+                                        price={flight.purchaseLinks[0].totalPrice}
+                                    />
+                                    <span> / Person</span>
+                                </span>
                             </div>
-
-                            <div className='flight-trip'>{sessionStorage.getItem('select_trip')}</div>
-
-                            <div className='show-detail flex' onClick={toggleFlightDetail}>
-                                <span>Show details</span>
-                                <MdOutlineArrowDropDownCircle className='icon'/>
-                            </div>
-
-                            <FlightDetail closeFlightDetail={closeFlightDetail} flight={flight}/>
-                        </div>
-                        
-                        <div className='flight-divider'/>
-
-                        <div className='flight-footer flex'>
-                            <span className='flight-price-wrapper flex'>
-                                <span>USD</span>
-                                <FlightPrice 
-                                    currency={flight.purchaseLinks[0].originalCurrency}
-                                    price={flight.purchaseLinks[0].totalPrice}
-                                />
-                                <span> / Person</span>
-                            </span>
-                        </div>
-                    </div>)
-                }
-            </div>
+                        </div>)
+                    }
+                </div>
             }
         </div>
     )

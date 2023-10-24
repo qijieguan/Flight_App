@@ -19,7 +19,8 @@
 
 .combobox-input {
     text-align: left;
-    font-size: clamp(1rem, 1.5vw, 1.5rem);
+    text-transform: capitalize;
+    font-size: clamp(0.75rem, 1.25vw, 1.25rem);
     color: rgb(53, 53, 53);
     border: 0;
     width: 100%;
@@ -32,7 +33,14 @@
 .input-icon { margin-right: 3%; }
 .input-icon * { font-size: clamp(1.5rem, 2vw, 2rem); color: grey; }
 
-.combobox-list { position: relative; background: white; box-shadow: 0 3px 3px; z-index: 2; }
+.combobox-list { 
+    position: relative; 
+    background: white; 
+    box-shadow: 0 3px 3px gray;  
+    border-radius: 0 0 2rem 2rem; 
+    z-index: 2; 
+    overflow: hidden;
+}
 .combobox-option { color: rgb(180, 180, 180); width: 100%; }
 
 .combobox-option-description {
@@ -44,12 +52,53 @@
     border-bottom: 1px solid rgb(228, 228, 228);
 }
 .combobox-option-description:hover { font-weight: 500; background: royalblue; color: white; }
-.combobox-option-description > span:first-child { margin-right: 0.5vw; }
+.combobox-option-description > span:first-child { font-size: clamp(0.75rem, 1.125vw, 1.125rem); margin-right: 0.5vw; }
 
 .option-icon { margin-left: auto; }
 .option-icon * { transform: translateY(7.5%); font-size: clamp(1rem, 1.5vw, 1.5rem); }
 
+.suggestions-inquiry {
+    justify-content: center;
+    padding: 0.5vh 1vw 0 1vw;
+    font-size: clamp(0.875rem, 1.125vw, 1.125rem);
+    font-weight: 100;
+    column-gap: 1vw;
+    min-height: 10vh;
+    width: 100%;
+    color: white; 
+    background: royalblue;
+    transition: column-gap 0.4s;
+}
+
+.suggestions-inquiry > span { font-size: clamp(0.75rem, 1.125vw, 1.125rem); }
+.suggestions-inquiry > .icon { font-size: clamp(1.25rem, 1.5vw, 1.5rem); }
+.suggestions-inquiry:hover { text-decoration: underline; column-gap: 2vw; }
+
+.suggestions-list { 
+    position: relative; 
+    background: white; 
+    box-shadow: 0 3px 3px gray;  
+    border-radius: 0 0 2rem 2rem; 
+    z-index: 2; 
+    overflow: hidden; 
+}
+.suggestions-li {
+    text-align: left;
+    justify-content: flex-start;
+    padding: 0.5vh 1vw 0 1vw;
+    width: 100%;
+    min-height: 10vh;
+    font-size: clamp(0.75rem, 1.125vw, 1.125rem); 
+    color: grey;
+    border-bottom: 1px solid rgb(228, 228, 228);
+}
+.suggestions-li:hover {
+    color: white;
+    background: royalblue;
+}
+
 @media (max-width: 25rem) {
     .combobox { width: 100%; }
     .combobox-input-wrapper { padding: 1vh 0; border-radius: 0; }
+    .combobox-option-description, .suggestions-inquiry, .suggestions-li { text-align: center; padding: 0.5vh 2vw 0 2vw; }
 }
