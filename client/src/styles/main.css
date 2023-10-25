@@ -133,7 +133,7 @@
 
 @media (max-width: 25rem) {
     .autocomplete-form { padding: 1vh 2vw; grid-template-columns: 100%; width: 100%; row-gap: 2vh; }
-    .autocomplete-form-label { margin: 1vh 0; grid-column: 1 / 2; align-items: center; } 
+    .autocomplete-form-label { margin: 3vh 0 2vh 0; grid-column: 1 / 2; align-items: center; } 
     .autocomplete-form-label > span { box-shadow: 0 0 1px; }
     .place-autocomplete-inputs { grid-column: 1 / 2; flex-direction: column; }  
     .search-button { grid-column: 1 / 2; }

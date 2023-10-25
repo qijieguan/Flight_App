@@ -20,13 +20,13 @@
 .combobox-input {
     text-align: left;
     text-transform: capitalize;
-    font-size: clamp(0.75rem, 1.25vw, 1.25rem);
+    font-size: clamp(0.875rem, 2.5vw, 1.5rem);
     color: rgb(53, 53, 53);
     border: 0;
     width: 100%;
 }
 
-.combobox-input:focus { font-size: clamp(1.25rem, 2vw, 2rem); box-shadow: none; }
+.combobox-input:focus { font-size: clamp(0.875rem, 1.75vw, 1.75rem); box-shadow: none; }
 
 .input-wrapper { justify-content: space-between; width: 100%; }
 
@@ -70,7 +70,7 @@
     transition: column-gap 0.4s;
 }
 
-.suggestions-inquiry > span { font-size: clamp(0.75rem, 1.125vw, 1.125rem); }
+.suggestions-inquiry > span { text-transform: uppercase; font-size: clamp(0.75rem, 1.125vw, 1.125rem); }
 .suggestions-inquiry > .icon { font-size: clamp(1.25rem, 1.5vw, 1.5rem); }
 .suggestions-inquiry:hover { text-decoration: underline; column-gap: 2vw; }
 

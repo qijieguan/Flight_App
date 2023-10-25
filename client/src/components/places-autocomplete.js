@@ -8,6 +8,7 @@ import "@reach/combobox/styles.css";
 
 import { useState, useEffect } from 'react';
 import axios from 'axios';
+import uuid from 'react-uuid';
 
 import Data from '../JSON/suggestion.json';
 
@@ -16,7 +17,6 @@ const PlacesAutocomplete = ( {param, setAirportInput} ) => {
     const baseURL = window.location.href.includes('localhost:3000') ? 'http://localhost:3001' : '';
 
     const [apiCall, setAPICall] = useState(false);
-    const [queryInp, setQuery] = useState("");
     const [suggestions, setSuggestions] = useState([]);
 
     const {
@@ -44,7 +44,7 @@ const PlacesAutocomplete = ( {param, setAirportInput} ) => {
 
     const searchAirports = async () => {
         await axios.post(baseURL + '/flight/search-airports/', {
-            query: queryInp
+            query: value
         })
         .then(response => {
             let results = response.data.data ? response.data.data: [];
@@ -85,16 +85,23 @@ const PlacesAutocomplete = ( {param, setAirportInput} ) => {
     }  
 
     const handleChange = (e) => {
-        setValue(e.target.value);
-        setQuery(e.target.value);
 
-        if (e.target.value.length >= 4 && !e.target.value.toLowerCase().includes(queryInp.toLowerCase())) {
-            setSuggestions([]);
-        }
+        if (e.target.value.length >= 4 && 
+            (!e.target.value.toLowerCase().includes(value.toLowerCase())
+                || !value.toLowerCase().includes(e.target.value.toLowerCase())
+            )
+        ) { setSuggestions([]); }
 
-        let filteredResults = data.filter(d => d.description.includes('(') && d.description.includes(')'));
+        let filteredResults = data.filter(d => 
+            d.description.includes('(') && 
+            d.description.includes(')') &&
+            d.description.toLowerCase().includes(e.target.value.toLowerCase())
+        );
+       
         if (e.target.value.length >= 4 && filteredResults.length === 0) { setAPICall(true); }
         else { setAPICall(false); }
+
+        setValue(e.target.value);
     }
 
     return (
@@ -119,19 +126,18 @@ const PlacesAutocomplete = ( {param, setAirportInput} ) => {
                 <ComboboxPopover className='combobox-popover'>
                     <ComboboxList className='combobox-list'>
                         {!apiCall && 
-                            data.filter(d => 
-                                d.description.includes('(') && d.description.includes(')'))
-                                .map(({ place_id, description }) => 
-                                <div className='combobox-option-wrapper flex' key={place_id}>
-                                    <div className='combobox-option flex' value={description}>
-                                        <span className='combobox-option-description flex' onClick={() => {handleSelect(description)}}>
-                                            <span>{description}</span>
-                                            <span className='option-icon'>
-                                                {param === 'origin' ? <MdFlightTakeoff/> : <MdFlightLand/> }
-                                            </span>
+                            data.filter(d => d.description.includes('(') && d.description.includes(')'))
+                            .map(({ place_id, description }) => 
+                            <div className='combobox-option-wrapper flex' key={place_id}>
+                                <div className='combobox-option flex' value={description}>
+                                    <span className='combobox-option-description flex' onClick={() => {handleSelect(description)}}>
+                                        <span>{description}</span>
+                                        <span className='option-icon'>
+                                            {param === 'origin' ? <MdFlightTakeoff/> : <MdFlightLand/> }
                                         </span>
-                                    </div>
+                                    </span>
                                 </div>
+                            </div>
                             ) 
                         }
                         {apiCall && suggestions.length === 0 &&
@@ -146,7 +152,9 @@ const PlacesAutocomplete = ( {param, setAirportInput} ) => {
                         {suggestions.length > 0 &&
                             <div className='suggestions-list'>
                                 {suggestions.map(airport => 
-                                    <div className='suggestions-li flex' onClick={() => {handleSelect(airport)}}>{airport}</div>    
+                                    <div className='suggestions-li flex' key={uuid()} 
+                                        onClick={() => {handleSelect(airport)}}
+                                    >{airport}</div>    
                                 )}
                             </div>
                         }
