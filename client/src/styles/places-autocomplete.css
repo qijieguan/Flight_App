@@ -33,19 +33,20 @@
 .input-icon { margin-right: 3%; }
 .input-icon * { font-size: clamp(1.5rem, 2vw, 2rem); color: grey; }
 
+.combobox-popover { border-radius: 0 0 2rem 2rem; }
 .combobox-list { 
     position: relative; 
     background: white; 
     box-shadow: 0 3px 3px gray;  
     border-radius: 0 0 2rem 2rem; 
-    z-index: 2; 
     overflow: hidden;
+    z-index: 2; 
 }
 .combobox-option { color: rgb(180, 180, 180); width: 100%; }
 
 .combobox-option-description {
     padding: 0.5vh 1vw 0 1vw;
-    column-gap: 2vw;
+    column-gap: 1vw;
     width: 100%;
     min-height: 10vh;
     color: grey;
@@ -80,7 +81,6 @@
     box-shadow: 0 3px 3px gray;  
     border-radius: 0 0 2rem 2rem; 
     z-index: 2; 
-    overflow: hidden; 
 }
 .suggestions-li {
     text-align: left;

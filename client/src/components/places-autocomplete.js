@@ -15,9 +15,8 @@ import Data from '../JSON/suggestion.json';
 const PlacesAutocomplete = ( {param, setAirportInput} ) => {
 
     const baseURL = window.location.href.includes('localhost:3000') ? 'http://localhost:3001' : '';
-
-    const [apiCall, setAPICall] = useState(false);
     const [suggestions, setSuggestions] = useState([]);
+    const [isSelect, setIsSelect] = useState(false);
 
     const {
         ready,
@@ -43,9 +42,7 @@ const PlacesAutocomplete = ( {param, setAirportInput} ) => {
     }, [param]);
 
     const searchAirports = async () => {
-        await axios.post(baseURL + '/flight/search-airports/', {
-            query: value
-        })
+        await axios.post(baseURL + '/flight/search-airports/', { query: value})
         .then(response => {
             let results = response.data.data ? response.data.data: [];
             let airports = [];
@@ -53,13 +50,10 @@ const PlacesAutocomplete = ( {param, setAirportInput} ) => {
             
             if (results.length > 0) {
                 results.forEach(children => {
-                    if (children.children) {
-                        children.children.forEach(airport => { airports.push(airport.name);});
-                    }
+                    if (children.children) { children.children.forEach(airport => { airports.push(airport.name);});}
                     else { airports.push(children.name); }     
                 });
             }
-
             setSuggestions(airports);
         });
     }
@@ -77,30 +71,21 @@ const PlacesAutocomplete = ( {param, setAirportInput} ) => {
 
         setValue(trim, false);
 
-        setAPICall(false);
+        setIsSelect(true);
         setSuggestions([]);
         clearSuggestions();
         
         setAirportInput({type: param, address: trim});
     }  
 
-    const handleChange = (e) => {
-
+    const handleChange = (e) => {    
         if (e.target.value.length >= 4 && 
             (!e.target.value.toLowerCase().includes(value.toLowerCase())
                 || !value.toLowerCase().includes(e.target.value.toLowerCase())
             )
         ) { setSuggestions([]); }
 
-        let filteredResults = data.filter(d => 
-            d.description.includes('(') && 
-            d.description.includes(')') &&
-            d.description.toLowerCase().includes(e.target.value.toLowerCase())
-        );
-       
-        if (e.target.value.length >= 4 && filteredResults.length === 0) { setAPICall(true); }
-        else { setAPICall(false); }
-
+        setIsSelect(false);
         setValue(e.target.value);
     }
 
@@ -125,31 +110,38 @@ const PlacesAutocomplete = ( {param, setAirportInput} ) => {
            
                 <ComboboxPopover className='combobox-popover'>
                     <ComboboxList className='combobox-list'>
-                        {!apiCall && 
-                            data.filter(d => d.description.includes('(') && d.description.includes(')'))
-                            .map(({ place_id, description }) => 
-                            <div className='combobox-option-wrapper flex' key={place_id}>
-                                <div className='combobox-option flex' value={description}>
-                                    <span className='combobox-option-description flex' onClick={() => {handleSelect(description)}}>
-                                        <span>{description}</span>
-                                        <span className='option-icon'>
-                                            {param === 'origin' ? <MdFlightTakeoff/> : <MdFlightLand/> }
-                                        </span>
+                        { data.filter(d => 
+                            d.description.includes('(') 
+                            && d.description.includes(')')
+                            && d.description.toLowerCase().includes(value.toLowerCase())
+                        )
+                        .map(({ place_id, description }) => 
+                        <div className='combobox-option-wrapper flex' key={place_id}>
+                            <div className='combobox-option flex' value={description}>
+                                <span className='combobox-option-description flex' onClick={() => {handleSelect(description)}}>
+                                    <span>{description}</span>
+                                    <span className='option-icon'>
+                                        {param === 'origin' ? <MdFlightTakeoff/> : <MdFlightLand/> }
                                     </span>
-                                </div>
-                            </div>
-                            ) 
-                        }
-                        {apiCall && suggestions.length === 0 &&
-                            <div className='airport-suggestions'>
-                                <span className='suggestions-inquiry flex' onClick={suggestionRequest}>
-                                    <span>Search Nearby Airports From This Place</span>
-                                    <BsArrowRightCircleFill className='icon'/>
                                 </span>
                             </div>
+                        </div>
+                        ) }
+
+                        { value.length >= 4 && data.filter(d => 
+                            d.description.includes('(') 
+                            && d.description.includes(')')
+                            && d.description.toLowerCase().includes(value.toLowerCase())
+                        ).length === 0 && suggestions.length === 0 && !isSelect &&
+                        <div className='airport-suggestions'>
+                            <span className='suggestions-inquiry flex' onClick={suggestionRequest}>
+                                <span>Search Nearby Airports From This Place</span>
+                                <BsArrowRightCircleFill className='icon'/>
+                            </span>
+                        </div>
                         }
 
-                        {suggestions.length > 0 &&
+                        {suggestions.length > 0 && 
                             <div className='suggestions-list'>
                                 {suggestions.map(airport => 
                                     <div className='suggestions-li flex' key={uuid()} 
