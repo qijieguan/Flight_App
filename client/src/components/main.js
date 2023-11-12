@@ -6,6 +6,7 @@ import { useState, useEffect } from 'react'
 import axios from 'axios';
 import { useLocation } from 'react-router-dom';
 
+import LoadScreen from './loadScreen.js';
 import PlacesAutocomplete from './places-autocomplete.js';
 import DatePickers from './date-pickers.js';
 import FlightResults from './flight-results.js';
@@ -90,9 +91,9 @@ const Main = () => {
     return (
         <div className="main flex">         
             {!paramURL.includes('tour-places') &&
-                <div>
+                <div className='flight-search'>
+                    <LoadScreen/>
                     <form className='autocomplete-form grid'>
-                        <div className='autocomplete-form-label flex'><h1>Find Live Flights</h1> <span>ROUND TRIP</span></div>
                         <div className='place-autocomplete-inputs flex'>
                             <PlacesAutocomplete param={'origin'} setAirportInput={setAirportInput}/>
                             <div className='icon-wrapper flex'>

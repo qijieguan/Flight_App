@@ -1,4 +1,5 @@
 import '../styles/tour-places.css';
+import { FaLocationDot } from 'react-icons/fa6';
 
 import { useEffect, useState } from 'react';
 import axios from 'axios';
@@ -54,9 +55,7 @@ const TourPlaces = () => {
         scrollAnimation();
     }
 
-    const handleChange = (e) => {
-        setInput(e.target.value);
-    }
+    const handleChange = (e) => { setInput(e.target.value); }
 
     const handleSubmit = (e) => {
         e.preventDefault();
@@ -102,9 +101,12 @@ const TourPlaces = () => {
             <div className="tour-list grid">
                 {tourList.length > 0 &&
                     tourList.map(place => 
-                        <div className='tour-place' key={uuid()}>
+                        <div className='tour-place flex' key={uuid()}>
                             <img src={place.photo.images.original.url} alt=""/>
-                            <h1>{place.name}</h1>
+                            <div className='tour-place-footer flex'>
+                                <div className='icon-wrapper flex'><FaLocationDot className='icon'/></div>
+                                <h1>{place.name}</h1>
+                            </div>
                         </div> 
                     )
                 }

@@ -25,7 +25,7 @@
     border: 0;
     width: 100%;
 }
-
+.combobox-input::placeholder { font-weight: 300; font-size: clamp(0.875rem, 1.5vw, 1.5rem); }
 .combobox-input:focus { font-size: clamp(0.875rem, 1.75vw, 1.75rem); box-shadow: none; }
 
 .input-wrapper { justify-content: space-between; width: 100%; }
@@ -99,6 +99,6 @@
 
 @media (max-width: 25rem) {
     .combobox { width: 100%; }
-    .combobox-input-wrapper { padding: 1vh 0; border-radius: 0; }
+    .combobox-input-wrapper { padding: 1vh 0; border-radius: 0.5rem; }
     .combobox-option-description, .suggestions-inquiry, .suggestions-li { text-align: center; padding: 0.5vh 2vw 0 2vw; }
 }

@@ -46,17 +46,22 @@
 .tour-header > span { font-weight: 500; }
 
 .tour-results-label { margin-top: 10vh; margin-bottom: 7.5vh; font-weight: bolder; }
-.tour-results-label > span {  font-size: clamp(1.375rem, 2vw, 2rem); }
+.tour-results-label > span { font-size: clamp(1.375rem, 2vw, 2rem); color: gray; }
 
 .tour-list {
     grid-template-columns: 22% 22% 22% 22%;
     justify-content: space-around;
     min-height: 30vh;
+    row-gap: 2vh;
 }
 
-.tour-place { height: 33vh; width: 100%; }
-.tour-place > img { height: 66%; width: 100%; border-radius: 0.5rem; transition: all 0.3s; }
-.tour-place > img:hover { transform: scale(1.5); }
+.tour-place { flex-direction: column; height: 33vh; width: 100%; border-radius: 0.5rem; box-shadow: 10px 10px 10px grey; overflow: hidden; }
+.tour-place > img { height: 80%; width: 100%; border-radius: 0.5rem 0.5rem 0 0; transition: all 0.3s; }
+.tour-place > img:hover { height: 100%; transform: scale(1.25); }
+.tour-place-footer { justify-content: center; column-gap: 0.5vw; color: tomato; height: 100%; width: 90%; }
+.tour-place-footer > h1 { text-align: left; font-size: clamp(0.875rem, 1.25vw, 1.25rem); }
+.tour-place-footer > .icon-wrapper { margin: auto 0; justify-content: center; }
+.tour-place-footer > .icon-wrapper > .icon { font-size: clamp(1rem, 1.5vw, 1.5rem); }
 
 .tour-list-empty { font-weight: 500; }
 
@@ -75,6 +80,6 @@
     .tour-search > input { width:97.5%; } 
     .tour-header { width: 97.5%; }
     .tour-results-label { margin-top: 5vh; margin-bottom: 5vh; }
-    .tour-list { grid-template-columns: 100%; }
+    .tour-list { grid-template-columns: 100%; padding: 0 2vw; }
     .tour-place > img { height: 75%;  border-radius: 0; }
 }

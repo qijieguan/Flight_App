@@ -5,7 +5,7 @@
     flex-wrap: wrap;
     column-gap: 2vw;
     row-gap: 1.5vh;
-    padding: 1vh 2vw;
+    padding: 2vh 2vw;
     width: 100%;
     background: white;
     box-shadow: 0 1px 1px rgb(240, 240, 240);
@@ -26,7 +26,7 @@
 }
 
 .header-trip-options > div {
-    padding: 2vh 1vw;
+    padding: 3vh 1vw;
     justify-content: center;
     column-gap: 0.5vw;
     color: grey;
@@ -73,6 +73,7 @@
 
 .header-option-2 { position: absolute; inset: 0 0 auto auto; }
 
+.header-links { margin-left: 2%; }
 .header-links a { color: grey; text-decoration: none; border: 0; box-shadow: none; }
 .header-links span { font-size: clamp(0.75rem, 1vw, 1rem); }
 .header-links:hover { opacity: 0.7; }
@@ -99,6 +100,7 @@
     box-shadow: 0 0 2px;
 }
 
-@media (max-width: 25rem) {
-    .header { padding: 1vh 2vw 2vh 2vw; }
+@media (max-width: 35rem) {
+    .header { padding: 2vh 2vw; }
+    .header-logo { display: none; }
 }
