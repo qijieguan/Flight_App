@@ -1,6 +1,8 @@
 import '../styles/header.css';
 import { FiChevronDown } from 'react-icons/fi';
 import { LuEqual } from 'react-icons/lu';
+import { FaMapMarked } from "react-icons/fa";
+import { IoAirplaneSharp } from "react-icons/io5";
 import flight_img from '../images/flight.webp';
 import rain_img from '../images/rain.webp';
 
@@ -53,6 +55,11 @@ const Header = () => {
         document.querySelector('.flight-class-options')?.classList.remove('clicked');
     }
 
+    const toggleFilterForm = () => {
+        let side_nav = document.querySelector('.side-nav');
+        side_nav?.classList.toggle('active');
+    }
+
     return (
         <header className='header flex'>
             <div className='header-logo flex'>
@@ -87,10 +94,20 @@ const Header = () => {
 
             <div className='header-links'>
                 {!location.pathname.includes('/tour-places') ?
-                    <Link to='/tour-places'><span>Travel Suggestions</span></Link> :
-                    <Link to='/'><span>Find Live Flights</span></Link>
+                    <Link to='/tour-places' className='header-link tour-link flex'>
+                         <FaMapMarked className='icon'/>
+                        <span>Travel Guide</span>
+                    </Link> :
+                    <Link to='/' className='header-link flight-link flex'>
+                        <IoAirplaneSharp className='icon'/>
+                        <span>Live Flights</span>
+                    </Link>
                 }
             </div>
+
+            {!location.pathname.includes('/tour-places') && 
+                <div className='filter-nav' onClick={toggleFilterForm}> Filters </div>
+            }
 
             <div className='header-profile flex'>
                 <div className='icon-wrapper flex'><LuEqual className='.icon'/></div>

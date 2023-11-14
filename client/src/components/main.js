@@ -7,6 +7,7 @@ import axios from 'axios';
 import { useLocation } from 'react-router-dom';
 
 import LoadScreen from './loadScreen.js';
+import SideNav from './side-nav.js';
 import PlacesAutocomplete from './places-autocomplete.js';
 import DatePickers from './date-pickers.js';
 import FlightResults from './flight-results.js';
@@ -76,7 +77,7 @@ const Main = () => {
             returnDate: tripType === "ONE_WAY" ? null : returnInp,
         })
         .then((response) => {
-            //console.log(response.data);
+            console.log(response.data);
             let results = response.data.data ? response.data.data.flights : [];
             if (results.length === 0) { 
                 console.log("Results are empty!");
@@ -88,11 +89,14 @@ const Main = () => {
         } ); 
     }
 
+    
+
     return (
         <div className="main flex">         
             {!paramURL.includes('tour-places') &&
-                <div className='flight-search'>
+                <div className='flight-search grid'>
                     <LoadScreen/>
+                    <SideNav flights={flights}/>
                     <form className='autocomplete-form grid'>
                         <div className='place-autocomplete-inputs flex'>
                             <PlacesAutocomplete param={'origin'} setAirportInput={setAirportInput}/>
@@ -106,26 +110,27 @@ const Main = () => {
                         <button className='search-button' onClick={searchFlight}>
                             <span>Search Flight</span>
                         </button>
+
+                        <p className='important-notice'>
+                            <span>*****Server is currently down. Please try again later***** </span>This is an early build based on a free version of a flight API service. 
+                            Please refresh and try again if no results are shown (avg. wait time 5 - 30 seconds). 
+                            Thank you for your patience.
+                        </p>
+
+                        {message.length > 0 && 
+                            <div className='request-status flex'>
+                                <FaCat className='icon'/>
+                                <FaCat className='icon'/>
+                                <FaCat className='icon'/>
+                                <span>{message}</span>
+                                <FaCat className='icon'/>
+                                <FaCat className='icon'/>
+                                <FaCat className='icon'/>
+                            </div> 
+                        }
                     </form>
-                
-                    <p className='important-notice'>
-                        <span>*****Server is currently down. Please try again later***** </span>This is an early build based on a free version of a flight API service. 
-                        Please refresh and try again if no results are shown (avg. wait time 5 - 30 seconds). 
-                        Thank you for your patience.
-                    </p>
 
                     <FlightResults flights={flights}/>
-                    { message.length > 0 && 
-                        <div className='request-status flex'>
-                            <FaCat className='icon'/>
-                            <FaCat className='icon'/>
-                            <FaCat className='icon'/>
-                            <span>{message}</span>
-                            <FaCat className='icon'/>
-                            <FaCat className='icon'/>
-                            <FaCat className='icon'/>
-                        </div> 
-                    }
                 </div>
             }   
 

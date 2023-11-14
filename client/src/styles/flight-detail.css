@@ -28,8 +28,7 @@
 .flight-detail > h1 {
     flex-wrap: wrap;
     justify-content: center;
-    margin: 7vh 0 7.5vh 0;
-    padding: 0 1vw;
+    margin: 7vh 0 8vh 0;
     column-gap: 1vw;
     font-size: clamp(1.125rem, 3vw, 2rem);
     text-transform: uppercase;
@@ -81,11 +80,12 @@
 .depart-detail, .return-detail { flex-direction: column; row-gap: 1vh;  }
 
 @media (max-width: 50rem) {
-    .flight-detail { width: 75%; }
+    .flight-detail { width: 85%; }
+    .flight-detail > h1 { margin: 4vh 0 5vh 0; }
 }
 
 @media (max-width: 25rem) {
-    .flight-detail { padding-top: 1vh; width: 95%; border-top: 1px dashed rgb(226, 226, 226); }
+    .flight-detail { padding: 1vh 2vw; width: 100%; border-top: 1px dashed rgb(226, 226, 226); }
     .flight-detail-segment > label { margin-bottom: 1vh; } 
     .purchase-link > span { margin-bottom: 3vh; }
     .depart-detail, .return-detail { width: 97.5%; }

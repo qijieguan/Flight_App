@@ -1,7 +1,7 @@
 import '../styles/flight-results.css';
 import { MdOutlineArrowDropDownCircle } from 'react-icons/md';
 
-import { useEffect } from 'react';
+import { useState, useEffect } from 'react';
 import uuid from 'react-uuid';
 
 import FlightPrice from './flightPrice.js';
@@ -9,12 +9,17 @@ import FlightDetail from './flight-detail.js';
 import Data from '../JSON/test.json';
 
 const FlightResults = ({ flights }) => {
-   
+
+    const [flightArr, setFlights] = useState([]);
+
     const testObj = Data;
 
     useEffect(() => {
         if (flights && flights.length > 0) { scrollToFlightSection(); }
+        if (!flights.length) { setFlights(testObj); }
+        else { setFlights(flights); }
     }, [flights]);
+
 
     const oneWayDuration = (segment) => {
         let totalDuration = {hours: 0, minutes: 0};
@@ -84,12 +89,11 @@ const FlightResults = ({ flights }) => {
         }, 500)
     }
 
-    //flights && flights.length > 0 &&
     return (
         <div className='flight-results-wrapper'>
-            {flights && flights.length > 0 &&
+            {flightArr.length > 0 &&
                 <div className="flight-results flex">
-                    {flights.map(flight => 
+                    {flightArr.map(flight => 
                         <div className="flight" key={uuid()}>
                             <div className='flight-header flex'>
                                 <div className='flight-airline flex'>

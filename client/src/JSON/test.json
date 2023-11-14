@@ -5,13 +5,13 @@
                 "arrivalDateTime": "2023-09-29T17:35:00+09:00",
                 "departureDateTime": "2023-09-28T12:10:00-07:00",
                 "marketingCarrier": {
-                    "displayName": "Example",
-                    "logoUrl": "https://static.tacdn.com/img2/flights/airlines/logos/100x100/Emirates2.png",
-                    "code": "Ex"
+                    "displayName": "Apple",
+                    "logoUrl": "https://images.pexels.com/photos/206959/pexels-photo-206959.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1",
+                    "code": "AE"
                 },
                 "operatingCarrier": {
-                    "displayName": "Example",
-                    "code": "Ex"
+                    "displayName": "Apple",
+                    "code": "AE"
                 },
                 "originStationCode": "LAX",
                 "destinationStationCode": "TPE", 
@@ -24,13 +24,13 @@
                 "arrivalDateTime": "2023-09-30T05:35:00+09:00",
                 "departureDateTime": "2023-09-29T17:35:00+09:00",
                 "marketingCarrier": {
-                    "displayName": "Example",
-                    "logoUrl": "https://static.tacdn.com/img2/flights/airlines/logos/100x100/Emirates2.png",
-                    "code": "Ex"
+                    "displayName": "Apple",
+                    "logoUrl": "https://images.pexels.com/photos/206959/pexels-photo-206959.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1",
+                    "code": "AE"
                 },
                 "operatingCarrier": {
-                    "displayName": "Example",
-                    "code": "Ex"
+                    "displayName": "Apple",
+                    "code": "AE"
                 },
                 "originStationCode": "JFK",
                 "destinationStationCode": "LAX",
@@ -41,8 +41,100 @@
         ],
         "purchaseLinks": [{
             "originalCurrency": "USD",
-            "totalPrice": 900,
-            "url": "https://images.pexels.com/photos/5344850/pexels-photo-5344850.jpeg?auto=compress&cs=tinysrgb&w=600"
+            "totalPrice": 600,
+            "url": "https://images.pexels.com/photos/206959/pexels-photo-206959.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1"
+        }]
+    },
+    {"segments": [
+        {"legs": [
+            {
+                "arrivalDateTime": "2023-09-29T17:35:00+09:00",
+                "departureDateTime": "2023-09-28T12:10:00-07:00",
+                "marketingCarrier": {
+                    "displayName": "Mango",
+                    "logoUrl": "https://images.pexels.com/photos/16977470/pexels-photo-16977470/free-photo-of-unripe-mango-fruit-on-tree.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1",
+                    "code": "MG"
+                },
+                "operatingCarrier": {
+                    "displayName": "Mango",
+                    "code": "MG"
+                },
+                "originStationCode": "LAX",
+                "destinationStationCode": "TPE", 
+                "flightNumber": 69,
+                "classOfService": "ECONOMY"
+            }
+        ]}, 
+        {"legs": [
+            {
+                "arrivalDateTime": "2023-09-30T05:35:00+09:00",
+                "departureDateTime": "2023-09-29T17:35:00+09:00",
+                "marketingCarrier": {
+                    "displayName": "Mango",
+                    "logoUrl": "https://images.pexels.com/photos/16977470/pexels-photo-16977470/free-photo-of-unripe-mango-fruit-on-tree.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1",
+                    "code": "MG"
+                },
+                "operatingCarrier": {
+                    "displayName": "Mango",
+                    "code": "MG"
+                },
+                "originStationCode": "JFK",
+                "destinationStationCode": "LAX",
+                "flightNumber": 69,
+                "classOfService": "ECONOMY"
+            }
+        ]}
+        ],
+        "purchaseLinks": [{
+            "originalCurrency": "USD",
+            "totalPrice": 1000,
+            "url": "https://images.pexels.com/photos/16977470/pexels-photo-16977470/free-photo-of-unripe-mango-fruit-on-tree.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1"
+        }]
+    },
+    {"segments": [
+        {"legs": [
+            {
+                "arrivalDateTime": "2023-09-29T17:35:00+09:00",
+                "departureDateTime": "2023-09-28T12:10:00-07:00",
+                "marketingCarrier": {
+                    "displayName": "Peach",
+                    "logoUrl": "https://images.pexels.com/photos/6157041/pexels-photo-6157041.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1",
+                    "code": "PE"
+                },
+                "operatingCarrier": {
+                    "displayName": "Peach",
+                    "code": "PE"
+                },
+                "originStationCode": "LAX",
+                "destinationStationCode": "TPE", 
+                "flightNumber": 69,
+                "classOfService": "ECONOMY"
+            }
+        ]}, 
+        {"legs": [
+            {
+                "arrivalDateTime": "2023-09-30T05:35:00+09:00",
+                "departureDateTime": "2023-09-29T17:35:00+09:00",
+                "marketingCarrier": {
+                    "displayName": "Peach",
+                    "logoUrl": "https://images.pexels.com/photos/6157041/pexels-photo-6157041.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1",
+                    "code": "PE"
+                },
+                "operatingCarrier": {
+                    "displayName": "PE",
+                    "code": "PE"
+                },
+                "originStationCode": "JFK",
+                "destinationStationCode": "LAX",
+                "flightNumber": 69,
+                "classOfService": "ECONOMY"
+            }
+        ]}
+        ],
+        "purchaseLinks": [{
+            "originalCurrency": "USD",
+            "totalPrice": 1400,
+            "url": "https://images.pexels.com/photos/6157041/pexels-photo-6157041.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1"
         }]
     }
 ]
