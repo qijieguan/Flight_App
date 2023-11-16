@@ -1,4 +1,4 @@
-.main { position: relative;; padding-bottom: 10vh; background: rgb(245, 245, 245); }
+.main { position: relative; padding-bottom: 10vh; background: rgb(245, 245, 245); }
 
 .flight-search {
     padding-top: 2vh;
@@ -54,6 +54,10 @@
     box-shadow: 1px 1px 3px gray;
     transition: all 0.3s ease-in; 
 }
+.search-button.disabled {
+    opacity: 0.4;
+    pointer-events: none;
+}
 
 .search-button > span {
     cursor: pointer;
@@ -83,6 +87,7 @@
 
 .important-notice {
     grid-column: 1 / 3;
+    margin: 1vh auto;
     color: rgb(160, 160, 160);
     font-size: clamp(0.75rem, 1vw, 1rem);
     width: 80%;
@@ -124,6 +129,6 @@
         border-radius: 0.5rem; 
     }
     .search-button { grid-column: 1 / 2; }
-    .important-notice { margin: 2vh auto; width: 97.5%; }
+    .important-notice { margin: 0 auto; width: 97.5%; }
     .request-status {margin: 5vh auto;}
 }

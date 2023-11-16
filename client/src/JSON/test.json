@@ -62,7 +62,7 @@
                 "originStationCode": "LAX",
                 "destinationStationCode": "TPE", 
                 "flightNumber": 69,
-                "classOfService": "ECONOMY"
+                "classOfService": "PREMIUM_ECONOMY"
             }
         ]}, 
         {"legs": [
@@ -81,7 +81,7 @@
                 "originStationCode": "JFK",
                 "destinationStationCode": "LAX",
                 "flightNumber": 69,
-                "classOfService": "ECONOMY"
+                "classOfService": "PREMIUM_ECONOMY"
             }
         ]}
         ],
@@ -108,7 +108,7 @@
                 "originStationCode": "LAX",
                 "destinationStationCode": "TPE", 
                 "flightNumber": 69,
-                "classOfService": "ECONOMY"
+                "classOfService": "BUSINESS"
             }
         ]}, 
         {"legs": [
@@ -127,7 +127,7 @@
                 "originStationCode": "JFK",
                 "destinationStationCode": "LAX",
                 "flightNumber": 69,
-                "classOfService": "ECONOMY"
+                "classOfService": "BUSINESS"
             }
         ]}
         ],

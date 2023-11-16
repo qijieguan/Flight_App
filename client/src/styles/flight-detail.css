@@ -30,7 +30,8 @@
     justify-content: center;
     margin: 7vh 0 8vh 0;
     column-gap: 1vw;
-    font-size: clamp(1.125rem, 3vw, 2rem);
+    font-size: clamp(1.5rem, 3vw, 2rem);
+    letter-spacing: 1px;
     text-transform: uppercase;
     color: orangered;
 }
@@ -50,14 +51,13 @@
     position: absolute;
     inset: 0 auto auto 0;
     font-size: clamp(0.75rem, 1vw, 1rem);
-    font-weight: 500;
     text-transform: uppercase;
     color: rgb(180, 180, 180);
     background: white;
     transform: translate3d(15%, -50%, 0);
 }
 
-.purchase-link > span { cursor: pointer; font-size: clamp(0.75rem, 1vw, 1.125rem); color: orangered; }
+.purchase-link > span { cursor: pointer; font-size: clamp(0.875rem, 1vw, 1.125rem); color: orangered; }
 .purchase-link > span:hover { text-decoration: underline; }
 
 .close-btn {

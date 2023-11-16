@@ -22,7 +22,8 @@ const Main = () => {
     const [paramURL, setParamURL] = useState('');
 
     const [flights, setFlights] = useState([]);
-    const [message, setMessage] = useState('')
+    const [message, setMessage] = useState('');
+    const [filters, setFilters] = useState(null);
 
     const baseURL = window.location.href.includes('localhost:3000') ? 'http://localhost:3001' : "";
     const location = useLocation();
@@ -31,6 +32,10 @@ const Main = () => {
         setParamURL(location.pathname);
         setFlights([]);
         setMessage('');
+        setFilters(null);
+        let search_button = document.querySelector('.search-button');
+        search_button?.classList.remove('disabled');
+        window.scrollTo(0, 0);
     }, [location]);
 
     const setAirportInput = (input) => {
@@ -60,8 +65,11 @@ const Main = () => {
         setFlights([]);
         setMessage("Fetching data... Please wait a second!");
 
-        let request_status = document.querySelector('.request-status');
-        setTimeout(() => { request_status?.scrollIntoView({block: 'start', behavior: 'smooth'}); }, 1000);
+        let important_notice = document.querySelector('.important-notice');
+        setTimeout(() => { important_notice?.scrollIntoView({block: 'start', behavior: 'smooth'}); }, 500);
+
+        let search_button = document.querySelector('.search-button');
+        search_button?.classList.add('disabled');
 
         let tripType = sessionStorage.getItem('select_trip').includes('one') ? 'ONE_WAY' : 'ROUND_TRIP';
         let classType = 
@@ -80,23 +88,31 @@ const Main = () => {
             console.log(response.data);
             let results = response.data.data ? response.data.data.flights : [];
             if (results.length === 0) { 
-                console.log("Results are empty!");
                 setMessage("Request timeout. We are sorry for the inconvenience. Please refresh the page or click search again!")
             }
             else { setMessage(""); }
-            
+
+            search_button?.classList.remove('disabled');
+            resetFilters();
             setFlights([...results]);
         } ); 
     }
 
-    
+    const resetFilters = () => {
+        setFilters(null);
+
+        let radios = document.querySelectorAll("[name='class-filter']");
+        radios.forEach(radio => { radio.checked = false; });
+    }
+
+    const applyFilters = (filters) => { setFilters(filters); }
 
     return (
         <div className="main flex">         
             {!paramURL.includes('tour-places') &&
                 <div className='flight-search grid'>
                     <LoadScreen/>
-                    <SideNav flights={flights}/>
+                    <SideNav flights={flights} applyFilters={applyFilters}/>
                     <form className='autocomplete-form grid'>
                         <div className='place-autocomplete-inputs flex'>
                             <PlacesAutocomplete param={'origin'} setAirportInput={setAirportInput}/>
@@ -130,7 +146,7 @@ const Main = () => {
                         }
                     </form>
 
-                    <FlightResults flights={flights}/>
+                    <FlightResults flights={flights} filters={filters}/>
                 </div>
             }   
 

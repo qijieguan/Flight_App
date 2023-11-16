@@ -8,18 +8,37 @@ import FlightPrice from './flightPrice.js';
 import FlightDetail from './flight-detail.js';
 import Data from '../JSON/test.json';
 
-const FlightResults = ({ flights }) => {
+const FlightResults = ({ flights, filters }) => {
 
     const [flightArr, setFlights] = useState([]);
 
     const testObj = Data;
 
     useEffect(() => {
-        if (flights && flights.length > 0) { scrollToFlightSection(); }
-        if (!flights.length) { setFlights(testObj); }
-        else { setFlights(flights); }
-    }, [flights]);
+        if (!flights.length) { applyFilters(testObj); }
+        else { applyFilters(flights); }
+    }, [flights, filters]);
 
+    const applyFilters = (data) => {
+        let flight_filter = data;
+
+        if (filters) { flight_filter = flight_filter.filter(flight => checkFilters(flight)); }     
+        setFlights(flight_filter);
+    }
+
+    const checkFilters = (flight) => {
+        
+        let a = true, b = true, c = true;
+        let totalPrice = flight.purchaseLinks[0].totalPrice;
+        let classOfService = flight.segments[0].legs[0].classOfService.toUpperCase();
+        let airlineName = flight.segments[0].legs[0].marketingCarrier.displayName;
+
+        if (!(filters.price_range[0] <= totalPrice && filters.price_range[1] >= totalPrice)) { a = false; }
+        if (filters.class.length > 0 && !(filters.class.toUpperCase() === classOfService)) { b = false; } 
+        if (filters.airlines.length > 0 && !(filters.airlines.includes(airlineName))) { c = false; }
+
+        if (a && b && c) { return flight; }
+    }
 
     const oneWayDuration = (segment) => {
         let totalDuration = {hours: 0, minutes: 0};
@@ -77,16 +96,6 @@ const FlightResults = ({ flights }) => {
 
     const closeFlightDetail = () => {
         document.querySelector('.flight-detail.show')?.classList.remove('show');  
-    }
-
-    const scrollToFlightSection = () => {
-        setTimeout(() => {
-            let flight = document.getElementsByClassName('flight')[0];
-            let autocomplete = document.querySelector('.autocomplete-form');
-
-            let scrollY = autocomplete?.getBoundingClientRect().height + flight?.getBoundingClientRect().height;
-            window?.scrollTo({top: scrollY, behavior: 'smooth'});
-        }, 500)
     }
 
     return (

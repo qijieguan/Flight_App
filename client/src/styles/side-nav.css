@@ -51,6 +51,11 @@
     accent-color: rgb(243, 90, 63); 
     box-shadow: none;
 }
+.class-filter *, .airline-filter * {
+    padding: 0 !important;
+    margin: 0 !important;
+}
+
 .class-filter > label, .airline-filter > label {
     text-align: left;
     font-size: clamp(0.75rem, 0.875vw, 0.875rem);

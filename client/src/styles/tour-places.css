@@ -45,7 +45,7 @@
 .tour-header > span { font-weight: 500; }
 
 .tour-results-label { margin-top: 10vh; margin-bottom: 7.5vh; font-weight: bolder; }
-.tour-results-label > span { font-size: clamp(1.375rem, 2vw, 2rem); color: gray; }
+.tour-results-label > span { font-size: clamp(1.375rem, 2vw, 2rem); color: rgb(61, 61, 61); }
 
 .tour-list {
     grid-template-columns: 22% 22% 22% 22%;

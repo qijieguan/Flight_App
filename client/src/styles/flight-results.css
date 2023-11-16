@@ -66,11 +66,13 @@
 .show-detail:hover { opacity: 0.4; }
 
 @media (max-width: 25rem) {
+    .flight-results { padding: 2vh 0; }
     .flight { padding: 1vh 2vw; border-radius: 0; }
     .flight-header { justify-content: center; row-gap: 1vh; }
     .flight-airline { margin-right: auto; column-gap: 3vw; }
     .flight-depart-date { margin: 0; }
     .flight-depart-date > span:first-child { font-weight: 300; }
-    .flight-depart-date, .flight-class, .flight-trip { padding: 1vh max(2vw, 1rem); }
+    .flight-depart-date, .flight-class, .flight-trip { padding: 0.75vh max(2vw, 1rem); }
+    .flight-divider { margin: 1vh 0; }
     .flight-price-wrapper { justify-content: center; flex-wrap: wrap; column-gap: 2vw; }
 }
