@@ -13,7 +13,7 @@
 }
 .flight-segment-date { align-items: flex-start; flex-direction: column; }
 .flight-segment-date > span:first-child { font-weight: 500; font-size: clamp(0.875rem, 1vw, 1rem); }
-.flight-segment-date > span:last-child { font-size: 0.75rem; color: rgb(180, 180, 180); }
+.flight-segment-date > span:last-child { font-size: clamp(0.625rem, 0.75vw, 0.75rem); color: rgb(180, 180, 180); }
 
 .airport-location { flex-direction: column; align-items: flex-start; text-align: left; }
 .airport-city { font-size: clamp(0.875rem, 1vw, 1rem); }

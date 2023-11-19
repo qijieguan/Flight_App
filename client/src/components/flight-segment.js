@@ -52,7 +52,7 @@ const FlightSegment = ({leg}) => {
 
     return (
         <div className='flight-segment grid'>
-            <div className='flight-segment-start flex'>
+            <div className='flight-segment-left flex'>
                 <span className='flight-segment-date flex'>
                     <span>{getTime(leg.departureDateTime)} </span>
                     <span>{getDate(leg.departureDateTime)}</span>
@@ -73,27 +73,7 @@ const FlightSegment = ({leg}) => {
                 <FaLocationDot className='icon'/>
             </div>
 
-            <div className='flight-segment-end flex'>
-                {destDetail &&
-                    <div className='airport-location flex'>
-                        <span className='airport-city'>
-                            {destDetail.city ? destDetail.city : destDetail.country }
-                        </span>
-                        <span className='airport-name'>
-                            { destDetail.name } ({ destDetail.iata_code }) 
-                        </span>
-                    </div>
-                }
-
-                <div className='carrier-side-text flex'>
-                    <span className='flight-duration'>
-                        {calcDuration(leg.departureDateTime, leg.arrivalDateTime)}
-                    </span>
-                    <span className='carrier-name'> 
-                        {leg.operatingCarrier.displayName} ({leg.operatingCarrier.code + " " + leg.flightNumber})
-                    </span>
-                </div>
-
+            <div className='flight-segment-right flex'>
                 {originDetail &&
                     <div className='airport-location flex'>
                         <span className='airport-city'>
@@ -104,7 +84,26 @@ const FlightSegment = ({leg}) => {
                         </span>
                     </div>
                 }
-            
+    
+                <div className='carrier-side-text flex'>
+                    <span className='flight-duration'>
+                        {calcDuration(leg.departureDateTime, leg.arrivalDateTime)}
+                    </span>
+                    <span className='carrier-name'> 
+                        {leg.operatingCarrier.displayName} ({leg.operatingCarrier.code + " " + leg.flightNumber})
+                    </span>
+                </div>
+
+                {destDetail &&
+                    <div className='airport-location flex'>
+                        <span className='airport-city'>
+                            {destDetail.city ? destDetail.city : destDetail.country }
+                        </span>
+                        <span className='airport-name'>
+                            { destDetail.name } ({ destDetail.iata_code }) 
+                        </span>
+                    </div>
+                }
             </div>
         </div>
     )
