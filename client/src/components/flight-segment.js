@@ -1,7 +1,28 @@
 import '../styles/flight-segment.css';
-import { MdFlightTakeoff, MdFlightLand } from 'react-icons/md';
+import { FaLocationDot } from 'react-icons/fa6';
+import { IoAirplane } from "react-icons/io5";
+
+import axios from 'axios';
+import { useEffect, useState } from 'react';
 
 const FlightSegment = ({leg}) => {
+
+    const baseURL = window.location.href.includes('localhost:3000') ? 'http://localhost:3001' : '';
+    const [originDetail, setOrigin] = useState(null)
+    const [destDetail, setDest] = useState(null);
+
+    useEffect(() => {
+        getAirportDetail('origin', leg.originStationCode);
+        getAirportDetail('destination', leg.destinationStationCode);
+    }, [leg]);
+
+    const getAirportDetail = async (param, iata_code) => {
+        axios.post(baseURL + '/util/airport-detail/', { iata_code: iata_code })
+        .then((response) => { 
+            if (param === 'origin') { setOrigin(response.data[0]); }
+            else { setDest(response.data[0]); }
+        });
+    }
 
     const calcDuration = (depart_date, arrival_date) => {
         let seconds = (new Date(arrival_date) - new Date(depart_date))/ 1000;
@@ -30,30 +51,60 @@ const FlightSegment = ({leg}) => {
     }
 
     return (
-        <div className='flight-segment'>
-            <div className='flight-segment-start grid'>
-                <MdFlightTakeoff className='icon'/>
+        <div className='flight-segment grid'>
+            <div className='flight-segment-start flex'>
                 <span className='flight-segment-date flex'>
                     <span>{getTime(leg.departureDateTime)} </span>
                     <span>{getDate(leg.departureDateTime)}</span>
                 </span> 
-                <span className='black-circle'>&#9679;</span>
-                <span className='carrier-code'>{ leg.originStationCode }</span>
-                <span className='carrier-name'> 
-                    ({leg.operatingCarrier.displayName} - {leg.operatingCarrier.code + " " + leg.flightNumber})
-                </span>
-            </div>
-            <div className='flight-segment-duration'>
-                {calcDuration(leg.departureDateTime, leg.arrivalDateTime)}
-            </div>
-            <div className='flight-segment-end grid'>
-                <MdFlightLand className='icon'/>
+
+
                 <span className='flight-segment-date flex'>
                     <span>{getTime(leg.arrivalDateTime)} </span>
                     <span>{getDate(leg.arrivalDateTime)}</span>
                 </span> 
-                <span className='black-circle'>&#9679;</span> 
-                <span className='carrier-code'>{ leg.destinationStationCode } </span>
+            
+            </div>
+        
+            <div className='line-segment flex'>
+                <span className='black-circle'>&#9679;</span>
+                <div className='icon-wrapper flex'><IoAirplane className='icon'/></div>
+                <div className='vertical-line'/>
+                <FaLocationDot className='icon'/>
+            </div>
+
+            <div className='flight-segment-end flex'>
+                {destDetail &&
+                    <div className='airport-location flex'>
+                        <span className='airport-city'>
+                            {destDetail.city ? destDetail.city : destDetail.country }
+                        </span>
+                        <span className='airport-name'>
+                            { destDetail.name } ({ destDetail.iata_code }) 
+                        </span>
+                    </div>
+                }
+
+                <div className='carrier-side-text flex'>
+                    <span className='flight-duration'>
+                        {calcDuration(leg.departureDateTime, leg.arrivalDateTime)}
+                    </span>
+                    <span className='carrier-name'> 
+                        {leg.operatingCarrier.displayName} ({leg.operatingCarrier.code + " " + leg.flightNumber})
+                    </span>
+                </div>
+
+                {originDetail &&
+                    <div className='airport-location flex'>
+                        <span className='airport-city'>
+                            {originDetail.city ? originDetail.city : originDetail.country }
+                        </span>
+                        <span className='airport-name'>
+                            { originDetail.name } ({ originDetail.iata_code }) 
+                        </span>
+                    </div>
+                }
+            
             </div>
         </div>
     )

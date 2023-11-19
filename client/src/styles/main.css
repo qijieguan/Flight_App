@@ -93,7 +93,7 @@
     width: 80%;
 }
 
-.important-notice > span { display: none; font-weight: bold; color: rgb(44, 44, 44); }
+.important-notice > span { display: none; font-weight: bold; color: rgb(99, 99, 99); }
 
 .request-status {
     margin: 15vh auto;
@@ -103,13 +103,13 @@
     row-gap: 1vh;
     column-gap: 1vw;
     width: 100%;
-    color: rgb(56, 56, 56);
+    color: rgb(100, 100, 100);
 }
 .request-status > span { font-size: clamp(0.875rem, 2.5vw, 1.5rem); }
 .request-status > .icon {
     margin-bottom: auto;
     font-size: clamp(1.5rem, 2.5vw, 2.5rem);
-    color: rgb(65, 65, 65);
+    color: rgb(100, 100, 100);
 }
 
 @media (max-width: 50rem) {

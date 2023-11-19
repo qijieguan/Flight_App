@@ -1,23 +1,58 @@
 .flight-segment {
+    grid-template-columns: 20% 5% auto;
+    padding: 1.5vh 2vw;
+    background: rgb(250, 250, 250);
     color: grey; 
     width: 100%; 
+    border-radius: 1rem;
 }
 .flight-segment > div {
-    grid-template-columns: 10% 30% auto auto 40%;
-    justify-content: flex-start;
-    column-gap: 2vw;
-    font-size: clamp(0.75rem, 1vw, 0.875rem);
+    flex-direction: column;
+    align-items: flex-start;
+    justify-content: space-between;
 }
-.flight-segment > div > span { font-size: clamp(0.75rem, 2vw, 1rem); }
 .flight-segment-date { align-items: flex-start; flex-direction: column; }
-.flight-segment-date > span { font-weight: 500; font-size: clamp(1rem, 1.5vw, 1.25rem); }
-.flight-segment-date > span:last-child { font-weight: 300; font-size: clamp(0.75rem, 1vw, 1rem); color: rgb(160, 160, 160); }
+.flight-segment-date > span:first-child { font-weight: 500; font-size: clamp(0.875rem, 1vw, 1rem); }
+.flight-segment-date > span:last-child { font-size: 0.75rem; color: rgb(180, 180, 180); }
 
-.carrier-code, .carrier-name, .flight-segment-duration { color: rgb(160, 160, 160); }
-.carrier-code, .carrier-name { font-size: clamp(0.875rem, 1.25vw, 1rem) !important; }
-.flight-segment-duration { margin: 2vh 0; }
-.flight-segment .icon { 
-    margin-right: 0.25vw;
-    font-size: clamp(1.25rem, 1.5vw, 1.5rem); 
-    color: rgb(153, 153, 153); 
+.airport-location { flex-direction: column; align-items: flex-start; text-align: left; }
+.airport-city { font-size: clamp(0.875rem, 1vw, 1rem); }
+.airport-name { font-size: clamp(0.625rem, 0.75vw, 0.75rem); color: rgb(180, 180, 180); }
+.carrier-side-text { 
+    margin: 2vh 0;
+    align-items: flex-start; 
+    flex-direction: column; 
+    color: rgb(202, 172, 172); 
+    text-align: left; 
 }
+
+.line-segment { position: relative; }
+.vertical-line { 
+    height: 90%;
+    transform: translate3d(200%, -2.5%, 0);
+    border: 1px solid rgb(240, 240, 240);
+}
+.line-segment > .icon-wrapper {
+    padding: 0.5vh 0;
+    position: absolute;
+    inset: 45% auto auto -10%;
+    background: rgb(250, 250, 250);
+    z-index: 2;
+}
+.line-segment > .icon-wrapper > .icon { transform: rotate(90deg); }
+.line-segment > .icon * { 
+    color: tomato; 
+    padding: 0 !important; 
+    margin: 0 !important; 
+    transform: translateX(-25%); 
+}
+.flight-duration { font-size: clamp(0.625rem, 0.75vw, 0.75rem); }
+.carrier-name { font-size: clamp(0.625rem, 0.75vw, 0.75rem); }
+
+@media (max-width: 25rem) { 
+    .flight-segment { grid-template-columns: 45% auto auto; }
+    .flight-segment-date > span:first-child { font-weight: 300; }
+    .line-segment > .icon-wrapper { inset: 45% auto auto -20%; }
+}
+
+

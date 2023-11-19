@@ -32,7 +32,7 @@
                     "displayName": "Apple",
                     "code": "AE"
                 },
-                "originStationCode": "JFK",
+                "originStationCode": "TPE",
                 "destinationStationCode": "LAX",
                 "flightNumber": 69,
                 "classOfService": "ECONOMY"
@@ -78,7 +78,7 @@
                     "displayName": "Mango",
                     "code": "MG"
                 },
-                "originStationCode": "JFK",
+                "originStationCode": "TPE",
                 "destinationStationCode": "LAX",
                 "flightNumber": 69,
                 "classOfService": "PREMIUM_ECONOMY"
@@ -124,7 +124,7 @@
                     "displayName": "PE",
                     "code": "PE"
                 },
-                "originStationCode": "JFK",
+                "originStationCode": "TPE",
                 "destinationStationCode": "LAX",
                 "flightNumber": 69,
                 "classOfService": "BUSINESS"

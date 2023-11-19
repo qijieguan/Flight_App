@@ -10,8 +10,6 @@ import { useState, useEffect } from 'react';
 import axios from 'axios';
 import uuid from 'react-uuid';
 
-import Data from '../JSON/suggestion.json';
-
 const PlacesAutocomplete = ( {param, setAirportInput} ) => {
 
     const baseURL = window.location.href.includes('localhost:3000') ? 'http://localhost:3001' : '';
@@ -28,17 +26,6 @@ const PlacesAutocomplete = ( {param, setAirportInput} ) => {
 
     useEffect(() => {
         
-        /*
-        let airports = [];
-
-        Data.forEach(children => {
-            children.children.forEach(airport => {
-                airport.push(airport.shortName);
-            });
-        });
-
-        //console.log(airports);
-        */
     }, [param]);
 
     const searchAirports = async () => {
@@ -151,8 +138,7 @@ const PlacesAutocomplete = ( {param, setAirportInput} ) => {
                             </div>
                         }
                     </ComboboxList>
-                </ComboboxPopover>
-                
+                </ComboboxPopover>    
             </Combobox>
         </div>
     )

@@ -9,12 +9,8 @@ import FlightSegment from './flight-segment.js';
 
 const FlightDetail = ({closeFlightDetail, flight}) => {
     return (
-        <div className='flight-detail'>
-            <MdOutlineClose className='icon' onClick={closeFlightDetail}/>
-            <h1 className='flex'>
-                Flight Overview 
-                <PiAirplaneTiltFill className='icon'/>
-            </h1>
+        <div className='flight-detail flex'>
+            <label>Flight Overview </label>
             <div className='flight-detail-segment flex'>
                 <label className='depart-label'>Depart Trip</label>
                 <div className='depart-detail flex'>
@@ -27,9 +23,9 @@ const FlightDetail = ({closeFlightDetail, flight}) => {
                 <div className='flight-detail-segment flex'>
                     <label className='return-label'>Return Trip</label>
                     <div className='return-detail flex'>
-                    {flight.segments[1].legs.map(leg => 
-                        <FlightSegment leg={leg} key={uuid()}/>
-                    )} 
+                        {flight.segments[1].legs.map(leg => 
+                            <FlightSegment leg={leg} key={uuid()}/>
+                        )} 
                     </div>
                 </div>
             }
