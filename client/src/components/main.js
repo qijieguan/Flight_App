@@ -62,13 +62,14 @@ const Main = () => {
         if (sessionStorage.getItem('select_trip').includes('two') && returnInp === null) { return; }
         console.log('submited!');
 
+        let request_status = document.querySelector('.request-status');
+        let important_notice = document.querySelector('.important-notice');
+        let search_button = document.querySelector('.search-button');
+
         setFlights([]);
         setMessage("Fetching data... Please wait a second!");
 
-        let important_notice = document.querySelector('.important-notice');
         setTimeout(() => { important_notice?.scrollIntoView({block: 'start', behavior: 'smooth'}); }, 500);
-
-        let search_button = document.querySelector('.search-button');
         search_button?.classList.add('disabled');
 
         let tripType = sessionStorage.getItem('select_trip').includes('one') ? 'ONE_WAY' : 'ROUND_TRIP';
@@ -89,9 +90,9 @@ const Main = () => {
             let results = response.data.data ? response.data.data.flights : [];
             if (results.length === 0) { 
                 setMessage("Request timeout. We are sorry for the inconvenience. Please refresh the page or click search again!")
+                request_status?.classList.add('stop-animate');
             }
-            else { setMessage(""); }
-
+            else { setMessage(""); request_status?.classList.remove('stop-animate');}
             search_button?.classList.remove('disabled');
             resetFilters();
             setFlights([...results]);
@@ -132,20 +133,21 @@ const Main = () => {
                             Please refresh and try again if no results are shown (avg. wait time 5 - 30 seconds). 
                             Thank you for your patience.
                         </p>
-
-                        {message.length > 0 && 
-                            <div className='request-status flex'>
-                                <FaCat className='icon'/>
-                                <FaCat className='icon'/>
-                                <FaCat className='icon'/>
-                                <span>{message}</span>
-                                <FaCat className='icon'/>
-                                <FaCat className='icon'/>
-                                <FaCat className='icon'/>
-                            </div> 
-                        }
                     </form>
 
+                    {message.length > 0 && 
+                        <div className='request-status wavy flex'>
+                            <FaCat className='icon' style={{'--i': 1}}/>
+                            <FaCat className='icon' style={{'--i': 2}}/>
+                            <FaCat className='icon' style={{marginRight: '1vw',  '--i': 3}}/>
+                            {message.split('').map((letter, index) => 
+                                <span className={letter === ' ' ? 'space' : ' '} style={{"--i": index + 4}}>{letter}</span>
+                            )}
+                            <FaCat className='icon' style={{marginLeft: '1vw', '--i': message.length + 4}}/>
+                            <FaCat className='icon' style={{'--i': message.length + 5}}/>
+                            <FaCat className='icon' style={{'--i': message.length + 6}}/>
+                        </div> 
+                    }
                     <FlightResults flights={flights} filters={filters}/>
                 </div>
             }   

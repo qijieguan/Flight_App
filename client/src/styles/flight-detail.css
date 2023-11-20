@@ -49,11 +49,11 @@
 }
 .flight-detail-segment > div { width: 100%; }
 
-.purchase-link > span { cursor: pointer; font-size: 0.875rem; color: tomato; }
+.purchase-link > span { cursor: pointer; font-size: clamp(0.75rem, 0.875vw, 0.875rem); color: tomato; }
 .purchase-link > span:hover { text-decoration: underline; }
 
 .close-btn {
-    margin: 10vh auto 0 auto;
+    margin: 2.5vh auto 0 auto;
     padding: 2vh 2vw;
     justify-content: center;
     column-gap: 0.5vw;
@@ -80,4 +80,5 @@
     .flight-detail-segment > label { margin-bottom: 1vh; } 
     .purchase-link > span { margin-bottom: 3vh; }
     .depart-detail, .return-detail { width: 97.5%; }
+    .close-btn { margin: 0 auto; }
 }
