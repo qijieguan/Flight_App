@@ -94,10 +94,8 @@
     .date-pickers { 
         grid-template-columns: 100%;  
         grid-column: 1 / 2; 
-        padding: 1.5vh 1vh; 
-        background: rgb(235, 235, 235); 
-        border-radius: 0.5rem; 
+        padding: 0 1vw; 
     }
-    .date-picker-wrapper { height: 12.5vh; row-gap: 0; border-radius: 0.5rem; }
+    .date-picker-wrapper { height: 12.5vh; row-gap: 0; border-radius: 0.5rem; box-shadow: 0 3px 3px rgb(240, 240, 240); }
     .MuiPickersPopper-root { width: 100%; }
 }

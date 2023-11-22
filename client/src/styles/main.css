@@ -1,4 +1,4 @@
-.main { position: relative; padding-bottom: 10vh; background: rgb(245, 245, 245); }
+.main { position: relative; padding-bottom: 10vh; background: rgb(247, 247, 247); }
 
 .flight-search {
     padding-top: 2vh;
@@ -116,9 +116,7 @@
         grid-template-columns: 100%;  
         grid-column: 1 / 2; 
         flex-direction: column; 
-        padding: 1.5vh 1vh; 
-        background: rgb(235, 235, 235); 
-        border-radius: 0.5rem; 
+        padding: 0 1vw;  
     }
     .search-button { grid-column: 1 / 2; }
     .important-notice { margin: 0 auto; width: 97.5%; }

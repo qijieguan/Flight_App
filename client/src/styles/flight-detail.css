@@ -3,7 +3,7 @@
     position: fixed;
     right: 0;
     bottom: 0;
-    padding: 3vh 2vw 5vh 2vw;
+    padding: 3vh 2vw 0 2vw;
     height: 100vh;
     width: 50%;
     background: white;
@@ -15,18 +15,34 @@
     overflow-y: scroll;
     overflow-x: hidden;
 }
-
 .flight-detail.show { transform: translateX(0%); }
 
-.flight-detail > label {
-    text-align: left;
-    margin: 2vh 0 5vh 0;
-    font-size: clamp(1.5rem, 2vw, 2rem);
-    letter-spacing: 1px;
-    text-transform: uppercase;
-    width: 100%;
-    color: rgb(180, 180, 180);
+.flight-segment-bg {
+    position: absolute;
+    inset: auto 0 0 auto;
+    height: 75%;
+    width: 75%;
+    transform: translate3d(50%, 30%, 0);
+    opacity: 0.3;
+    z-index: -1;
 }
+
+.flight-detail-header {
+    margin: 2vh 0 5vh 0;
+    justify-content: flex-start;
+    letter-spacing: 1px;
+    text-transform: capitalize;
+    width: 100%;
+    color: rgb(255, 136, 115);
+}
+.flight-detail-header > .icon { 
+    margin-right: 4vw; 
+    font-size: clamp(1.5rem, 4vw, 2rem); 
+    color: rgb(255, 191, 179);
+    transition: all 0.4s ease-in; 
+}
+.flight-detail-header > .icon:hover { margin-right: 7vw; } 
+.flight-detail-header > label { text-align: left; font-size: clamp(1rem, 1.75vw, 1.75rem); }
 
 .flight-detail-segment {
     position: relative; 
@@ -41,8 +57,9 @@
     padding: 0 0.25vw;
     position: absolute;
     inset: 0 auto auto 0;
+    font-weight: 300;
     font-size: clamp(0.75rem, 1vw, 1rem);
-    text-transform: uppercase;
+    text-transform: capitalize;
     color: rgb(200, 200, 200);
     background: white;
     transform: translate3d(0, -50%, 0);
@@ -72,12 +89,13 @@
 
 @media (max-width: 50rem) {
     .flight-detail { width: 85%; }
-    .flight-detail > h1 { margin: 4vh 0 5vh 0; }
 }
 
 @media (max-width: 25rem) {
     .flight-detail { padding: 1vh 2vw; width: 100%; border-top: 1px dashed rgb(226, 226, 226); }
-    .flight-detail-segment > label { margin-bottom: 1vh; } 
+    .flight-detail-header { margin: 2vh 0 4vh 0; }
+    .flight-detail-header > .icon:hover { margin-right: 10vw; } 
+    .flight-detail-segment { padding: 1vh 1vw; }
     .purchase-link > span { margin-bottom: 3vh; }
     .depart-detail, .return-detail { width: 97.5%; }
     .close-btn { margin: 0 auto; }

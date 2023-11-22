@@ -58,12 +58,10 @@ const FlightSegment = ({leg}) => {
                     <span>{getDate(leg.departureDateTime)}</span>
                 </span> 
 
-
                 <span className='flight-segment-date flex'>
                     <span>{getTime(leg.arrivalDateTime)} </span>
                     <span>{getDate(leg.arrivalDateTime)}</span>
                 </span> 
-            
             </div>
         
             <div className='line-segment flex'>

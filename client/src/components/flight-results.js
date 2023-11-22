@@ -127,7 +127,9 @@ const FlightResults = ({ flights, filters }) => {
                                     {flight.segments[0].legs[0].classOfService.toLowerCase().replace('_', " ")} Class
                                 </div>
 
-                                <div className='flight-trip'>{sessionStorage.getItem('select_trip')}</div>
+                                <div className='flight-trip'>
+                                    {flight.segments.length === 1 ? "One-Way" : "Two-Way"}
+                                </div>
 
                                 <div className='show-detail flex' onClick={toggleFlightDetail}>
                                     <span>Show details</span>
@@ -137,7 +139,10 @@ const FlightResults = ({ flights, filters }) => {
                                 <FlightDetail closeFlightDetail={closeFlightDetail} flight={flight}/>
                             </div>
                             
-                            <div className='flight-divider'/>
+                            <div className='flight-divider flex'>
+                                <div className='circle-divider'/>
+                                <div className='line-divider'/>
+                            </div>
 
                             <div className='flight-footer flex'>
                                 <span className='flight-price-wrapper flex'>

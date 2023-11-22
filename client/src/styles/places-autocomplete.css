@@ -99,6 +99,6 @@
 
 @media (max-width: 25rem) {
     .combobox { width: 100%; }
-    .combobox-input-wrapper { padding: 1vh 0; border-radius: 0.5rem; }
+    .combobox-input-wrapper { padding: 1vh 0; border-radius: 0.5rem; box-shadow: 0 3px 3px rgb(240, 240, 240); }
     .combobox-option-description, .suggestions-inquiry, .suggestions-li { text-align: center; padding: 0.5vh 2vw 0 2vw; }
 }

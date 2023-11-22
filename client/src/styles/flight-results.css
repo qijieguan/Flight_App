@@ -12,8 +12,8 @@
 .flight {
     position: relative;
     margin: 0 auto;
-    padding: 2vh 2vw;
-    row-gap: 2vh;
+    padding: 2vh 0;
+    row-gap: 1vh;
     min-height: 10vh;
     width: 95%;
     background: white;
@@ -22,7 +22,7 @@
     overflow: hidden;
 }
 
-.flight-header { justify-content: space-between; flex-wrap: wrap; row-gap: 1.5vh; column-gap: 1vw; }
+.flight-header { padding: 0 2vw; justify-content: space-between; flex-wrap: wrap; row-gap: 1vh; column-gap: 1vw; }
 
 .flight-airline { column-gap: 0.5vw; }
 .flight-airline > img { height: 7vh; width: 7vh; border-radius: 5rem; }
@@ -44,9 +44,19 @@
 .flight-depart-date > span, .flight-class, .flight-trip { text-transform: capitalize; font-size: clamp(0.75rem, 1vw, 1rem); }
 .flight-depart-date > span:first-child { font-size: clamp(0.875rem, 1.125vw, 1.125rem); font-weight: 500; }
 
-.flight-divider { margin: 2vh 0; width: 100%; border: 1px dashed rgb(226, 226, 226); }
+.flight-divider { position: relative; height: 5vh; width: 100%; }
+.flight-divider > .circle-divider {
+    position: absolute;
+    inset: 50% auto auto 0;
+    height: 100%;
+    aspect-ratio: 1 / 1;
+    background: rgb(245, 245, 245);
+    transform: translate3d(-50%, -50%, 0);
+    border-radius: 3rem;
+}
+.flight-divider > .line-divider { width: 100%; border: 1px dashed rgb(245, 245, 245); }
 
-.flight-footer { justify-content: space-between; }
+.flight-footer { padding: 0 2vw; justify-content: space-between; }
 
 .flight-price-wrapper { column-gap: 0.5vw; }
 .flight-price-wrapper > span { font-size: clamp(1rem, 1.25vw, 1.25rem); color: grey; }
@@ -59,15 +69,12 @@
     transform: translateX(1vw);
 }
 .show-detail > span { margin: 0 0.25vw; font-size: clamp(0.75rem, 1.125vw, 1.125rem); font-weight: 500; }
-.show-detail > .icon { 
-    font-size: clamp(1.25rem, 2vw, 1.5rem); 
-    transform: translateY(-5%); 
-}
+.show-detail > .icon { font-size: clamp(1.25rem, 2vw, 1.5rem); transform: translateY(-5%); }
 .show-detail:hover { opacity: 0.4; }
 
 @media (max-width: 25rem) {
     .flight-results { padding: 2vh 0; }
-    .flight { padding: 1vh 2vw; border-radius: 0; }
+    .flight { padding: 1vh 0; border-radius: 0; }
     .flight-header { justify-content: center; row-gap: 1vh; }
     .flight-airline { margin-right: auto; column-gap: 3vw; }
     .flight-depart-date { margin: 0; }

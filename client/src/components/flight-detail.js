@@ -1,16 +1,21 @@
 import '../styles/flight-detail.css';
-import { MdOutlineClose } from 'react-icons/md';
 import { AiOutlineArrowRight } from 'react-icons/ai';
-import { PiAirplaneTiltFill } from 'react-icons/pi';
+import { BsArrowLeft } from "react-icons/bs";
 
 import uuid from 'react-uuid';
 
 import FlightSegment from './flight-segment.js';
 
 const FlightDetail = ({closeFlightDetail, flight}) => {
+    const url = "https://cdn.pixabay.com/photo/2013/07/12/17/00/continent-151644_1280.png";
+
     return (
         <div className='flight-detail flex'>
-            <label>Flight Overview </label>
+            <img src={url} className='flight-segment-bg' alt=""/>
+            <div className='flight-detail-header flex'>
+                <BsArrowLeft className='icon' onClick={closeFlightDetail}/>
+                <label>Flight Routes</label>
+            </div>
             <div className='flight-detail-segment flex'>
                 <label className='depart-label'>Depart Trip</label>
                 <div className='depart-detail flex'>
