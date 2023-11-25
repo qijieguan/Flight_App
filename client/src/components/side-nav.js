@@ -31,7 +31,7 @@ const SideNav = ({flights, applyFilters}) => {
     window.addEventListener("resize", (e) => {
         let side_nav = document.querySelector('.side-nav');
         if (window.innerWidth <= 800) {
-            side_nav.classList.remove('active');
+            side_nav?.classList.remove('active');
         }
     });
 

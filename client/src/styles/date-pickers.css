@@ -21,15 +21,8 @@
     border: 1px solid rgb(240, 240, 240);
     border-radius: 1rem;
 }
-
-.date-picker-wrapper.error {
-    border: 2px solid red;
-}
-
-.date-picker-wrapper.hide {
-    opacity: 0.4;
-    pointer-events: none;
-}
+.date-picker-wrapper.error { border: 2px solid red; }
+.date-picker-wrapper.hide { pointer-events: none; opacity: 0.4; }
 
 .date-picker-wrapper > span {
     margin-left: 2%;

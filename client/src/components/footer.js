@@ -37,7 +37,7 @@ const Footer = () => {
 
                     <span className='grid'>
                         <ImLocation2 className='icon'/>
-                        <span>Los Angeles County</span>
+                        <span>Los Angeles County, CA</span>
                     </span>
 
                     <span className='grid linkedin' onClick={() => {openLink()}}>

@@ -17,6 +17,15 @@
     overflow: hidden;
 }
 
+.autocomplete-form-bg {
+    position: absolute;
+    inset: 0 0 auto auto;
+    height: 75%;
+    width: 100%;
+    transform: translateX(33%);
+    z-index: -1;
+}
+
 .place-autocomplete-inputs {
     grid-column: 1 / 3;
     position: relative;
@@ -112,6 +121,7 @@
 
 @media (max-width: 25rem) {
     .autocomplete-form { padding: 1vh 2vw; grid-template-columns: 100%; width: 100%; row-gap: 2vh; }
+    .autocomplete-form-bg { transform: translateX(0%); }
     .place-autocomplete-inputs { 
         grid-template-columns: 100%;  
         grid-column: 1 / 2; 

@@ -28,6 +28,8 @@ const Main = () => {
     const baseURL = window.location.href.includes('localhost:3000') ? 'http://localhost:3001' : "";
     const location = useLocation();
 
+    const url = "https://cdn.pixabay.com/photo/2017/04/18/16/49/europe-2239723_1280.png";
+
     useEffect(() => {
         setParamURL(location.pathname);
         setFlights([]);
@@ -115,6 +117,7 @@ const Main = () => {
                     <LoadScreen/>
                     <SideNav flights={flights} applyFilters={applyFilters}/>
                     <form className='autocomplete-form grid'>
+                        <img src={url} className='autocomplete-form-bg' alt=""/>
                         <div className='place-autocomplete-inputs flex'>
                             <PlacesAutocomplete param={'origin'} setAirportInput={setAirportInput}/>
                             <div className='icon-wrapper flex'>
