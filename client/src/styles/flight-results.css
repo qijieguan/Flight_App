@@ -36,8 +36,8 @@
     padding: 1.5vh max(2vw, 1rem);
     align-items: flex-start;
     flex-direction: column;
-    color: orangered;
-    background: rgb(255, 204, 185);
+    color: white;
+    background: rgb(75, 75, 75);
     border-radius: 2rem;
 }
 .flight-depart-date { margin: 0 auto; }
@@ -64,7 +64,7 @@
 
 .show-detail {
     justify-content: center; 
-    color: rgb(255, 98, 40); 
+    color: rgb(160, 160, 160); 
     border-bottom: 1px solid transparent; 
     transform: translateX(1vw);
 }
@@ -79,7 +79,7 @@
     .flight-airline { margin-right: auto; column-gap: 3vw; }
     .flight-depart-date { margin: 0; }
     .flight-depart-date > span:first-child { font-weight: 300; }
-    .flight-depart-date, .flight-class, .flight-trip { padding: 0.75vh max(2vw, 1rem); }
+    .flight-depart-date, .flight-class, .flight-trip { padding: 0.75vh max(2vw, 1rem); border-radius: 0.75rem; }
     .flight-divider { margin: 1vh 0; }
     .flight-price-wrapper { justify-content: center; flex-wrap: wrap; column-gap: 2vw; }
 }

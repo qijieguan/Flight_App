@@ -1,5 +1,5 @@
 .side-nav {
-    margin: 2vh 0 2vh auto;
+    margin: 1vh 0 2vh auto;
     padding: 2vh 1vw 3vh 1vw;
     flex-direction: column;
     row-gap: 2vh;
@@ -68,9 +68,10 @@
     font-weight: 500;
     color: white;
     width: 100%;
-    background: black;
+    background: tomato;
     border-radius: 2rem;
-    box-shadow: 0 0 3px;
+    box-shadow: 0 0 3px red;
+    border: 0;
 }
 
 @media (max-width: 50rem) {

@@ -28,7 +28,7 @@ const Main = () => {
     const baseURL = window.location.href.includes('localhost:3000') ? 'http://localhost:3001' : "";
     const location = useLocation();
 
-    const url = "https://cdn.pixabay.com/photo/2017/04/18/16/49/europe-2239723_1280.png";
+    const url = "https://images.pexels.com/photos/2114014/pexels-photo-2114014.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1";
 
     useEffect(() => {
         setParamURL(location.pathname);
@@ -111,7 +111,8 @@ const Main = () => {
     const applyFilters = (filters) => { setFilters(filters); }
 
     return (
-        <div className="main flex">         
+        <div className="main flex">     
+            <div className='main-overlay'/>    
             {!paramURL.includes('tour-places') &&
                 <div className='flight-search grid'>
                     <LoadScreen/>

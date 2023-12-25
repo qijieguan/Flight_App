@@ -82,8 +82,10 @@ const FlightResults = ({ flights, filters }) => {
 
     const toggleFlightDetail = (e) => { 
         let flight_detail = e.currentTarget.parentElement?.querySelector('.flight-detail');
+        let overlay = document.querySelector('.main-overlay');
         setTimeout(() => {
             if (!flight_detail?.classList.contains('show')) { closeFlightDetail(); }
+            overlay?.classList.toggle('active');
             flight_detail?.classList.toggle('show');
 
             document.addEventListener('click', (e) => { outsideClick(e, flight_detail); });
@@ -95,7 +97,8 @@ const FlightResults = ({ flights, filters }) => {
     }
 
     const closeFlightDetail = () => {
-        document.querySelector('.flight-detail.show')?.classList.remove('show');  
+        document.querySelector('.flight-detail.show')?.classList.remove('show'); 
+        document.querySelector('.main-overlay')?.classList.remove('active'); 
     }
 
     return (

@@ -14,8 +14,7 @@ const Footer = () => {
         <div className='footer grid'>
           
             <div className='footer-logo flex'>
-                <h1>Sky Nation</h1>
-                <PiAirplaneTiltFill className='icon'/>
+                <h1 className='flex'>Sky Nation  <PiAirplaneTiltFill className='icon'/></h1>
                 <p>
                     Powered by Tripadvisor API. Get real time flight prices in no time.
                 </p>
