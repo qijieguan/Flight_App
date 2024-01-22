@@ -1,7 +1,7 @@
 import '../styles/side-nav.css';
 import { AiOutlineArrowRight } from 'react-icons/ai';
 import Slider from '@mui/material/Slider';
-import Data from '../JSON/test.json';
+import Data from '../JSON/flight.json';
 
 import { useState, useEffect } from 'react';
 
@@ -13,12 +13,12 @@ const SideNav = ({flights, applyFilters}) => {
     const [selectClass, setClass] = useState("");
     const [selectAirlines, setAirlines] = useState([]);
     
-    const testObj = Data;
+    const flight_samples = Data;
 
     useEffect(() => {
         if (!flights.length) { 
-            setUniqueAirlines(testObj); 
-            updatePriceRange(testObj);
+            setUniqueAirlines(flight_samples); 
+            updatePriceRange(flight_samples);
         }
         else { 
             setUniqueAirlines(flights); 

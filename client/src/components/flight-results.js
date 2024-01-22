@@ -6,16 +6,16 @@ import uuid from 'react-uuid';
 
 import FlightPrice from './flightPrice.js';
 import FlightDetail from './flight-detail.js';
-import Data from '../JSON/test.json';
+import Data from '../JSON/flight.json';
 
 const FlightResults = ({ flights, filters }) => {
 
     const [flightArr, setFlights] = useState([]);
 
-    const testObj = Data;
+    const flight_samples = Data;
 
     useEffect(() => {
-        if (!flights.length) { applyFilters(testObj); }
+        if (!flights.length) { applyFilters(flight_samples); }
         else { applyFilters(flights); }
     }, [flights, filters]);
 

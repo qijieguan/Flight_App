@@ -1,4 +1,4 @@
-.main { position: relative; padding-bottom: 10vh; background: rgb(247, 247, 247); }
+.main { position: relative; padding-bottom: 10vh; }
 
 .main-overlay.active {
     position: absolute;

@@ -1,10 +1,12 @@
 import '../styles/tour-places.css';
-import { FaLocationDot } from 'react-icons/fa6';
+import { FaLocationDot,  FaRankingStar } from 'react-icons/fa6';
+import { FaStar } from "react-icons/fa";
+import { GoArrowRight, GoPersonFill } from "react-icons/go";
 
 import { useEffect, useState } from 'react';
-import axios from 'axios';
-
 import uuid from 'react-uuid';
+import axios from 'axios';
+import Data from '../JSON/tour-place.json';
 
 const TourPlaces = () => {
 
@@ -14,10 +16,15 @@ const TourPlaces = () => {
     const [message, setMessage] = useState('Fetching data... Please wait a second!');
 
     const baseURL = window.location.href.includes('localhost:3000') ? 'http://localhost:3001' : "";
-    const banner_url = "https://images.pexels.com/photos/2359/sand-desert-statue-pyramid.jpg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1";
+    const banner_url = "https://images.pexels.com/photos/861446/pexels-photo-861446.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1";
+    const empty_url = "https://img.freepik.com/premium-vector/default-image-icon-vector-missing-picture-page-website-design-mobile-app-no-photo-available_87543-11093.jpg";
+
+    const place_samples = Data;
 
     useEffect(() => {
-        apiRequest("Rome, Italy")
+        console.log(place_samples);
+        setTourList(place_samples);
+        //apiRequest("Tokyo, Japan");
     }, []);
 
     const scrollAnimation = () => {
@@ -49,6 +56,7 @@ const TourPlaces = () => {
                 else {
                     setMessage('No results for this query at this level. Please try another key search.');
                 }
+                console.log(response.data.data);
                 setTerm(tourInput);
             }); 
         });
@@ -63,6 +71,21 @@ const TourPlaces = () => {
             setTourList([]);
             apiRequest(tourInput);
         }
+    }
+
+    const handleToggleRead = (index) => {
+        let previous = document.querySelectorAll('.tour-place-description.show');
+        previous.forEach(d => {
+            d?.classList.remove('show');
+        })
+
+        let description = document.querySelector('.tour-place-description-' + index);
+        description?.classList.add('show');
+    }
+
+    const handleCloseRead = (index) => {
+        let description = document.querySelector('.tour-place-description-' + index);
+        description?.classList.remove('show');
     }
 
     return (
@@ -86,9 +109,9 @@ const TourPlaces = () => {
                 </form>
             </div>
 
-            <label className='tour-results-label'>
+            <label className='tour-results-label flex'>
                 {searchTerm.length <= 0 ?
-                    <span>Example - Italy's Hotspots</span>
+                    <span>Example - Toyko, Japan</span>
                     :
                     <span>Search Results - {searchTerm}</span>
                 }
@@ -100,12 +123,36 @@ const TourPlaces = () => {
         
             <div className="tour-list grid">
                 {tourList.length > 0 &&
-                    tourList.map(place => 
+                    tourList.map((place, index) => 
                         <div className='tour-place flex' key={uuid()}>
-                            <img src={place.photo.images.original.url} alt=""/>
+                            <div className= {'tour-place-description flex ' + 'tour-place-description-' + index}>
+                                <p>{place.description ? place.description : "Sorry. No Descriptions Available."}</p>
+                                <div className='icon-wrapper flex'>
+                                    <span onClick={() => {handleCloseRead(index)}}>EXIT</span>
+                                    <GoArrowRight className='icon'/>
+                                </div>
+                            </div>
+                            <img src={place.photo.images.original.url ? place.photo.images.original.url : empty_url} alt={empty_url}/>
                             <div className='tour-place-footer flex'>
-                                <div className='icon-wrapper flex'><FaLocationDot className='icon'/></div>
-                                <h1>{place.name}</h1>
+                                <div className='tour-place-name flex'>
+                                    <FaLocationDot className='icon'/>
+                                    <span>{place.name}</span>
+                                </div>
+                                <div className='tour-place-data flex'>
+                                    <span className='tour-place-ranking flex'>
+                                        <FaRankingStar className='icon'/>
+                                        #{place.ranking_position}
+                                    </span>
+                                    <span className='separate-line'> | </span>
+                                    <span className='tour-place-rating flex'>
+                                        <FaStar className='icon'/> {place.rating}
+                                    </span>
+                                    <span className='separate-line'> | </span>
+                                    <span className='tour-place-reviews flex'>
+                                        <GoPersonFill className='icon'/> {place.num_reviews}
+                                    </span>
+                                </div>
+                                <button onClick={() => {handleToggleRead(index)}}>READ MORE</button>
                             </div>
                         </div> 
                     )
