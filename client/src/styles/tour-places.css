@@ -3,6 +3,7 @@
     flex-direction: column;
     min-height: 75vh;
     width: 100%;
+    font-weight: 500;
 }
 
 .tour-banner { position: relative; padding: 10vh 2vw; width: 100%; }
@@ -18,7 +19,7 @@
     inset: 0 auto auto 0;
     height: 100%;
     width: 100%;
-    background: linear-gradient(to bottom, transparent 20%, black);
+    background: linear-gradient(to bottom, transparent 20%, rgb(48, 48, 48));
     z-index: 1;
 }
 
@@ -42,23 +43,45 @@
 
 .tour-header { flex-direction: column; row-gap: 2vh; width: 75%; color: white; }
 .tour-header > h1 { font-size: clamp(1.5rem, 2.5vw, 2.5rem); font-weight: bolder; }
-.tour-header > span { font-weight: 500; }
 
 .tour-results-label { 
     justify-content: flex-start; 
     padding-left: 1vw;
-    margin: 10vh 0 7.5vh 0; 
-    font-weight: 500;
+    margin: 10vh 0 5vh 0; 
+    font-weight: 700;
     width: 90%; 
-    border-left: 3px solid;
+    border-left: 4px solid;
 }
-.tour-results-label > span { text-transform: uppercase; font-size: clamp(1.75rem, 2.5vw, 2.5rem); color: rgb(61, 61, 61); }
+.tour-results-label > span { 
+    text-transform: uppercase; 
+    font-size: clamp(1.75rem, 2.5vw, 2.5rem); 
+    color: rgb(61, 61, 61); 
+}
+
+.sort-filters {
+    font-size: 0.875rem;
+    font-weight: 500;
+    color: gray;
+    margin: 1vh 0 7vh 2vw;
+    justify-content: flex-start;
+    column-gap: 0.5vw;
+    width: 90%;
+}
+.sort-filter {
+    padding: 0.375vh 0.5vw 0.75vh 0.5vw;
+    font-weight: 500;
+    color: gray;
+    border: 0;
+    border-radius: 0.25rem;
+}
+.sort-filter:not(.active):hover { opacity: 0.5; }
+.sort-filter.active { color: white; background: black; }
 
 .tour-list {
     padding-bottom: 10vh;
-    grid-template-columns: 22% 22% 22% 22%;
-    justify-content: space-between;
-    column-gap: 2vw;
+    grid-template-columns: 23% 23% 23% 23%;
+    justify-content: center;
+    column-gap: 1vw;
     row-gap: 7.5vh;
     width: 90%;
 }
@@ -68,10 +91,12 @@
     flex-direction: column; 
     height: 50vh; 
     width: 100%; 
-    box-shadow: 0 3px 3px rgb(209, 209, 209); 
-    border-radius: 0.25rem;
+    border-radius: 0.5rem;
+    background: rgb(255, 255, 240);
+    opacity: 0;
     overflow-y: auto;
     overflow-x: hidden; 
+    animation: fadeIn 1s forwards;
 }
 .tour-place-description {
     position: absolute;
@@ -83,16 +108,19 @@
     min-height: 100%; 
     width: 100%;
     text-align: left;
+    word-break: break-all;
     color: darkslategray;
     background: white;
-    transform: translateX(-100%);
+    transform: translateX(-101%);
     transition: all 0.4s ease-in;
     z-index: 2;
+    border-radius: 0.5rem;
+    border: 1px solid rgb(215, 215, 215); 
     overflow-x: hidden;
 }
-.tour-place-description.show { transform: translateX(0); }
-.tour-place-description > .icon-wrapper { justify-content: center; border-bottom: 1px solid transparent;  }
-.tour-place-description > .icon-wrapper:hover { border-bottom: 1px solid; }
+.tour-place-description.show { transform: translateX(0);}
+.tour-place-description > .icon-wrapper { justify-content: center; border-bottom: 1px solid transparent; }
+.tour-place-description > .icon-wrapper:hover { border-bottom: 1px solid; cursor: pointer; }
 
 .tour-place-description > p {
     padding-bottom: 3vh;
@@ -100,7 +128,7 @@
     border-bottom: 1px solid rgb(212, 212, 212);
 }
 .tour-place-description > .icon-wrapper {
-    font-size: 1.25rem;
+    font-size: 1.125rem;
     margin-top: 5vh;
     margin-left: 0;
     border-bottom: 1px solid;
@@ -114,7 +142,7 @@
 .tour-place-description > .icon-wrapper:hover { margin-left: 0.5vw; }
 .tour-place-description > .icon-wrapper:hover .icon { margin-left: 0.5vw; }
 
-.tour-place > img { height: 65%; width: 100%; transition: all 0.3s;  }
+.tour-place > img { height: 60%; width: 100%; border-radius: 0 0 1.5rem 0; transition: all 0.3s;  }
 .tour-place-footer { 
     position: relative; 
     padding: 2vh 1vw 5vh 1vw; 
@@ -122,12 +150,12 @@
     justify-content: space-around;
     column-gap: 0.5vw;
     row-gap: 2vh; 
-    height: 35%; 
+    height: 40%; 
     width: 100%; 
     overflow: hidden; 
 }
 .tour-place-name { 
-    margin-top: 1vh;
+    margin-top: 2.5vh;
     justify-content: center;
     width: 100%;
     text-transform: capitalize;
@@ -135,7 +163,7 @@
     color: darkslategray;
 }
 .tour-place-name > .icon { margin-right: 1vw; font-size: 1.125rem; }
-.tour-place-name > span { font-size: 1.25rem; }
+.tour-place-name > span { font-size: 1.25rem; font-weight: 700; letter-spacing: 0.5px; }
 .tour-place-data { column-gap: 1vw; color: grey; }
 .tour-place-rating, .tour-place-ranking, .tour-place-reviews {
     justify-content: center;
@@ -143,19 +171,30 @@
     font-size: 1rem; 
     color: rgb(61, 61, 61);
 }
+.tour-place-ranking { color: green; }
+.tour-place-rating { color: orange; }
+.tour-place-reviews { color: grey; }
 .separate-line { color: rgb(209, 209, 209); font-size: 0.875rem; }
 .tour-place-footer > button {
+    margin-top: 2.5vh;
     font-size: 0.875rem;
+    font-weight: 500;
     color: rgb(61, 61, 61);
     background: transparent;
     border: 0;
     border-bottom: 1px solid rgb(172, 172, 172);
 }
 .tour-place-footer > button:hover { opacity: 0.4; }
+.tour-container > p {
+    padding: 5vh 0;
+    text-align: left;
+    font-weight: 300;
+    color: grey;
+    width: 75%;
+}
 
-.tour-list-empty { font-weight: 500; }
-
-@media (max-width: 50rem) { .tour-list { grid-template-columns: 30% 30% 30%; } }
+@media (max-width: 65rem) { .tour-list { width: 100%; } }
+@media (max-width: 50rem) { .tour-list { grid-template-columns: 32% 32% 32%; } .tour-container > p { width: 85%; } }
 @media (max-width: 35rem) { .tour-list { grid-template-columns: 45% 45%; } }
 
 @media (max-width: 25rem) {
@@ -163,6 +202,10 @@
     .tour-banner { position: relative; padding: 5vh 1vw; } 
     .tour-search > input { width:97.5%; } 
     .tour-header { width: 97.5%; }
-    .tour-results-label { margin-top: 5vh; margin-bottom: 5vh; }
-    .tour-list { grid-template-columns: 100%; padding: 0 2vw; }
+    .tour-results-label { margin-top: 5vh; margin-bottom: 5vh; padding-left: 2vw; }
+    .sort-filters { column-gap: 1.5vw; }
+    .sort-filter { padding: 0.5vh 1vw 0.75vh 1vw; }
+    .tour-list { grid-template-columns: 100%; padding: 0 2vw; row-gap: 3.5vh; }
+    .tour-place-name, .tour-place-footer > button { margin-top: 1.5vh; }
+    .tour-place-description { padding: 5vh 3vw; }
 }

@@ -22,10 +22,43 @@ const TourPlaces = () => {
     const place_samples = Data;
 
     useEffect(() => {
-        console.log(place_samples);
-        setTourList(place_samples);
+        //console.log(place_samples);
         //apiRequest("Tokyo, Japan");
+        let sort = place_samples.sort((a,b) => a.ranking_position - b.ranking_position);
+        setTourList(sort);
     }, []);
+
+    const handleSort = (e) => {
+        e.target?.classList.toggle('active');
+
+        let filters = document.querySelectorAll('.sort-filter.active');
+        filters.forEach(filter => {
+            if (e.target.innerHTML.toLowerCase() !== filter.innerHTML.toLowerCase()) {
+                filter?.classList.remove('active');
+            }
+        });
+        
+        sortFilter();
+    }
+
+    const sortFilter = () => {
+        let sort = null;
+
+        let filter = document.querySelector('.sort-filter.active');
+        if (filter === null) { return; }
+
+        if (filter.innerHTML === 'Ranking') {
+            sort = place_samples.sort((a,b) => a.ranking_position - b.ranking_position);
+        }
+        else if (filter.innerHTML === 'Rating') {
+            sort = place_samples.sort((a,b) => b.rating - a.rating);
+        }
+        else { sort = place_samples.sort((a,b) => b.num_reviews - a.num_reviews); }
+
+        console.log(sort)
+        
+        setTourList([...sort]);
+    }
 
     const scrollAnimation = () => {
         setTimeout(() => {
@@ -54,7 +87,7 @@ const TourPlaces = () => {
                     setTourList(response.data.data.filter(place => place.hasOwnProperty('photo') && place.hasOwnProperty('name')));
                 }
                 else {
-                    setMessage('No results for this query at this level. Please try another key search.');
+                    setMessage('No results for this query at this level. Please try a more specific search query.');
                 }
                 console.log(response.data.data);
                 setTerm(tourInput);
@@ -117,6 +150,13 @@ const TourPlaces = () => {
                 }
             </label>
 
+            <div className='sort-filters flex'>
+                <label>Sort by: </label>
+                <button className='sort-filter active' onClick={handleSort}>Ranking</button>
+                <button className='sort-filter' onClick={handleSort}>Rating</button>
+                <button className='sort-filter' onClick={handleSort}>Reviews</button>
+            </div>
+
             {tourList.length === 0 &&
                 <h1 className='tour-list-empty'>{message}</h1>
             }
@@ -149,7 +189,7 @@ const TourPlaces = () => {
                                     </span>
                                     <span className='separate-line'> | </span>
                                     <span className='tour-place-reviews flex'>
-                                        <GoPersonFill className='icon'/> {place.num_reviews}
+                                        <GoPersonFill className='icon'/> ({place.num_reviews})
                                     </span>
                                 </div>
                                 <button onClick={() => {handleToggleRead(index)}}>READ MORE</button>
@@ -158,6 +198,10 @@ const TourPlaces = () => {
                     )
                 }
             </div>
+
+            <p>Powered by Travel Advisor API. This service aggregates places that are closed to the queried location.
+                In addition, the places are supported by data to match the users preferences.
+            </p>
         </div>
     )
 }
