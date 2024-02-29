@@ -31,6 +31,11 @@
     z-index: 1;
 }
 
+.tour-search.disabled > input {
+    pointer-events: none;
+    opacity: 0.4;
+}
+
 .tour-search > input {
     margin-bottom: 2vh;
     width: 75%;
@@ -89,7 +94,7 @@
 .tour-place { 
     position: relative;
     flex-direction: column; 
-    height: 50vh; 
+    min-height: 50vh; 
     width: 100%; 
     border-radius: 0.5rem;
     background: rgb(255, 255, 240);

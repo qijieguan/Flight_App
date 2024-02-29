@@ -3,7 +3,7 @@ import { FaLocationDot,  FaRankingStar } from 'react-icons/fa6';
 import { FaStar } from "react-icons/fa";
 import { GoArrowRight, GoPersonFill } from "react-icons/go";
 
-import { useEffect, useState } from 'react';
+import { useEffect, useState, useRef, useCallback } from 'react';
 import uuid from 'react-uuid';
 import axios from 'axios';
 import Data from '../JSON/tour-place.json';
@@ -11,8 +11,9 @@ import Data from '../JSON/tour-place.json';
 const TourPlaces = () => {
 
     const [tourList, setTourList] = useState([]);
-    const [tourInput, setInput] = useState('');
+    const tourInput = useRef(null);
     const [searchTerm, setTerm] = useState('');
+    const [request, setRequest] = useState(false);
     const [message, setMessage] = useState('Fetching data... Please wait a second!');
 
     const baseURL = window.location.href.includes('localhost:3000') ? 'http://localhost:3001' : "";
@@ -22,11 +23,20 @@ const TourPlaces = () => {
     const place_samples = Data;
 
     useEffect(() => {
-        //console.log(place_samples);
-        //apiRequest("Tokyo, Japan");
-        let sort = place_samples.sort((a,b) => a.ranking_position - b.ranking_position);
-        setTourList(sort);
-    }, []);
+        if (tourList.length === 0) {
+            if (!sessionStorage.getItem('tour-place')) {
+                apiRequest("Tokyo, Japan");
+                console.log("API called!")
+            }
+            else {
+                let sort = JSON.parse(sessionStorage.getItem('tour-place')).sort((a,b) => a.ranking_position - b.ranking_position);
+                setTourList(sort);
+            }
+        }
+        else {
+            sortFilter();
+        }
+    }, [request]);
 
     const handleSort = (e) => {
         e.target?.classList.toggle('active');
@@ -43,19 +53,17 @@ const TourPlaces = () => {
 
     const sortFilter = () => {
         let sort = null;
-
         let filter = document.querySelector('.sort-filter.active');
+
         if (filter === null) { return; }
 
         if (filter.innerHTML === 'Ranking') {
-            sort = place_samples.sort((a,b) => a.ranking_position - b.ranking_position);
+            sort = tourList.sort((a,b) => a.ranking_position - b.ranking_position);
         }
         else if (filter.innerHTML === 'Rating') {
-            sort = place_samples.sort((a,b) => b.rating - a.rating);
+            sort = tourList.sort((a,b) => b.rating - a.rating);
         }
-        else { sort = place_samples.sort((a,b) => b.num_reviews - a.num_reviews); }
-
-        console.log(sort)
+        else { sort = tourList.sort((a,b) => b.num_reviews - a.num_reviews); }
         
         setTourList([...sort]);
     }
@@ -76,35 +84,50 @@ const TourPlaces = () => {
     }
 
     const apiRequest = async (query) => {
+        document.querySelector('.tour-search')?.classList.add('disabled');
+        let input = document.getElementById('tour-search-input');
+        input.disabled = true;
+
         await axios.post(baseURL + '/flight/locations-search/', {query: query})
         .then(async (response) => { 
-            await axios.post(baseURL + '/flight/attractions-list/', 
-            {
-                location_id: response.data[0].result_object.location_id
-            })
-            .then((response) => {
-                if (response.data.data) {
-                    setTourList(response.data.data.filter(place => place.hasOwnProperty('photo') && place.hasOwnProperty('name')));
-                }
-                else {
-                    setMessage('No results for this query at this level. Please try a more specific search query.');
-                }
-                console.log(response.data.data);
-                setTerm(tourInput);
-            }); 
+            if (response.data[0] && response.data[0].result_object) {
+                await axios.post(baseURL + '/flight/attractions-list/', 
+                {
+                    location_id: response.data[0].result_object.location_id
+                })
+                .then((response) => {
+                    if (response.data.data && response.data.data.length > 0) {
+                        let sort = response.data.data.filter(place => place.hasOwnProperty('photo') && place.hasOwnProperty('name'));
+                        setTourList(sort);
+                        setRequest(!request);
+                    }
+                    //console.log(response.data.data);
+                    setTerm(tourInput.current.value);
+                    if (!sessionStorage.getItem('tour-place')) {
+                        sessionStorage.setItem('tour-place', JSON.stringify(response.data.data));
+                    }
+                }); 
+            }
+            else {
+                setMessage('No results for this query at this level. Please be careful about spaces or spelling errors.');
+            }
         });
+        document.querySelector('.tour-search')?.classList.remove('disabled');
+        input.disabled = false;
+        
         scrollAnimation();
     }
 
-    const handleChange = (e) => { setInput(e.target.value); }
+    //const handleChange = (e) => { setInput(e.target.value); }
 
-    const handleSubmit = (e) => {
+    const handleSubmit = async(e) => {
         e.preventDefault();
-        if (tourInput.length > 0) {
+
+        if (tourInput.current.value.length > 0) {
             setTourList([]);
-            apiRequest(tourInput);
+            apiRequest(tourInput.current.value);
         }
-    }
+    };
 
     const handleToggleRead = (index) => {
         let previous = document.querySelectorAll('.tour-place-description.show');
@@ -126,11 +149,11 @@ const TourPlaces = () => {
             <div className='tour-banner'>
                 <img className="tour-banner-image" src={banner_url} alt=""/>
                 <div className='tour-banner-overlay'/>
-                <form onSubmit={handleSubmit} className="tour-search flex">
+                <form onSubmit={handleSubmit}  className="tour-search flex">
                     <input 
+                        id='tour-search-input'
                         placeholder="Enter a city, district, or place"
-                        value={tourInput}
-                        onChange={handleChange}
+                        ref={tourInput}
                     />
                     <div className="tour-header flex">
                         <h1>Browse Tour Attractions</h1>
@@ -152,9 +175,9 @@ const TourPlaces = () => {
 
             <div className='sort-filters flex'>
                 <label>Sort by: </label>
-                <button className='sort-filter active' onClick={handleSort}>Ranking</button>
-                <button className='sort-filter' onClick={handleSort}>Rating</button>
-                <button className='sort-filter' onClick={handleSort}>Reviews</button>
+                <button className='sort-filter active ranking' onClick={handleSort}>Ranking</button>
+                <button className='sort-filter rating' onClick={handleSort}>Rating</button>
+                <button className='sort-filter reviews' onClick={handleSort}>Reviews</button>
             </div>
 
             {tourList.length === 0 &&
@@ -172,7 +195,7 @@ const TourPlaces = () => {
                                     <GoArrowRight className='icon'/>
                                 </div>
                             </div>
-                            <img src={place.photo.images.original.url ? place.photo.images.original.url : empty_url} alt={empty_url}/>
+                            <img src={place.photo?.images.original.url ? place.photo.images.original.url : empty_url} alt={empty_url}/>
                             <div className='tour-place-footer flex'>
                                 <div className='tour-place-name flex'>
                                     <FaLocationDot className='icon'/>
